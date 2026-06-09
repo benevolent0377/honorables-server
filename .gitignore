@@ -6,3 +6,6 @@ crash-reports/*
 screenshots/
 logs/*
 saves/*
+options.txt
+rhino.local.properties
+fabricloader.log

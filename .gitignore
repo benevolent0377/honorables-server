@@ -1,1 +1,7 @@
-./world/
+world/*
+usercache.json
+usernamecache.json
+shaderpacks/*
+crash-reports/*
+screenshots/
+logs/

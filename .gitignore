@@ -4,4 +4,5 @@ usernamecache.json
 shaderpacks/*
 crash-reports/*
 screenshots/
-logs/
+logs/*
+saves/*

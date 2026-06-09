@@ -1,0 +1,80 @@
+{
+	autofocus_id: "46ADCEF8897A09AC"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "begin_your_journey"
+	group: ""
+	icon: "minecraft:map"
+	id: "166714EE1F6B2988"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["58378D08CF200F31"]
+			id: "4BBB0E8E62B66BC8"
+			rewards: [{
+				id: "79A722248E7729CA"
+				type: "xp_levels"
+				xp_levels: 2
+			}]
+			tasks: [{
+				id: "2FD7CA6E9DF2E61B"
+				stat: "minecraft:mob_kills"
+				title: "Defeat your first enemy."
+				type: "stat"
+				value: 1
+			}]
+			x: -0.5d
+			y: -2.5d
+		}
+		{
+			id: "58378D08CF200F31"
+			rewards: [
+				{
+					id: "4EE0F13487BA0D0E"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 32
+					id: "4BEF32D5EEE11413"
+					item: "minecraft:torch"
+					type: "item"
+				}
+				{
+					id: "66F890F4B1FBBF14"
+					item: {
+						Count: 1
+						id: "minecraft:wooden_pickaxe"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			subtitle: "A strange building lies in wait nearby. I wonder what is inside..."
+			tasks: [{
+				dimension: "minecraft:overworld"
+				id: "542E620F270BCCC8"
+				ignore_dimension: false
+				position: [I;
+					-218
+					154
+					144
+				]
+				size: [I;
+					25
+					5
+					25
+				]
+				title: "Find your first dungeon."
+				type: "location"
+			}]
+			x: -0.5d
+			y: 0.5d
+		}
+	]
+	subtitle: ["Learn the basics of dungeoneering."]
+	title: "Begin Your Journey"
+}

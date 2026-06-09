@@ -1,0 +1,30 @@
+{
+	"index": 4,
+	"attributes": {
+		"generic.max_health": 16,
+		"generic.movement_speed": 0.11,
+		"paraglider:max_stamina": 42
+	},
+	"starting_skills": [
+		"epicfight:roll",
+		"epicfight:emergency_escape"
+	],
+	"items": [
+		{
+			"id": "minecraft:bow",
+			"slot": "mainhand"
+		},
+		{
+			"id": "minecraft:arrow",
+			"count": 24,
+			"slot": "mainhand"
+		},
+		{
+			"id": "minecraft:bread",
+			"count": 10,
+			"slot": "mainhand"
+		}
+	],
+	"animation": "epicfight:biped/combat/bow_shot_mid",
+	"offset": [0, 0]
+}

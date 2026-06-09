@@ -1,0 +1,224 @@
+================================================================================
+                         SOL'S ITEM RARITY MOD v1.4.0
+                            Configuration Guide
+================================================================================
+
+This mod assigns rarity tiers to items with TWO systems:
+
+  1. RARITY CHANCES (rarity_chances.json)
+     Items roll a random rarity when first obtained.
+     Higher rarities give bigger stat bonuses!
+
+  2. FIXED RARITIES (hardcoded + custom_rarities.json)
+     Items have a permanent rarity. No stat bonuses, just visuals.
+     Vanilla items are hardcoded. Use custom_rarities.json to override
+     or add your own.
+
+  AFTER EDITING ANY FILE:  /solsrarity reload   or   /sr reload
+
+
+================================================================================
+                           RARITY TIERS
+================================================================================
+
+  Tier         Visual                       Multiplier
+  -------      -------------------------    ----------
+  COMMON       White text                   1.0x
+  UNCOMMON     Green & White chroma         1.15x
+  RARE         Cyan & White chroma          1.25x
+  EPIC         Blue & White chroma          1.5x
+  LEGENDARY    Rainbow chroma               2.0x
+  MYTHICAL     Black & White chroma         3.0x
+  SUPREME      Red & Black chroma           5.0x
+
+
+================================================================================
+                   FILE 1: rarity_chances.json
+                     (Weapons & Armor Pools)
+================================================================================
+
+Items in this file roll a random rarity when first picked up.
+The rolled rarity is saved permanently to the item.
+
+FORMAT:
+  "modid:item_name": {
+    "RARITY_NAME": weight,
+    "RARITY_NAME": weight
+  }
+
+  Higher weight = more likely. Weights are relative (not percentages).
+
+EXAMPLE:
+  "minecraft:diamond_sword": {
+    "COMMON": 20,
+    "UNCOMMON": 25,
+    "RARE": 25,
+    "EPIC": 20,
+    "LEGENDARY": 8,
+    "MYTHICAL": 2
+  }
+
+  Total = 100, so each weight IS the percentage in this case.
+  Omit a tier to exclude it from the pool.
+
+AUTO-DETECTION:
+  Weapons and armor NOT listed here are auto-detected by the mod.
+  Auto-detected items use the default pool weights from the
+  .toml config file (defaultPool section). To give a specific
+  item custom weights, add it to this file — it overrides auto-detect.
+
+MODDED ITEMS:
+  "alexsmobs:bone_serpent_tooth_sword": { "COMMON": 30, "RARE": 50, "EPIC": 20 }
+  "twilightforest:diamond_minotaur_axe": { "EPIC": 40, "LEGENDARY": 40, "MYTHICAL": 20 }
+
+
+================================================================================
+                   FILE 2: custom_rarities.json
+                     (Custom Fixed Rarities)
+================================================================================
+
+Override or add fixed rarities here. Vanilla item rarities are hardcoded
+in the mod — this file lets you override those or add modded items.
+
+FORMAT:
+  "modid:item_name": "RARITY_NAME"
+
+EXAMPLES:
+  {
+    "minecraft:diamond": "LEGENDARY",
+    "minecraft:nether_star": "SUPREME",
+    "alexsmobs:banana": "RARE",
+    "twilightforest:naga_trophy": "MYTHICAL",
+    "create:precision_mechanism": "EPIC"
+  }
+
+  - The diamond override changes it from the default EPIC to LEGENDARY.
+  - The nether_star override changes it from the default MYTHICAL to SUPREME.
+  - Modded items with no hardcoded rarity get COMMON by default.
+    Adding them here gives them a visible rarity.
+
+NOTE: Fixed rarities do NOT get stat bonuses — just visual display.
+
+
+================================================================================
+                   FILE 3: rarity_attributes.json
+                     (Stat Bonuses)
+================================================================================
+
+Define bonus stats for weapons and armor. These bonuses are
+multiplied by the item's rarity multiplier.
+
+FORMAT:
+  "modid:item_name": {
+    "attributeName": value
+  }
+
+AVAILABLE ATTRIBUTES:
+  attackDamageBonus         Extra attack damage
+  attackSpeedBonus          Faster attacks
+  armorBonus                Extra armor points
+  armorToughnessBonus       Extra toughness
+  maxHealthBonus            Extra health (2.0 = +1 heart)
+  movementSpeedBonus        Faster movement
+  knockbackResistanceBonus  Resist knockback (0.0 to 1.0)
+  luckBonus                 Better loot drops
+
+EXAMPLE:
+  "minecraft:diamond_sword": {
+    "attackDamageBonus": 0.8,
+    "attackSpeedBonus": 0.08
+  }
+
+  If this sword rolls EPIC (1.5x multiplier):
+    Attack Damage: +0.8 x 1.5 = +1.2 damage
+    Attack Speed:  +0.08 x 1.5 = +0.12 speed
+
+
+================================================================================
+                    SETID-BASED CONFIGS
+              (For Unique / Custom Item Variants)
+================================================================================
+
+SetID configs let you assign rarities to item VARIANTS using a
+simple NBT tag. Perfect for sets, boss drops, quest rewards.
+
+STEP 1 — Give an item a SetID:
+  /give @p minecraft:diamond_sword{SetID:"boss_drop"} 1
+  /give @p mineminenomi:marine_shirt{SetID:"marine_set"} 1
+
+STEP 2 — Add to config files:
+  Config key format: "modid:item{SetID:value}"
+
+FILES:
+  setid_raritychances.json  — Random rarity pools for SetID items
+  setid_fixed-rarities.json — Fixed rarities for SetID items
+  setid_attributes.json     — Custom attributes for SetID items
+
+EXAMPLES:
+
+  setid_fixed-rarities.json:
+  {
+    "mineminenomi:marine_shirt{SetID:marine_set}": "LEGENDARY",
+    "minecraft:diamond_sword{SetID:boss_drop}": "SUPREME"
+  }
+
+  setid_raritychances.json:
+  {
+    "minecraft:diamond_sword{SetID:boss_drop}": {
+      "EPIC": 40, "LEGENDARY": 35, "MYTHICAL": 20, "SUPREME": 5
+    }
+  }
+
+  setid_attributes.json:
+  {
+    "minecraft:diamond_sword{SetID:boss_drop}": {
+      "attackDamageBonus": 1.5, "attackSpeedBonus": 0.1
+    }
+  }
+
+PRIORITY: SetID configs always override item-based configs.
+
+
+================================================================================
+                    PRIORITY ORDER (Highest → Lowest)
+================================================================================
+
+  1. SetID fixed rarity          (setid_fixed-rarities.json)
+  2. Item fixed rarity            (custom_rarities.json > hardcoded defaults)
+  3. SetID rarity pool            (setid_raritychances.json)
+  4. Item rarity pool             (rarity_chances.json)
+  5. Auto-detected weapon/armor   (uses default pool weights from .toml)
+  6. Default rarity               (COMMON, configurable in .toml)
+
+  If an item matches multiple levels, only the HIGHEST priority applies.
+
+
+================================================================================
+                      AUTO-DETECTION
+================================================================================
+
+The mod automatically detects weapons and armor (vanilla + modded).
+Auto-detected items get a random rarity using the default pool weights
+defined in the .toml config file.
+
+Detected item types: Swords, Axes, Pickaxes, Shovels, Hoes,
+  Bows, Crossbows, Tridents, Shields, and all Armor pieces.
+
+To override auto-detection for a specific item:
+  - Add it to rarity_chances.json for custom roll weights
+  - Add it to custom_rarities.json for a fixed rarity instead
+
+
+================================================================================
+                          TIPS
+================================================================================
+
+- Press F3+H to see item IDs in tooltips
+- Use /sr reload after editing ANY config file
+- Modded items use format: "modid:item_name"
+- Priority: SetID > custom_rarities > hardcoded > rarity_chances > auto-detect
+- custom_rarities.json overrides are not affected by mod updates
+
+================================================================================
+                    Made by solmochi - Enjoy!
+================================================================================

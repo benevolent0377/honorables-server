@@ -1,0 +1,27 @@
+{
+	"index": 1,
+	"attributes": {
+		"generic.max_health": 24,
+		"generic.movement_speed": 0.09,
+		"paraglider:max_stamina": 15
+	},
+	"starting_skills": [
+		"epicfight:roll",
+		"epicfight:berserker",
+		"epicfight:forbidden_strength"
+	],
+	"items": [
+		{
+			"id": "better_weaponry:stone_battleaxe"
+		},
+		{
+			"id": "minecraft:shield"
+		},
+		{
+			"id": "minecraft:bread",
+			"count": 6
+		}
+	],
+	"animation": "epicfight:biped/combat/axe_auto1",
+	"offset": [0, 0]
+}

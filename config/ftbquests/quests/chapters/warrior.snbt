@@ -1,0 +1,163 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "circle"
+	filename: "warrior"
+	group: ""
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_complete: true
+	icon: "alexsmobs:animal_dictionary"
+	id: "632124E0C7C726AC"
+	order_index: 0
+	progression_mode: "linear"
+	quest_links: [ ]
+	quests: [
+		{
+			id: "7971212D15B50CAD"
+			rewards: [
+				{
+					id: "2964673EA1FEB188"
+					item: {
+						Count: 1
+						id: "minecraft:chainmail_helmet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "19258B945DCD58C9"
+					item: {
+						Count: 1
+						id: "minecraft:chainmail_boots"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "7FBCB2F80C48008B"
+					type: "xp"
+					xp: 100
+				}
+			]
+			subtitle: "You have chosen the path of a warrior."
+			tasks: [{
+				icon: {
+					Count: 1
+					id: "minecraft:iron_sword"
+					tag: {
+						Damage: 0
+					}
+				}
+				id: "2E8F511B141452EB"
+				stage: "class_warrior"
+				title: "Become a Warrior"
+				type: "gamestage"
+			}]
+			x: -3.0d
+			y: 0.0d
+		}
+		{
+			id: "3189E30438556ADF"
+			rewards: [
+				{
+					id: "62A92E98DE198285"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "44CD5E055CBB601C"
+					item: {
+						Count: 1
+						id: "minecraft:bow"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					exclude_from_claim_all: true
+					id: "418BF06655142BBC"
+					table_id: 2274867275190187412L
+					type: "random"
+				}
+			]
+			subtitle: "You have chosen to be a scout!"
+			tasks: [{
+				icon: "minecraft:rabbit_foot"
+				id: "654326218EDBCAD7"
+				stage: "class_scout"
+				title: "Select the Scout Class"
+				type: "gamestage"
+			}]
+			title: "Become a Scout"
+			x: -6.5d
+			y: -0.5d
+		}
+		{
+			id: "0DCA7426EEE83E6C"
+			rewards: [{
+				id: "4B726D31E6A3C0C4"
+				type: "xp"
+				xp: 100
+			}]
+			subtitle: "You have chosen to be a berserker."
+			tasks: [{
+				icon: "mowziesmobs:wrought_axe"
+				id: "123AA55ADFA862E0"
+				stage: "class_berserker"
+				title: "Select the Berserker Class"
+				type: "gamestage"
+			}]
+			title: "Become a Berserker"
+			x: 0.5d
+			y: -0.5d
+		}
+		{
+			id: "6883C05A940931B7"
+			rewards: [
+				{
+					id: "410F466FB8300768"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "27A903D9966DA082"
+					item: {
+						Count: 1
+						id: "irons_spellbooks:scroll"
+						tag: {
+							"irons_spellbooks:spell_container": {
+								data: [{
+									id: "irons_spellbooks:magic_missile"
+									index: 0
+									level: 1
+									locked: 1b
+								}]
+								maxSpells: 1
+								mustEquip: 0b
+								spellWheel: 0b
+							}
+						}
+					}
+					type: "item"
+				}
+			]
+			subtitle: "Learn to master the arcane elements."
+			tasks: [{
+				icon: "irons_spellbooks:book_stack"
+				id: "5C7D4E4D6A01BED6"
+				stage: "class_mage"
+				title: "Select the mage class"
+				type: "gamestage"
+			}]
+			x: -6.5d
+			y: -2.5d
+		}
+	]
+	subtitle: ["Class selection rewards."]
+	title: "Class Selection"
+}

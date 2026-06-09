@@ -1,0 +1,77 @@
+
+#Sol's Item Rarity - Configuration
+#Author: solmochi
+[general]
+	#Enable or disable the entire mod
+	enabled = true
+	#Show the rarity tier in item tooltips
+	showRarityInTooltip = true
+	#Show attribute bonus information in tooltips
+	showAttributeBonuses = true
+	#Show custom colored borders around items based on rarity
+	showCustomBorders = true
+	#Enable animated/chroma text effects for item names, tooltip rarity text, and bonus headers
+	#Disable this to use static rarity colors for better FPS.
+	enableChromaTextEffects = true
+	#Enable animated border effects such as pulsing glow, sparkles, particles, and traveling lights
+	#Disable this to keep rarity borders visible but cheaper to render.
+	enableAnimatedBorders = true
+	#Controls how custom item borders are rendered
+	#FULL = decorative animated borders, SIMPLE = lighter framed borders, STATIC = plain static frames, OFF = no custom borders
+	borderRenderMode = "FULL"
+	#Color item names based on their rarity
+	colorItemNames = true
+	#Apply attribute modifiers based on rarity
+	applyAttributeModifiers = true
+	#Speed of the rainbow/chroma color cycle (lower = faster)
+	#Range: 100.0 ~ 10000.0
+	rainbowSpeed = 1500.0
+	#Default rarity for items not in any config
+	#Options: COMMON, UNCOMMON, RARE, EPIC, LEGENDARY, MYTHICAL, SUPREME
+	defaultRarity = "COMMON"
+
+#Attribute multipliers for each rarity tier
+#Higher rarity = stronger stat bonuses
+[multipliers]
+	#Range: 0.1 ~ 10.0
+	common = 1.0
+	#Range: 0.1 ~ 10.0
+	uncommon = 1.15
+	#Range: 0.1 ~ 10.0
+	rare = 1.25
+	#Range: 0.1 ~ 10.0
+	epic = 1.5
+	#Range: 0.1 ~ 10.0
+	legendary = 2.0
+	#Range: 0.1 ~ 10.0
+	mythical = 3.0
+	#Range: 0.1 ~ 20.0
+	supreme = 5.0
+
+#Roll weights for the automatic rarity pool applied to modded weapons and armor
+#that are not listed in rarity_chances.json.
+#These are relative weights — e.g. 30 common vs 1 supreme means supreme is 30x rarer.
+#Set a tier to 0 to exclude it from the auto-pool entirely.
+[defaultPool]
+	#Weight for COMMON    (default: 30)
+	#Range: 0 ~ 10000
+	common = 30
+	#Weight for UNCOMMON  (default: 28)
+	#Range: 0 ~ 10000
+	uncommon = 28
+	#Weight for RARE      (default: 22)
+	#Range: 0 ~ 10000
+	rare = 22
+	#Weight for EPIC      (default: 12)
+	#Range: 0 ~ 10000
+	epic = 12
+	#Weight for LEGENDARY (default: 5)
+	#Range: 0 ~ 10000
+	legendary = 5
+	#Weight for MYTHICAL  (default: 2)
+	#Range: 0 ~ 10000
+	mythical = 2
+	#Weight for SUPREME   (default: 1)
+	#Range: 0 ~ 10000
+	supreme = 1
+

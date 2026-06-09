@@ -1,0 +1,114 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "your_first_spellbook"
+	group: ""
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_complete: true
+	id: "34FA94568123B9DA"
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["6883C05A940931B7"]
+			hide_until_deps_complete: true
+			id: "63070A7617AAB967"
+			rewards: [{
+				id: "3B54917E9E2DD8EB"
+				type: "xp"
+				xp: 100
+			}]
+			subtitle: "Start your journey into the arcane."
+			tasks: [{
+				icon: {
+					Count: 1
+					id: "irons_spellbooks:copper_spell_book"
+					tag: {
+						"irons_spellbooks:spell_container": {
+							data: [ ]
+							maxSpells: 5
+							mustEquip: 1b
+							spellWheel: 1b
+						}
+					}
+				}
+				id: "6ED394098BAE4631"
+				stage: "class_mage"
+				title: "Your first grimiore."
+				type: "gamestage"
+			}]
+			x: 0.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["63070A7617AAB967"]
+			icon: "irons_spellbooks:inscription_table"
+			id: "3F31D38A1FCA2FAA"
+			rewards: [{
+				id: "7988FF1146812C5F"
+				item: "irons_spellbooks:inscription_table"
+				type: "item"
+			}]
+			subtitle: "Collect the table and place it."
+			tasks: [{
+				id: "7BA866BB385AB72F"
+				title: "A magical station."
+				type: "checkmark"
+			}]
+			x: 0.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["3F31D38A1FCA2FAA"]
+			id: "12D94ABF9317BBA8"
+			rewards: [{
+				id: "6A1E32711E3A2C8D"
+				type: "xp"
+				xp: 200
+			}]
+			subtitle: "Place the table and imbue your grimiore with your first spell."
+			tasks: [{
+				block: "irons_spellbooks:inscription_table"
+				block_type: 0
+				icon: {
+					Count: 1
+					id: "irons_spellbooks:scroll"
+					tag: {
+						"irons_spellbooks:spell_container": {
+							data: [{
+								id: "irons_spellbooks:counterspell"
+								index: 0
+								level: 1
+								locked: 1b
+							}]
+							maxSpells: 1
+							mustEquip: 0b
+							spellWheel: 0b
+						}
+					}
+				}
+				id: "60936F64D2BEA446"
+				replace: false
+				replaced: "minecraft:air"
+				title: "Imbue your spell."
+				type: "questsadditions:place"
+				value: 1L
+			}]
+			x: 0.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["12D94ABF9317BBA8"]
+			id: "1A355869F840E713"
+			rewards: [{
+				id: "21847265A91AAE2F"
+				type: "xp"
+				xp: 300
+			}]
+			subtitle: "Select your next spell and decide your fate."
+			x: 0.5d
+			y: -4.5d
+		}
+	]
+	title: "Your First Spellbook"
+}

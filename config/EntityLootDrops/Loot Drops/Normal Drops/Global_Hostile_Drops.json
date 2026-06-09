@@ -1,0 +1,17 @@
+[
+  {
+    "requiredDimension": "minecraft:overworld",
+    "itemId": "minecraft:diamond",
+    "dropChance": 5.0,
+    "minAmount": 1,
+    "maxAmount": 1,
+    "command": "effect give {player} minecraft:speed 10 1",
+    "commandChance": 100.0,
+    "commandCoolDown": 300,
+    "_comment": "Speed effect on diamond drop",
+    "requirePlayerKill": true,
+    "extraDropChance": 10.0,
+    "extraAmountMin": 1,
+    "extraAmountMax": 3
+  }
+]

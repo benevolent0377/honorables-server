@@ -1,0 +1,271 @@
+{
+// item rules
+// types are used for fine-grained balance control — they act as filters only
+// rune stats are only applied to items whose type matches
+// item types: "melee", "range", "thrown", "melee_second", "armor", "tools", "magic", "curios"
+// multiple types are allowed: "types": ["melee", "range"] — matches melee and range items
+// for Curios items use "types": ["curios"] for all slots, or "types": ["curios:ring"] for a specific slot
+// "socket": [min, max] number of rune slots
+// "items": accepts direct item IDs or tags prefixed with "#" (e.g. "#forge:swords")
+// "mult": true — stat multiplier. ignores flat bonuses from glyphborn_runes.json
+// "mult": false — flat bonus. applied after all other calculations
+// formula: ((item base * item mult from glyphborn_items.json) + item flat from glyphborn_items.json)
+//          * (1 + sum of all rune multiplier bonuses) + sum of all rune flat bonuses
+// "itspercent": true — displays the value as a percentage. 0.01 = 1%. does not affect calculations
+
+// item tier weights — ordered worst to best
+// number of entries defines number of tiers
+// item tier is the upper bound for affix tiers (item T3 → affixes can be T1–T3)
+  "item_tier_weights": [35, 28, 20, 17],
+//35 + 28 + 20 + 14 = 97
+// T4 (worst): 35/97 = 36.1%
+// T3: 28/97 = 28.9%
+// T2: 20/97 = 20.6%
+// T1 (best): 14/97 = 14.4%
+
+// geometric tier widths with overlap
+// width_growth (r): each tier is r times wider than previous (r=2 means T3 is 2x T4 width)
+// overlap (p): next tier starts at (1-p) of current tier's width (0.5 = 50% overlap)
+// formula: w0 = (B-A) / (S_N - p*S_{N-1}) where S_k = (r^k - 1)/(r - 1)
+  "item_tier_width_growth": 1.7,
+  "item_tier_overlap": 0.7,
+  "rules": [
+    {
+      "items": [
+        "epicfight:diamond_dagger", "epicfight:diamond_greatsword", "epicfight:diamond_longsword", "epicfight:diamond_spear", "epicfight:diamond_tachi",
+        "epicfight:golden_dagger", "epicfight:golden_greatsword", "epicfight:golden_longsword", "epicfight:golden_spear", "epicfight:golden_tachi",
+        "epicfight:iron_dagger", "epicfight:iron_greatsword", "epicfight:iron_longsword", "epicfight:iron_spear", "epicfight:iron_tachi",
+        "epicfight:netherite_dagger", "epicfight:netherite_greatsword", "epicfight:netherite_longsword", "epicfight:netherite_spear", "epicfight:netherite_tachi",
+        "epicfight:stone_dagger", "epicfight:stone_greatsword", "epicfight:stone_longsword", "epicfight:stone_spear", "epicfight:stone_tachi",
+        "epicfight:wooden_dagger", "epicfight:wooden_greatsword", "epicfight:wooden_longsword", "epicfight:wooden_spear", "epicfight:wooden_tachi",
+        "epicfight:glove", "epicfight:uchigatana"
+      ],
+      "types": ["melee"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "minecraft:generic.attack_damage", "mult": true, "base_range": [-0.2, 1] },
+        { "id": "minecraft:generic.attack_speed", "mult": true, "base_range": [-0.2, 1] },
+        { "id": "epicfight:armor_negation", "mult": true, "base_range": [-0.1, 0.75] },
+        { "id": "epicfight:impact", "mult": true, "base_range": [-0.38, 0.38] },
+        { "id": "epicfight:max_strikes", "mult": true, "base_range": [1, 1] },
+        { "id": "glyphborn:crit_chance", "mult": false, "itspercent": true, "base_range": [0.02, 0.075] },
+        { "id": "glyphborn:crit_multiplier", "mult": false, "itspercent": true, "base_range": [0.05, 0.45] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.5, 1.25] }
+      ]
+    },
+    {
+      "items": ["epicfight:stray_hat", "epicfight:stray_robe", "epicfight:stray_pants"],
+      "types": ["armor"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "minecraft:generic.armor", "mult": true, "base_range": [-0.2, 0.5] },
+        { "id": "minecraft:generic.armor_toughness", "mult": true, "base_range": [-0.2, 0.5] },
+        { "id": "epicfight:stun_armor", "mult": true, "base_range": [0.15, 2.8] },
+        { "id": "epicfight:weight", "mult": true, "base_range": [0.02, 0.35] },
+        { "id": "epicfight:staminar", "mult": false, "base_range": [0.3, 3.5] },
+        { "id": "epicfight:stamina_regen", "mult": false, "base_range": [0.03, 0.35] },
+        { "id": "epicfight:execution_resistance", "mult": false, "base_range": [0.05, 0.6] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.5, 0.5] }
+      ]
+    },
+    {
+      "items": ["#curios:spellbook"],
+      "types": ["curios:spellbook"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "irons_spellbooks:max_mana", "mult": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:mana_regen", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:spell_power", "mult": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:cooldown_reduction", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:cast_time_reduction", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:spell_resist", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.5 , 0.5] }
+      ]
+    },
+    {
+      "items": ["#curios:ring"],
+      "types": ["curios:ring"],
+      "socket": [1, 2],
+      "attrs": [
+        { "id": "irons_spellbooks:max_mana", "mult": true, "base_range": [-0.75 , 1.95] },
+        { "id": "irons_spellbooks:mana_regen", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:spell_power", "mult": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:cooldown_reduction", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:cast_time_reduction", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:spell_resist", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.5 , 0.5] }
+      ]
+    },
+    {
+      "items": ["#curios:necklace"],
+      "types": ["curios:necklace"],
+      "socket": [1, 2],
+      "attrs": [
+        { "id": "irons_spellbooks:max_mana", "mult": true, "base_range": [-0.7 , 1.75] },
+        { "id": "irons_spellbooks:mana_regen", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:spell_power", "mult": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:cooldown_reduction", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:cast_time_reduction", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "irons_spellbooks:spell_resist", "mult": true, "itspercent": true, "base_range": [-0.5 , 0.5] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.5 , 0.5] }
+      ]
+    },
+    {
+      "items": [
+        "irons_spellbooks:amethyst_rapier", "irons_spellbooks:artificer_cane", "irons_spellbooks:blood_staff", "irons_spellbooks:claymore",
+        "irons_spellbooks:firebrand", "irons_spellbooks:graybeard_staff", "irons_spellbooks:ice_staff", "irons_spellbooks:keeper_flamberge",
+        "irons_spellbooks:lightning_rod", "irons_spellbooks:magehunter", "irons_spellbooks:misery", "irons_spellbooks:spellbreaker", "irons_spellbooks:truthseeker"
+      ],
+      "types": ["melee"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "minecraft:generic.attack_damage", "mult": true, "base_range": [-0.2, 1.75] },
+        { "id": "minecraft:generic.attack_speed", "mult": true, "base_range": [-0.2, 1.75] },
+        { "id": "irons_spellbooks:spell_power", "mult": true, "base_range": [-0.12, 0.32] },
+        { "id": "irons_spellbooks:mana_regen", "mult": false, "base_range": [0.04, 0.35] },
+        { "id": "irons_spellbooks:cooldown_reduction", "mult": true, "base_range": [-0.1, 0.22] },
+        { "id": "glyphborn:crit_chance", "mult": false, "itspercent": true, "base_range": [0.02, 0.06] },
+        { "id": "glyphborn:crit_multiplier", "mult": false, "itspercent": true, "base_range": [0.05, 0.45] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.7, 1.0] }
+      ]
+    },
+    {
+      "items": ["irons_spellbooks:autoloader_crossbow"],
+      "types": ["range"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "glyphborn:projectile_damage", "mult": true, "itspercent": true, "base_range": [-0.2, 0.5] },
+        { "id": "glyphborn:projectile_speed", "mult": true, "itspercent": true, "base_range": [-0.2, 0.5] },
+        { "id": "glyphborn:use_speed", "mult": true, "base_range": [-0.2, 0.5] },
+        { "id": "irons_spellbooks:spell_power", "mult": true, "base_range": [-0.1, 0.28] },
+        { "id": "irons_spellbooks:cooldown_reduction", "mult": true, "base_range": [-0.08, 0.2] },
+        { "id": "glyphborn:crit_chance", "mult": false, "itspercent": true, "base_range": [0.01, 0.05] },
+        { "id": "glyphborn:crit_multiplier", "mult": true, "itspercent": true, "base_range": [-0.5, 0.5] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.5, 0.5] }
+      ]
+    },
+    {
+      "items": [
+        "irons_spellbooks:tarnished_helmet",
+        "irons_spellbooks:wandering_magician_helmet", "irons_spellbooks:wandering_magician_chestplate", "irons_spellbooks:wandering_magician_leggings", "irons_spellbooks:wandering_magician_boots",
+        "irons_spellbooks:pumpkin_helmet", "irons_spellbooks:pumpkin_chestplate", "irons_spellbooks:pumpkin_leggings", "irons_spellbooks:pumpkin_boots",
+        "irons_spellbooks:pyromancer_helmet", "irons_spellbooks:pyromancer_chestplate", "irons_spellbooks:pyromancer_leggings", "irons_spellbooks:pyromancer_boots",
+        "irons_spellbooks:electromancer_helmet", "irons_spellbooks:electromancer_chestplate", "irons_spellbooks:electromancer_leggings", "irons_spellbooks:electromancer_boots",
+        "irons_spellbooks:archevoker_helmet", "irons_spellbooks:archevoker_chestplate", "irons_spellbooks:archevoker_leggings", "irons_spellbooks:archevoker_boots",
+        "irons_spellbooks:cultist_helmet", "irons_spellbooks:cultist_chestplate", "irons_spellbooks:cultist_leggings", "irons_spellbooks:cultist_boots",
+        "irons_spellbooks:cryomancer_helmet", "irons_spellbooks:cryomancer_chestplate", "irons_spellbooks:cryomancer_leggings", "irons_spellbooks:cryomancer_boots",
+        "irons_spellbooks:shadowwalker_helmet", "irons_spellbooks:shadowwalker_chestplate", "irons_spellbooks:shadowwalker_leggings", "irons_spellbooks:shadowwalker_boots",
+        "irons_spellbooks:priest_helmet", "irons_spellbooks:priest_chestplate", "irons_spellbooks:priest_leggings", "irons_spellbooks:priest_boots",
+        "irons_spellbooks:plagued_helmet", "irons_spellbooks:plagued_chestplate", "irons_spellbooks:plagued_leggings", "irons_spellbooks:plagued_boots",
+        "irons_spellbooks:netherite_mage_helmet", "irons_spellbooks:netherite_mage_chestplate", "irons_spellbooks:netherite_mage_leggings", "irons_spellbooks:netherite_mage_boots"
+      ],
+      "types": ["armor"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "minecraft:generic.armor", "mult": true, "base_range": [-0.2, 0.5] },
+        { "id": "minecraft:generic.armor_toughness", "mult": true, "base_range": [-0.2, 0.5] },
+        { "id": "irons_spellbooks:max_mana", "mult": false, "base_range": [1.5, 22.0] },
+        { "id": "irons_spellbooks:mana_regen", "mult": false, "base_range": [0.04, 0.38] },
+        { "id": "irons_spellbooks:spell_power", "mult": true, "base_range": [-0.12, 0.28] },
+        { "id": "irons_spellbooks:spell_resist", "mult": true, "base_range": [-0.08, 0.22] },
+        { "id": "irons_spellbooks:cooldown_reduction", "mult": true, "base_range": [-0.1, 0.22] },
+        { "id": "irons_spellbooks:cast_time_reduction", "mult": true, "base_range": [-0.08, 0.2] },
+        { "id": "irons_spellbooks:summon_damage", "mult": true, "base_range": [-0.1, 0.25] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.5, 0.5] }
+      ]
+    },
+    {
+      "items": ["#minecraft:swords"],
+      "types": ["melee"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "minecraft:generic.attack_damage", "mult": true, "base_range": [-0.2, 1.75] },
+        { "id": "minecraft:generic.attack_speed", "mult": true, "base_range": [-0.2, 1.75] },
+        { "id": "epicfight:armor_negation", "mult": true, "base_range": [-0.1, 0.75] },
+        { "id": "epicfight:impact", "mult": true, "base_range": [-0.38, 0.38] },
+        { "id": "epicfight:max_strikes", "mult": true, "base_range": [1, 1] },
+        { "id": "glyphborn:crit_chance", "mult": false, "itspercent": true, "base_range": [0.02, 0.05] },
+        { "id": "glyphborn:crit_multiplier", "mult": false, "itspercent": true, "base_range": [-0.8, 0.5] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.5, 1.25] }
+      ]
+    },
+    {
+      "items": ["#minecraft:axes"],
+      "types": ["melee", "tools"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "minecraft:generic.attack_damage", "mult": true, "base_range": [-0.2, 2.75] },
+        { "id": "minecraft:generic.attack_speed", "mult": true, "base_range": [-0.2, 2.75]},
+        { "id": "epicfight:armor_negation", "mult": true, "base_range": [-0.2, 1.5] },
+        { "id": "epicfight:impact", "mult": true, "base_range": [-0.38, 0.38] },
+        { "id": "epicfight:max_strikes", "mult": true, "base_range": [1, 1] },
+        { "id": "glyphborn:crit_chance", "mult": false, "itspercent": true, "base_range": [0.02, 0.05] },
+        { "id": "glyphborn:crit_multiplier", "mult": false, "itspercent": true, "base_range": [-0.5, 0.5] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.4, 2.0] }
+      ]
+    },
+    {
+      "items": ["#minecraft:pickaxes", "#minecraft:shovels", "#minecraft:hoes"],
+      "types": ["tools"],
+      "socket": [1, 2],
+      "attrs": [
+        { "id": "minecraft:generic.attack_damage", "mult": true, "base_range": [-0.5, 0.5] },
+        { "id": "minecraft:generic.attack_speed", "mult": true, "base_range": [-0.5, 0.5] },
+        { "id": "epicfight:armor_negation", "mult": true, "base_range": [-0.5, 0.5] },
+        { "id": "epicfight:impact", "mult": true, "base_range": [-0.38, 0.38] },
+        { "id": "epicfight:max_strikes", "mult": true, "base_range": [1, 1] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.4, 0.6] }
+      ]
+    },
+    {
+      "items": ["#forge:armors/helmets", "#forge:armors/chestplates", "#forge:armors/leggings", "#forge:armors/boots"],
+      "types": ["armor"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "minecraft:generic.armor", "mult": true, "base_range": [-0.2, 0.75] },
+        { "id": "minecraft:generic.armor_toughness", "mult": true, "base_range": [-0.2, 0.5] },
+        { "id": "minecraft:generic.knockback_resistance", "mult": true, "base_range": [-0.2, 0.5] },
+        { "id": "epicfight:stun_armor", "mult": true, "base_range": [0.15, 2.8] },
+        { "id": "epicfight:weight", "mult": true, "base_range": [0.02, 0.35] },
+        { "id": "glyphborn:durability", "mult": true, "base_range": [-0.8, 1.0] }
+      ]
+    },
+    {
+      "items": ["minecraft:bow", "minecraft:crossbow", "#too_many_bows:bows"],
+      "types": ["range"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "glyphborn:projectile_damage", "mult": true,  "itspercent": true, "base_range": [-0.2, 0.5] },
+        { "id": "glyphborn:projectile_speed",  "mult": true,  "itspercent": true, "base_range": [-0.2, 0.5] },
+        { "id": "glyphborn:use_speed",         "mult": true,  "itspercent": true, "base_range": [-0.5, 0.5] },
+        { "id": "glyphborn:crit_chance",       "mult": false, "itspercent": true, "base_range": [0.01, 0.05] },
+        { "id": "glyphborn:crit_multiplier",   "mult": false, "itspercent": true, "base_range": [-0.5, 0.5] },
+        { "id": "glyphborn:durability",        "mult": true,  "base_range": [-0.5, 0.5] }
+      ]
+    },
+    {
+      "items": ["minecraft:trident"],
+      "types": ["thrown", "melee", "range"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "minecraft:generic.attack_damage", "mult": true,  "base_range": [-0.2, 0.5] },
+        { "id": "minecraft:generic.attack_speed",  "mult": true,  "base_range": [-0.2, 0.5] },
+        { "id": "glyphborn:projectile_damage",           "mult": true,  "itspercent": true, "base_range": [-0.2, 0.5] },
+        { "id": "glyphborn:projectile_speed",            "mult": true,  "itspercent": true, "base_range": [-0.2, 0.5] },
+        { "id": "glyphborn:crit_chance",                 "mult": false, "itspercent": true, "base_range": [0.01, 0.05] },
+        { "id": "glyphborn:crit_multiplier",             "mult": false, "itspercent": true, "base_range": [-0.3, 0.5] },
+        { "id": "glyphborn:durability",                  "mult": true,  "base_range": [-0.2, 0.5] }
+      ]
+    },
+    {
+      "items": ["minecraft:shield"],
+      "types": ["armor", "melee_second", "melee"],
+      "socket": [1, 3],
+      "attrs": [
+        { "id": "minecraft:generic.armor",      "mult": false,  "itspercent": false, "base_range": [0.0, 2.0] },
+        { "id": "minecraft:generic.max_health", "mult": false,  "itspercent": false, "base_range": [0.0, 4.0] },
+        { "id": "glyphborn:durability",               "mult": true,  "base_range": [-0.5, 0.5] }
+      ]
+    }
+  ]
+}

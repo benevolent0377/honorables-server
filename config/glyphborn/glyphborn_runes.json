@@ -1,0 +1,397 @@
+{
+// shared settings for all normal runes
+// number of tiers
+  "tiers_count": 5,
+// stat multipliers per tier — ordered T5 to T1 (worst to best)
+  "tier_multipliers": [1.00, 1.20, 1.45, 1.75, 2.10],
+// drop weight per tier — ordered T5 to T1 (worst to best)
+  "tier_weights": [50, 25, 14, 8, 3],
+// [min, max] stat budget for the lowest tier. scales up with tier
+  "budget": [9, 15],
+
+// rune list
+  "runes": 
+  [
+    // runes are only compatible with items listed in "glyphborn_items"
+  // "types" are used for fine-grained balance control — they act as filters only
+  // stat types: "melee", "range", "thrown", "melee_second" (shield), "armor", "tools", "magic", "all", "curios"
+  // multiple types are allowed: "types": ["melee", "range"] — matches melee and range items
+  // for Curios items use "types": ["curios"] for all slots, or "types": ["curios:ring"] for a specific slot
+  // "base_range": [min, max]
+  // "mult": true — multiplies the item's base value. (item base * multiplier)
+  // "mult": false — flat bonus added to the item's base value. (item base + bonus)
+  // formula: ((item base * item mult from glyphborn_items.json) + item flat from glyphborn_items.json)
+  //          * (1 + sum of all rune multiplier bonuses) + sum of all rune flat bonuses
+  // "itspercent": true — displays the value as a percentage. 0.01 = 1%. does not affect calculations
+  // "weight" — controls how likely this stat is to appear. higher = more common
+  // "cost" — how much budget this stat consumes
+
+  // unique runes are marked with "unic": true
+  // all stats on unique runes are guaranteed
+  // unique runes ignore shared rune settings and are excluded from the normal drop pool
+  // "grant_types" grants the rune to the item if the item matches any of the types
+    {
+      //Stardisc Splinter
+      "id": "rune_a",
+      "stats": [
+        { "id": "minecraft:generic.attack_damage",   "mult": false, "base_range": [0.01, 1.6],    "types": ["melee"],  "weight": 35, "cost": 3 },
+        { "id": "minecraft:generic.attack_damage",   "mult": true,  "base_range": [0.01, 0.11],   "types": ["melee"],  "weight": 28, "cost": 4 },
+        { "id": "glyphborn:projectile_damage",             "mult": false, "itspercent": true, "base_range": [0.01, 0.28],   "types": ["range"],  "weight": 32, "cost": 3 },
+        { "id": "glyphborn:projectile_damage",             "mult": true,  "itspercent": true, "base_range": [0.01, 0.11],   "types": ["range"],  "weight": 26, "cost": 4 },
+        { "id": "minecraft:generic.armor",           "mult": false, "base_range": [0.01, 1.8],     "types": ["armor"],  "weight": 30, "cost": 2 },
+        { "id": "minecraft:generic.armor",           "mult": true,  "base_range": [0.01, 0.10],   "types": ["armor"],  "weight": 24, "cost": 4 },
+        { "id": "minecraft:generic.attack_speed",    "mult": false, "base_range": [0.01, 0.22],   "types": ["melee"],  "weight": 28, "cost": 2 },
+        { "id": "glyphborn:use_speed",                     "mult": true,  "base_range": [0.01, 0.11],   "types": ["range"],  "weight": 24, "cost": 4 },
+        { "id": "glyphborn:crit_chance",                   "mult": false, "itspercent": true, "base_range": [0.01, 0.055],  "types": ["melee"],  "weight": 22, "cost": 2 },
+        { "id": "glyphborn:crit_multiplier",               "mult": false, "itspercent": true, "base_range": [0.01, 0.16],   "types": ["range"],  "weight": 22, "cost": 3 },
+        { "id": "glyphborn:mining_speed",                  "mult": false, "itspercent": true, "base_range": [0.01, 0.22],   "types": ["tools"],  "weight": 20, "cost": 2 },
+        { "id": "minecraft:generic.max_health",      "mult": false, "base_range": [0.01, 3.0],    "types": ["armor"],  "weight": 20, "cost": 2 },
+        { "id": "minecraft:generic.movement_speed",  "mult": false, "itspercent": true, "base_range": [0.01, 0.012],"types": ["armor"],  "weight": 18, "cost": 1 },
+        { "id": "minecraft:generic.luck",            "mult": false, "base_range": [0.01, 2.0],    "types": ["thrown"], "weight": 16, "cost": 1 },
+        { "id": "epicfight:armor_negation",          "mult": false, "base_range": [0.2, 4.5],      "types": ["melee"],  "weight": 14, "cost": 3 },
+        { "id": "epicfight:armor_negation",          "mult": false, "base_range": [0.2, 4.5],      "types": ["range"],  "weight": 12, "cost": 3 },
+        { "id": "epicfight:impact",                  "mult": false, "base_range": [0.03, 0.26],    "types": ["melee"],  "weight": 14, "cost": 2 },
+        { "id": "irons_spellbooks:spell_power",      "mult": true,  "base_range": [0.02, 0.11],    "types": ["range"],  "weight": 12, "cost": 3 },
+        { "id": "irons_spellbooks:max_mana",         "mult": false, "base_range": [1.0, 16.0],     "types": ["armor"],  "weight": 12, "cost": 2 },
+        { "id": "irons_spellbooks:mana_regen",       "mult": false, "base_range": [0.03, 0.32],    "types": ["armor"],  "weight": 10, "cost": 2 }
+      ]
+    },
+
+    {
+      //Pestilent Pattern
+      "id": "rune_b",
+      "stats": [
+        { "id": "minecraft:generic.max_health",       "mult": false, "base_range": [1.2, 3.5],    "types": ["armor"], "weight": 0, "cost": 2 },
+        { "id": "minecraft:generic.armor",            "mult": false, "base_range": [0.4, 2.2],    "types": ["armor"], "weight": 38, "cost": 2 },
+        { "id": "minecraft:generic.armor_toughness",  "mult": false, "base_range": [0.3, 1.8],    "types": ["armor"], "weight": 32, "cost": 2 },
+        { "id": "minecraft:generic.knockback_resistance","mult": false, "base_range": [0.02, 0.12],"types": ["armor"], "weight": 26, "cost": 1 },
+        { "id": "minecraft:generic.armor",            "mult": true,  "base_range": [0.04, 0.14],   "types": ["armor"], "weight": 22, "cost": 4 },
+        { "id": "minecraft:generic.attack_speed",       "mult": false, "base_range": [0.04, 0.16],   "types": ["armor"], "weight": 20, "cost": 2 },
+        { "id": "minecraft:generic.movement_speed",     "mult": false, "itspercent": true, "base_range": [0.002, 0.012],"types": ["armor"], "weight": 18, "cost": 1 },
+        { "id": "epicfight:stun_armor",                 "mult": false, "base_range": [0.15, 2.4],    "types": ["armor"], "weight": 16, "cost": 2 },
+        { "id": "epicfight:weight",                     "mult": false, "base_range": [0.03, 0.42],   "types": ["armor"], "weight": 14, "cost": 1 },
+        { "id": "irons_spellbooks:spell_resist",        "mult": true,  "base_range": [0.02, 0.11],   "types": ["armor"], "weight": 14, "cost": 3 },
+        { "id": "irons_spellbooks:max_mana",            "mult": false, "base_range": [1.2, 14.0],    "types": ["armor"], "weight": 12, "cost": 2 }
+      ]
+    },
+
+    {
+      //Shift
+      "id": "rune_c",
+      "stats": [
+        { "id": "minecraft:generic.attack_speed",   "mult": false, "base_range": [0.06, 0.42],   "types": ["melee"],  "weight": 40, "cost": 2 },
+        { "id": "minecraft:generic.attack_speed",   "mult": true,  "base_range": [0.03, 0.16],   "types": ["melee"],  "weight": 32, "cost": 4 },
+        { "id": "glyphborn:use_speed",   "mult": false, "base_range": [0.08, 0.38],   "types": ["range"],  "weight": 38, "cost": 2 },
+        { "id": "glyphborn:use_speed",   "mult": true,  "base_range": [0.04, 0.15],   "types": ["range"],  "weight": 30, "cost": 4 },
+        { "id": "minecraft:generic.attack_speed",   "mult": false, "base_range": [0.05, 0.28],   "types": ["armor"],  "weight": 28, "cost": 2 },
+        { "id": "minecraft:generic.attack_speed",   "mult": true,  "base_range": [0.025, 0.12],  "types": ["armor"],  "weight": 24, "cost": 4 },
+        { "id": "minecraft:generic.attack_speed",   "mult": false, "base_range": [0.05, 0.32],   "types": ["tools"],  "weight": 22, "cost": 2 },
+        { "id": "minecraft:generic.attack_speed",   "mult": true,  "base_range": [0.02, 0.11],   "types": ["tools"],  "weight": 20, "cost": 4 }
+      ]
+    },
+
+    {
+      //Threshold
+      "id": "rune_d",
+      "stats": [
+        { "id": "minecraft:generic.attack_damage",   "mult": false, "base_range": [-0.9, 2.8],    "types": ["melee"],  "weight": 36, "cost": 3 },
+        { "id": "minecraft:generic.armor",           "mult": false, "base_range": [-0.9, 2.6],    "types": ["armor"],  "weight": 34, "cost": 2 },
+        { "id": "glyphborn:projectile_damage",           "mult": false, "itspercent": true, "base_range": [-0.12, 0.42],  "types": ["range"],  "weight": 32, "cost": 3 },
+        { "id": "glyphborn:mining_speed",                "mult": false, "itspercent": true, "base_range": [-0.18, 0.38],   "types": ["tools"],  "weight": 28, "cost": 2 },
+        { "id": "glyphborn:use_speed",  "mult": false, "base_range": [-0.06, 0.28],   "types": ["range"],  "weight": 26, "cost": 2 },
+        { "id": "glyphborn:crit_chance",                 "mult": false, "itspercent": true, "base_range": [-0.05, 0.09],   "types": ["melee"],  "weight": 24, "cost": 2 },
+        { "id": "minecraft:generic.armor_toughness","mult": false, "base_range": [-0.4, 1.6],    "types": ["armor"],  "weight": 22, "cost": 2 }
+      ]
+    },
+
+    {
+      //Shard of the Swarm
+      "id": "rune_e",
+      "stats": [
+        { "id": "minecraft:generic.attack_damage",  "mult": true,  "base_range": [-0.12, 0.08],  "types": ["melee"],  "weight": 32, "cost": 4 },
+        { "id": "glyphborn:projectile_damage",            "mult": true, "itspercent": true, "base_range": [-0.12, 0.08],  "types": ["range"],  "weight": 32, "cost": 4 },
+        { "id": "minecraft:generic.armor",            "mult": true,  "base_range": [-0.14, 0.06],  "types": ["armor"],  "weight": 30, "cost": 4 },
+        { "id": "glyphborn:crit_multiplier",              "mult": true, "itspercent": true, "base_range": [-0.10, 0.07],  "types": ["melee"],  "weight": 26, "cost": 4 },
+        { "id": "minecraft:generic.attack_speed",   "mult": true,  "base_range": [-0.11, 0.06],  "types": ["tools"],  "weight": 24, "cost": 4 },
+        { "id": "glyphborn:mining_speed",                 "mult": true, "itspercent": true, "base_range": [-0.13, 0.07],  "types": ["tools"],  "weight": 22, "cost": 4 },
+        { "id": "glyphborn:projectile_speed",             "mult": true, "itspercent": true, "base_range": [-0.10, 0.08],  "types": ["thrown"],"weight": 20, "cost": 4 }
+      ]
+    },
+
+    {
+      //Eternity
+      "id": "rune_f",
+      "stats": [
+        { "id": "glyphborn:durability", "mult": false, "base_range": [1.00, 50.0], "types": ["melee"],        "weight": 34, "cost": 2 },
+        { "id": "glyphborn:durability", "mult": true,  "base_range": [0.03, 0.14], "types": ["melee"],        "weight": 28, "cost": 4 },
+        { "id": "glyphborn:durability", "mult": false, "base_range": [1.00, 50.0], "types": ["range"],        "weight": 32, "cost": 2 },
+        { "id": "glyphborn:durability", "mult": true,  "base_range": [0.03, 0.13], "types": ["range"],        "weight": 28, "cost": 4 },
+        { "id": "glyphborn:durability", "mult": false, "base_range": [1.00, 50.0], "types": ["armor"],        "weight": 30, "cost": 2 },
+        { "id": "glyphborn:durability", "mult": true,  "base_range": [0.03, 0.15], "types": ["armor"],        "weight": 26, "cost": 4 },
+        { "id": "glyphborn:durability", "mult": false, "base_range": [1.00, 50.0], "types": ["tools"],        "weight": 28, "cost": 2 },
+        { "id": "glyphborn:durability", "mult": true,  "base_range": [0.035, 0.15],"types": ["tools"],        "weight": 24, "cost": 4 },
+        { "id": "glyphborn:durability", "mult": false, "base_range": [1.00, 50.0], "types": ["thrown"],       "weight": 24, "cost": 2 },
+        { "id": "glyphborn:durability", "mult": true,  "base_range": [0.03, 0.13], "types": ["thrown"],       "weight": 22, "cost": 4 },
+        { "id": "glyphborn:durability", "mult": false, "base_range": [1.00, 50.0], "types": ["all"],          "weight": 20, "cost": 2 },
+        { "id": "glyphborn:durability", "mult": true,  "base_range": [0.025, 0.12],"types": ["all"],          "weight": 18, "cost": 4 },
+        { "id": "glyphborn:durability", "mult": false, "base_range": [1.00, 50.0], "types": ["melee_second"], "weight": 18, "cost": 2 },
+        { "id": "glyphborn:durability", "mult": true,  "base_range": [0.03, 0.13], "types": ["melee_second"], "weight": 16, "cost": 4 }
+      ]
+    },
+
+    {
+      //Skinless Twins
+      "id": "rune_g",
+      "stats": [
+        { "id": "minecraft:generic.max_health",     "mult": false, "base_range": [1.8, 4.2],     "types": ["armor"], "weight": 0, "cost": 2 },
+        { "id": "minecraft:generic.armor",          "mult": true,  "base_range": [-0.16, -0.05],  "types": ["armor"], "weight": 0, "cost": 4 },
+        { "id": "minecraft:generic.attack_damage",  "mult": false, "base_range": [1.0, 2.6],      "types": ["melee"], "weight": 0, "cost": 3 },
+        { "id": "minecraft:generic.attack_speed",   "mult": true,  "base_range": [-0.14, -0.04],  "types": ["melee"], "weight": 0, "cost": 4 },
+        { "id": "minecraft:generic.armor_toughness","mult": false, "base_range": [-0.5, 0.8],     "types": ["armor"], "weight": 28, "cost": 2 },
+        { "id": "minecraft:generic.movement_speed", "mult": true, "itspercent": true, "base_range": [-0.012, -0.002],"types": ["armor"], "weight": 24, "cost": 4 },
+        { "id": "minecraft:generic.attack_speed",   "mult": false, "base_range": [-0.06, 0.12],   "types": ["armor"], "weight": 22, "cost": 2 },
+        { "id": "glyphborn:crit_chance",                  "mult": false, "itspercent": true, "base_range": [-0.04, 0.05],   "types": ["armor"], "weight": 20, "cost": 2 },
+        { "id": "minecraft:generic.knockback_resistance","mult": true,"base_range": [-0.08, 0.04], "types": ["armor"], "weight": 18, "cost": 4 },
+        { "id": "minecraft:generic.attack_speed",   "mult": false, "base_range": [-0.08, 0.14],   "types": ["melee"], "weight": 26, "cost": 2 },
+        { "id": "glyphborn:crit_chance",                  "mult": true, "itspercent": true, "base_range": [-0.10, 0.05],   "types": ["melee"], "weight": 22, "cost": 4 },
+        { "id": "glyphborn:crit_multiplier",              "mult": false, "itspercent": true, "base_range": [-0.06, 0.18],   "types": ["melee"], "weight": 20, "cost": 3 },
+        { "id": "minecraft:generic.movement_speed", "mult": false, "itspercent": true, "base_range": [-0.008, 0.010], "types": ["melee"], "weight": 18, "cost": 1 }
+      ]
+    },
+
+    {
+      //Moon's Allegiance
+      "id": "rune_h",
+      "stats": [
+        { "id": "glyphborn:projectile_damage",            "mult": false, "itspercent": true, "base_range": [0.14, 0.42],  "types": ["range"], "weight": 40, "cost": 3 },
+        { "id": "glyphborn:projectile_damage",            "mult": true, "itspercent": true, "base_range": [0.04, 0.14],  "types": ["range"], "weight": 32, "cost": 4 },
+        { "id": "glyphborn:use_speed",   "mult": false, "base_range": [0.09, 0.28],  "types": ["range"], "weight": 36, "cost": 2 },
+        { "id": "glyphborn:use_speed",   "mult": true,  "base_range": [0.03, 0.12],  "types": ["range"], "weight": 28, "cost": 4 },
+        { "id": "glyphborn:projectile_speed",             "mult": false, "itspercent": true, "base_range": [0.04, 0.14],  "types": ["range"], "weight": 26, "cost": 2 },
+        { "id": "glyphborn:projectile_speed",             "mult": true, "itspercent": true, "base_range": [0.025, 0.10], "types": ["range"], "weight": 22, "cost": 4 },
+        { "id": "glyphborn:crit_chance",                  "mult": false, "itspercent": true, "base_range": [0.02, 0.08],  "types": ["range"], "weight": 24, "cost": 2 },
+        { "id": "glyphborn:crit_multiplier",              "mult": false, "itspercent": true, "base_range": [0.08, 0.24],  "types": ["range"], "weight": 22, "cost": 3 },
+        { "id": "glyphborn:crit_multiplier",              "mult": true, "itspercent": true, "base_range": [0.03, 0.11],  "types": ["range"], "weight": 18, "cost": 4 }
+      ]
+    },
+
+    {
+      //The names just beg to come out
+      "id": "rune_i",
+      "stats": [
+        { "id": "minecraft:generic.luck",           "mult": false, "base_range": [-0.5, 3.0],    "types": ["thrown"], "weight": 35, "cost": 1, "descName": "…и ещё одно имя" },
+        { "id": "minecraft:generic.movement_speed", "mult": false, "itspercent": true, "base_range": [-0.006, 0.018], "types": ["armor"],  "weight": 32, "cost": 1, "descName": "Подпись сбоку" },
+        { "id": "minecraft:generic.knockback_resistance","mult": false, "base_range": [-0.04, 0.14], "types": ["melee"], "weight": 28, "cost": 1 },
+        { "id": "glyphborn:crit_chance",                  "mult": false, "itspercent": true, "base_range": [-0.02, 0.09],   "types": ["range"],  "weight": 26, "cost": 2, "descName": "Слоган?" },
+        { "id": "minecraft:generic.attack_speed",   "mult": false, "base_range": [-0.05, 0.22],   "types": ["tools"],  "weight": 24, "cost": 2 },
+        { "id": "glyphborn:mining_speed",                 "mult": false, "itspercent": true, "base_range": [-0.1, 0.22],    "types": ["tools"],  "weight": 22, "cost": 2 },
+        { "id": "minecraft:generic.max_health",     "mult": false, "base_range": [-0.8, 2.2],     "types": ["armor"],  "weight": 20, "cost": 2 }
+      ]
+    },
+
+    {
+      //A Whisper of Torn Lives Leads to Black Rivers
+      "id": "rune_j",
+      "stats": [
+        { "id": "irons_spellbooks:spell_power",          "mult": false, "itspercent": true, "base_range": [0.02, 0.10], "types": ["armor"],  "weight": 36, "cost": 3 },
+        { "id": "irons_spellbooks:mana_regen",          "mult": false, "base_range": [0.15, 0.55], "types": ["armor"],  "weight": 32, "cost": 2 },
+        { "id": "irons_spellbooks:max_mana",            "mult": false, "base_range": [4.0, 18.0],  "types": ["armor"],  "weight": 30, "cost": 3 },
+        { "id": "irons_spellbooks:cooldown_reduction",  "mult": false, "itspercent": true, "base_range": [0.02, 0.08], "types": ["armor"],  "weight": 28, "cost": 3 },
+        { "id": "irons_spellbooks:cast_time_reduction", "mult": false, "itspercent": true, "base_range": [0.02, 0.08], "types": ["curios:spellbook"],  "weight": 24, "cost": 3 },
+        { "id": "irons_spellbooks:spell_resist",        "mult": false, "itspercent": true, "base_range": [0.02, 0.08], "types": ["armor"],  "weight": 22, "cost": 2 },
+        { "id": "irons_spellbooks:summon_damage",       "mult": false, "itspercent": true, "base_range": [0.02, 0.10], "types": ["curios:spellbook"],  "weight": 20, "cost": 3 },
+        { "id": "irons_spellbooks:fire_spell_power",    "mult": false, "itspercent": true, "base_range": [0.02, 0.08], "types": ["curios:spellbook"],  "weight": 18, "cost": 3 },
+        { "id": "irons_spellbooks:fire_magic_resist",     "mult": false, "itspercent": true, "base_range": [0.02, 0.08], "types": ["armor"],  "weight": 16, "cost": 2 },
+        { "id": "minecraft:generic.max_health",          "mult": false, "base_range": [1.2, 3.5],   "types": ["armor"],  "weight": 34, "cost": 2 },
+        { "id": "minecraft:generic.luck",                "mult": false, "base_range": [0.4, 1.8],   "types": ["armor"],  "weight": 28, "cost": 1 },
+        { "id": "minecraft:generic.movement_speed",      "mult": false, "itspercent": true, "base_range": [0.003, 0.012],"types": ["armor"],  "weight": 26, "cost": 1 },
+        { "id": "minecraft:generic.knockback_resistance","mult": false, "base_range": [0.02, 0.10], "types": ["armor"],  "weight": 24, "cost": 1 },
+        { "id": "minecraft:generic.attack_speed",        "mult": false, "base_range": [0.04, 0.14], "types": ["curios:spellbook"],  "weight": 22, "cost": 2 }
+      ]
+    },
+
+    {
+      //Silhouette
+      "id": "rune_k",
+      "stats": [
+        { "id": "minecraft:generic.luck",            "mult": false, "base_range": [0.05, 0.45],   "types": ["melee"],  "weight": 28, "cost": 1 },
+        { "id": "minecraft:generic.luck",            "mult": false, "base_range": [0.05, 0.45],   "types": ["range"],  "weight": 28, "cost": 1 },
+        { "id": "minecraft:generic.luck",            "mult": false, "base_range": [0.05, 0.40],   "types": ["armor"],  "weight": 26, "cost": 1 },
+        { "id": "minecraft:generic.movement_speed",  "mult": false, "itspercent": true, "base_range": [0.001, 0.008], "types": ["melee"],  "weight": 24, "cost": 1 },
+        { "id": "minecraft:generic.movement_speed",  "mult": false, "itspercent": true, "base_range": [0.001, 0.008], "types": ["range"],  "weight": 24, "cost": 1 },
+        { "id": "minecraft:generic.knockback_resistance","mult": false, "base_range": [0.01, 0.06], "types": ["armor"], "weight": 22, "cost": 1 },
+        { "id": "glyphborn:crit_chance",                   "mult": false, "itspercent": true, "base_range": [0.005, 0.035], "types": ["thrown"], "weight": 20, "cost": 2 },
+        { "id": "glyphborn:mining_speed",                  "mult": false, "itspercent": true, "base_range": [0.02, 0.12],   "types": ["tools"],  "weight": 22, "cost": 2 },
+        { "id": "minecraft:generic.attack_speed",    "mult": false, "base_range": [0.02, 0.10],   "types": ["tools"],  "weight": 20, "cost": 2 }
+      ]
+    },
+
+    {
+      //Duality
+      "id": "rune_l",
+      "stats": [
+        { "id": "minecraft:generic.attack_damage",  "mult": true,  "base_range": [-0.18, -0.06],  "types": ["melee"],  "weight": 0, "cost": 4 },
+        { "id": "minecraft:generic.attack_damage",  "mult": false, "base_range": [0.7, 2.2],      "types": ["melee"],  "weight": 2, "cost": 3 },
+        { "id": "minecraft:generic.armor",          "mult": true,  "base_range": [-0.16, -0.05],  "types": ["armor"],  "weight": 0, "cost": 4 },
+        { "id": "minecraft:generic.armor",          "mult": false, "base_range": [0.8, 2.4],      "types": ["armor"],  "weight": 2, "cost": 2 },
+        { "id": "glyphborn:crit_chance",                  "mult": false, "itspercent": true, "base_range": [-0.10, -0.02], "types": ["range"],  "weight": 0, "cost": 2 },
+        { "id": "glyphborn:crit_multiplier",              "mult": true, "itspercent": true, "base_range": [0.05, 0.16],     "types": ["range"],  "weight": 2, "cost": 4 },
+        { "id": "minecraft:generic.attack_speed",   "mult": false, "base_range": [0.05, 0.22],   "types": ["melee"],  "weight": 26, "cost": 2 },
+        { "id": "minecraft:generic.attack_speed",   "mult": true,  "base_range": [0.02, 0.12],   "types": ["melee"],  "weight": 22, "cost": 4 },
+        { "id": "glyphborn:crit_chance",                  "mult": false, "itspercent": true, "base_range": [0.01, 0.08],   "types": ["melee"],  "weight": 20, "cost": 2 },
+        { "id": "glyphborn:crit_multiplier",              "mult": false, "itspercent": true, "base_range": [0.04, 0.18],   "types": ["melee"],  "weight": 18, "cost": 3 },
+        { "id": "glyphborn:crit_chance",                  "mult": true, "itspercent": true, "base_range": [-0.08, 0.05],  "types": ["melee"],  "weight": 16, "cost": 4 },
+        { "id": "minecraft:generic.max_health",     "mult": false, "base_range": [0.4, 2.0],     "types": ["armor"],  "weight": 24, "cost": 2 },
+        { "id": "minecraft:generic.max_health",     "mult": true,  "base_range": [0.02, 0.10],   "types": ["armor"],  "weight": 20, "cost": 4 },
+        { "id": "minecraft:generic.armor_toughness","mult": false, "base_range": [0.15, 1.0],    "types": ["armor"],  "weight": 22, "cost": 2 },
+        { "id": "minecraft:generic.armor_toughness","mult": true,  "base_range": [0.02, 0.09],   "types": ["armor"],  "weight": 18, "cost": 4 },
+        { "id": "minecraft:generic.knockback_resistance","mult": false, "base_range": [0.02, 0.10], "types": ["armor"], "weight": 18, "cost": 1 },
+        { "id": "minecraft:generic.knockback_resistance","mult": true,  "base_range": [0.015, 0.08], "types": ["armor"], "weight": 16, "cost": 4 },
+        { "id": "minecraft:generic.movement_speed", "mult": false, "itspercent": true, "base_range": [0.002, 0.012], "types": ["armor"],  "weight": 16, "cost": 1 },
+        { "id": "minecraft:generic.movement_speed", "mult": true, "itspercent": true, "base_range": [-0.006, 0.04], "types": ["armor"],  "weight": 14, "cost": 4 },
+        { "id": "minecraft:generic.attack_speed",   "mult": false, "base_range": [-0.10, 0.06],  "types": ["armor"],  "weight": 20, "cost": 2 },
+        { "id": "minecraft:generic.attack_speed",   "mult": false, "base_range": [-0.10, 0.06],  "types": ["melee"],  "weight": 18, "cost": 2 },
+        { "id": "glyphborn:use_speed",   "mult": false, "base_range": [-0.10, 0.06],  "types": ["range"],  "weight": 18, "cost": 2 }
+      ]
+    },
+
+    {
+      //Withered Chain
+      "id": "rune_m",
+      "stats": [
+        { "id": "glyphborn:durability",                 "mult": false, "base_range": [-15.00, 33.0],  "types": ["tools"],  "weight": 32, "cost": 2 },
+        { "id": "glyphborn:durability",                 "mult": true,  "base_range": [-0.06, 0.10],  "types": ["tools"],  "weight": 26, "cost": 4 },
+        { "id": "glyphborn:mining_speed",               "mult": false, "itspercent": true, "base_range": [-0.12, 0.15],  "types": ["tools"],  "weight": 28, "cost": 2 },
+        { "id": "minecraft:generic.attack_speed", "mult": false, "base_range": [-0.08, 0.10],  "types": ["tools"],  "weight": 24, "cost": 2 },
+        { "id": "glyphborn:durability",                 "mult": false, "base_range": [-15.00, 30.0],  "types": ["armor"],  "weight": 26, "cost": 2 },
+        { "id": "minecraft:generic.movement_speed", "mult": false, "itspercent": true, "base_range": [-0.006, 0.008], "types": ["armor"],  "weight": 22, "cost": 1 },
+        { "id": "minecraft:generic.armor_toughness","mult": false, "base_range": [0.1, 0.9],    "types": ["armor"],  "weight": 20, "cost": 2 },
+        { "id": "minecraft:generic.knockback_resistance","mult": false, "base_range": [0.02, 0.12], "types": ["armor"], "weight": 18, "cost": 1 },
+        { "id": "glyphborn:durability",                 "mult": false, "base_range": [13.00, 27.0],  "types": ["thrown"], "weight": 18, "cost": 2 }
+      ]
+    },
+
+    {
+      //Facet
+      "id": "rune_n",
+      "stats": [
+        { "id": "minecraft:generic.attack_damage",  "mult": false, "base_range": [-0.5, 0.8],    "types": ["melee"],  "weight": 28, "cost": 3 },
+        { "id": "glyphborn:projectile_damage",            "mult": false, "itspercent": true, "base_range": [-0.12, 0.22],  "types": ["range"],  "weight": 26, "cost": 3 },
+        { "id": "minecraft:generic.armor",          "mult": false, "base_range": [-0.6, 0.9],    "types": ["armor"],  "weight": 26, "cost": 2 },
+        { "id": "minecraft:generic.max_health",     "mult": false, "base_range": [-1.2, 1.8],    "types": ["armor"],  "weight": 24, "cost": 2 },
+        { "id": "minecraft:generic.attack_speed",   "mult": false, "base_range": [-0.08, 0.12],  "types": ["melee"],  "weight": 22, "cost": 2 },
+        { "id": "glyphborn:crit_chance",                  "mult": false, "itspercent": true, "base_range": [-0.05, 0.06],   "types": ["range"],  "weight": 20, "cost": 2 },
+        { "id": "glyphborn:crit_multiplier",              "mult": false, "itspercent": true, "base_range": [-0.06, 0.14],  "types": ["melee"],  "weight": 20, "cost": 3 },
+        { "id": "glyphborn:mining_speed",                 "mult": false, "itspercent": true, "base_range": [-0.15, 0.12],   "types": ["tools"],  "weight": 18, "cost": 2 },
+        { "id": "minecraft:generic.luck",           "mult": false, "base_range": [-0.8, 0.9],     "types": ["thrown"], "weight": 16, "cost": 1 },
+        { "id": "minecraft:generic.knockback_resistance","mult": false, "base_range": [-0.05, 0.08], "types": ["armor"], "weight": 16, "cost": 1 }
+      ]
+    },
+
+    {
+      // The roar of strings...
+      "id": "rune_o",
+      "stats": [
+        { "id": "glyphborn:durability",                 "mult": true,  "base_range": [-0.22, -0.08],  "types": ["all"],    "weight": 0, "cost": 4 },
+        { "id": "minecraft:generic.attack_damage",  "mult": false, "base_range": [1.0, 2.8],    "types": ["melee"],  "weight": 32, "cost": 3 },
+        { "id": "minecraft:generic.attack_damage",  "mult": true,  "base_range": [0.10, 0.26],   "types": ["melee"],  "weight": 28, "cost": 4 },
+        { "id": "glyphborn:projectile_damage",            "mult": false, "itspercent": true, "base_range": [0.18, 0.48],  "types": ["range"],  "weight": 30, "cost": 3 },
+        { "id": "glyphborn:projectile_damage",            "mult": true, "itspercent": true, "base_range": [0.08, 0.22],   "types": ["range"],  "weight": 26, "cost": 4 },
+        { "id": "minecraft:generic.armor",          "mult": false, "base_range": [0.8, 2.4],     "types": ["armor"],  "weight": 28, "cost": 2 },
+        { "id": "minecraft:generic.armor",          "mult": true,  "base_range": [0.08, 0.22],   "types": ["armor"],  "weight": 24, "cost": 4 },
+        { "id": "glyphborn:mining_speed",                 "mult": false, "itspercent": true, "base_range": [0.12, 0.38],   "types": ["tools"],  "weight": 24, "cost": 2 },
+        { "id": "glyphborn:mining_speed",                 "mult": true, "itspercent": true, "base_range": [0.07, 0.20],   "types": ["tools"],  "weight": 22, "cost": 4 },
+        { "id": "minecraft:generic.max_health",     "mult": false, "base_range": [1.5, 4.5],     "types": ["armor"],  "weight": 22, "cost": 2 },
+        { "id": "minecraft:generic.max_health",     "mult": true,  "base_range": [0.06, 0.18],   "types": ["armor"],  "weight": 18, "cost": 4 },
+        { "id": "glyphborn:crit_multiplier",              "mult": false, "itspercent": true, "base_range": [0.12, 0.32],   "types": ["melee"],  "weight": 20, "cost": 3 },
+        { "id": "glyphborn:crit_multiplier",              "mult": true, "itspercent": true, "base_range": [0.08, 0.22],   "types": ["range"],  "weight": 18, "cost": 4 }
+      ]
+    },
+
+    {
+      //An old stone with some scribbles. Taste: not great
+      "id": "rune_p",
+      "stats": [
+        { "id": "minecraft:generic.attack_damage",  "mult": true,  "base_range": [0.01, 0.032],  "types": ["melee"],  "weight": 30, "cost": 4 },
+        { "id": "glyphborn:projectile_damage",            "mult": true, "itspercent": true, "base_range": [0.006, 0.030],  "types": ["range"],  "weight": 28, "cost": 4 },
+        { "id": "minecraft:generic.armor",          "mult": true,  "base_range": [0.01, 0.028],  "types": ["armor"],  "weight": 26, "cost": 4 },
+        { "id": "minecraft:generic.attack_speed",   "mult": true,  "base_range": [0.01, 0.022],  "types": ["melee"],  "weight": 24, "cost": 4 },
+        { "id": "glyphborn:use_speed",   "mult": true,  "base_range": [0.01, 0.020],  "types": ["range"],  "weight": 22, "cost": 4 },
+        { "id": "glyphborn:crit_multiplier",              "mult": true, "itspercent": true, "base_range": [0.01, 0.025],  "types": ["melee"],  "weight": 20, "cost": 4 },
+        { "id": "glyphborn:mining_speed",                 "mult": true, "itspercent": true, "base_range": [0.01, 0.028],  "types": ["tools"],  "weight": 20, "cost": 4 },
+        { "id": "glyphborn:durability",                   "mult": true,  "base_range": [0.01, 0.020],  "types": ["tools"],  "weight": 18, "cost": 4 },
+        { "id": "minecraft:generic.max_health",     "mult": true,  "base_range": [0.01, 0.018],  "types": ["armor"],  "weight": 16, "cost": 4 }
+      ]
+    },
+
+    {
+      // Sealed Circle
+      "id": "rune_q",
+      "stats": [
+        { "id": "minecraft:generic.armor",          "mult": true,  "base_range": [-0.14, 0.14],     "types": ["armor"],  "weight": 32, "cost": 2 },
+        { "id": "minecraft:generic.attack_damage",  "mult": true,  "base_range": [-0.12, 0.15],     "types": ["melee"],  "weight": 30, "cost": 2 },
+        { "id": "glyphborn:projectile_damage",            "mult": true, "itspercent": true, "base_range": [-0.12, 0.05],  "types": ["range"],  "weight": 28, "cost": 2 },
+        { "id": "minecraft:generic.attack_speed",   "mult": true,  "base_range": [-0.13, 0.24],  "  types": ["melee"],  "weight": 26, "cost": 2 },
+        { "id": "glyphborn:use_speed",                    "mult": true,  "base_range": [-0.12, 0.24],     "types": ["range"],  "weight": 24, "cost": 2 },
+        { "id": "glyphborn:mining_speed",                 "mult": true, "itspercent": true, "base_range": [-0.14, 0.04],  "types": ["tools"],  "weight": 22, "cost": 2 },
+        { "id": "glyphborn:crit_multiplier",              "mult": true, "itspercent": true, "base_range": [-0.11, 0.04],  "types": ["range"],  "weight": 20, "cost": 2 },
+        { "id": "minecraft:generic.max_health",     "mult": true,  "base_range": [-0.10, 0.23],     "types": ["armor"],  "weight": 18, "cost": 2 },
+        { "id": "glyphborn:durability",                   "mult": true,  "base_range": [-0.12, 0.24],     "types": ["thrown"], "weight": 16, "cost": 2 },
+        { "id": "minecraft:generic.movement_speed", "mult": true, "itspercent": true, "base_range": [-0.01, 0.02],"types": ["armor"],  "weight": 14, "cost": 2 }
+      ]
+    },
+
+    {
+      //Summit of Souls
+      "id": "rune_r",
+      "stats": [
+        { "id": "minecraft:generic.max_health",     "mult": false, "base_range": [4.0, 10.0],    "types": ["all"], "weight": 25, "cost": 6 },
+        { "id": "minecraft:generic.movement_speed", "mult": false, "itspercent": true, "base_range": [0.014, 0.034], "types": ["all"], "weight": 25, "cost": 6 },
+        { "id": "glyphborn:mining_speed",                 "mult": false, "itspercent": true, "base_range": [0.22, 0.48],    "types": ["all"], "weight": 25, "cost": 6 },
+        { "id": "glyphborn:durability",                   "mult": false, "base_range": [25.00, 70.0],    "types": ["all"], "weight": 25, "cost": 6}
+      ]
+    },
+
+
+  // unique runes are marked with "unic": true
+  // all stats on unique runes are guaranteed
+  // unique runes ignore shared rune settings and are excluded from the normal drop pool
+    
+    //Sun's Sacrifice
+    {
+      "id": "rune_s",
+      "unic": true,
+      "grant_types": [{ "grant": "melee", "on": ["armor"] }],
+      "stats": [
+        { "id": "minecraft:generic.attack_damage",  "mult": false, "base_range": [1.0, 8.0],    "types": ["melee"] },
+        { "id": "minecraft:generic.max_health",     "mult": false, "base_range": [-8.0, -4.0],  "types": ["melee"] }
+      ]
+    },
+
+    //Forged Flesh
+    {
+      "id": "rune_t",
+      "unic": true,
+      "grant_types": [{ "grant": "armor", "on": ["melee"] }],
+      "stats": [
+        { "id": "minecraft:generic.armor",               "mult": false, "base_range": [2.0, 10.0],      "types": ["armor"] },
+        { "id": "minecraft:generic.armor_toughness",     "mult": false, "base_range": [1.0, 4.0],      "types": ["armor"] },
+        { "id": "minecraft:generic.movement_speed",      "mult": false, "itspercent": true, "base_range": [-0.02, -0.1],"types": ["armor"] }
+      ]
+    },
+
+    //Worm
+    {
+      "id": "rune_u",
+      "unic": true,
+      "grant_types": [{ "grant": "range", "on": ["armor"] }],
+      "stats": [
+        { "id": "glyphborn:projectile_damage",        "mult": false, "itspercent": true, "base_range": [0.04, 0.40],   "types": ["range"] },
+        { "id": "glyphborn:projectile_damage",        "mult": true, "itspercent": true, "base_range": [0.10, 0.40],   "types": ["range"] },
+        { "id": "minecraft:generic.armor",            "mult": false, "base_range": [-8.0, -1.0],  "types": ["range"] }
+      ]
+    }
+
+  ]
+}
+

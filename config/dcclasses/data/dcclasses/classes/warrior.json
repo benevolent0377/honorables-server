@@ -1,23 +1,38 @@
 {
-	"index": 0,
-	"attributes": {
-		"generic.max_health": 20,
-		"paraglider:max_stamina": 28
-	},
-	"starting_skills": [
-		"epicfight:roll"
-	],
-	"items": [
-		{
-			"id": "minecraft:stone_sword",
-			"slot": "mainhand"
-		},
-		{
-			"id": "minecraft:bread",
-			"count": 6,
-			"slot": "mainhand"
-		}
-	],
-	"animation": "epicfight:biped/combat/sword_auto3",
-	"offset": [0, 0]
+    "index": 3,
+    "attributes": {
+        "puffish_attributes:melee_damage": 1.5,
+        "generic.armor": 3.0,
+        "puffish_attributes:resistance": 1.2
+    },
+    "starting_skills": [
+        "epicfight:roll"
+    ],
+    "items": [
+        {
+            "id": "legendarysurvivaloverhaul:bandage",
+            "count": 3
+        },
+        {
+            "id": "minecraft:bread",
+            "count": 6
+        },
+        {
+            "id": "minecraft:stone_sword",
+            "slot": "mainhand"
+        },
+        {
+            "id": "minecraft:shield",
+            "slot": "offhand"
+        },
+        {
+            "id": "minecraft:cooked_beef",
+            "count": 8
+        }
+    ],
+    "animation": "epicfight:biped/combat/sword_auto3",
+    "offset": [
+        0,
+        0
+    ]
 }

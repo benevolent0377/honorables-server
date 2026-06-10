@@ -1,0 +1,47 @@
+{
+    "index": 2,
+    "attributes": {
+        "puffish_attributes:sprinting_speed": 1.5,
+        "generic.movement_speed": 0.125,
+        "puffish_attributes:jump": 1.25,
+        "puffish_attributes:fall_reduction": 1.25,
+        "puffish_attributes:stamina": 1.2,
+        "forge:block_reach": 5.2,
+        "forge:swim_speed": 1.1,
+        "forge:step_height_addition": 0.1,
+        "puffish_attributes:resistance": 0.8,
+        "puffish_attributes:melee_damage": 0.85,
+        "puffish_attributes:magic_damage": 0.85,
+        "puffish_attributes:pickaxe_speed": 0.9
+    },
+    "starting_skills": [],
+    "items": [
+        {
+            "id": "legendarysurvivaloverhaul:bandage",
+            "count": 3
+        },
+        {
+            "id": "minecraft:bread",
+            "count": 6
+        },
+        {
+            "id": "minecraft:stone_axe",
+            "slot": "mainhand"
+        },
+        {
+            "id": "naturescompass:naturescompass"
+        },
+        {
+            "id": "minecraft:oak_boat"
+        },
+        {
+            "id": "minecraft:sweet_berries",
+            "count": 16
+        }
+    ],
+    "animation": "epicfight:biped/combat/sword_auto3",
+    "offset": [
+        0,
+        0
+    ]
+}

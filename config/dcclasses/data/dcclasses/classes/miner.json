@@ -1,34 +1,44 @@
 {
-	"index": 6,
-	"attributes": {
-		"generic.max_health": 24,
-		"forge:entity_gravity": 0.1,
-		"paraglider:max_stamina": 28
-	},
-	"starting_skills": [
-		"epicfight:emergency_escape"
-	],
-	"items": [
-		{
-			"id": "minecraft:stone_pickaxe",
-			"slot": "mainhand"
-		},
-		{
-			"id": "minecraft:bread",
-			"count": 12,
-			"slot": "mainhand"
-		},
-		{
-			"id": "minecraft:torch",
-			"count": 16,
-			"slot": "offhand"
-		},
-		{
-			"id": "minecraft:cobblestone",
-			"count": 32,
-			"slot": "offhand"
-		}
-	],
-	"animation": "epicfight:biped/living/sneak",
-	"offset": [0, 0]
+    "index": 0,
+    "attributes": {
+        "puffish_attributes:pickaxe_speed": 1.8,
+        "puffish_attributes:mining_speed": 1.4,
+        "puffish_attributes:fortune": 1.2,
+        "puffish_attributes:stamina": 1.15,
+        "puffish_attributes:resistance": 1.1,
+        "forge:block_reach": 5.0,
+        "puffish_attributes:ranged_damage": 0.75,
+        "puffish_attributes:magic_damage": 0.75,
+        "puffish_attributes:sprinting_speed": 0.8,
+        "puffish_attributes:stealth": 0.85,
+        "puffish_attributes:healing": 0.9
+    },
+    "starting_skills": [],
+    "items": [
+        {
+            "id": "legendarysurvivaloverhaul:bandage",
+            "count": 3
+        },
+        {
+            "id": "minecraft:bread",
+            "count": 6
+        },
+        {
+            "id": "minecraft:stone_pickaxe",
+            "slot": "mainhand"
+        },
+        {
+            "id": "minecraft:coal",
+            "count": 8
+        },
+        {
+            "id": "minecraft:baked_potato",
+            "count": 8
+        }
+    ],
+    "animation": "epicfight:biped/combat/sword_auto3",
+    "offset": [
+        0,
+        0
+    ]
 }

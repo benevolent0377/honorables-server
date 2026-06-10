@@ -1,21 +1,39 @@
 {
-"index": 8,
-"attributes": {
-    "irons_spellbooks:spellpower": 1.2,
-    "irons_spellbooks:max_mana": 125,
-    "irons_spellbooks:mana_regen": 1.1,
-    "generic.max_health": 16,
-    "generic.movement_speed": 0.11,
-    "paraglider:max_stamina": 20
-},
-"items": [
-    {
-        "id": "minecraft:bread",
-        "count": 12
+    "index": 5,
+    "attributes": {
+        "irons_spellbooks:spell_power": 1.5,
+        "irons_spellbooks:max_mana": 140,
+        "irons_spellbooks:mana_regen": 1.3,
+        "irons_spellbooks:cooldown_reduction": 1.2,
+        "puffish_attributes:magic_damage": 1.2,
+        "irons_spellbooks:cast_time_reduction": 1.15,
+        "puffish_attributes:melee_damage": 0.75,
+        "puffish_attributes:ranged_damage": 0.75,
+        "puffish_attributes:pickaxe_speed": 0.85,
+        "puffish_attributes:stamina": 0.9
     },
-    {
-        "id": "irons_spellbooks:copper_spell_book"
-    }
-],
-"offset": [0, 0]
+    "starting_skills": [],
+    "items": [
+        {
+            "id": "legendarysurvivaloverhaul:bandage",
+            "count": 3
+        },
+        {
+            "id": "minecraft:bread",
+            "count": 6
+        },
+        {
+            "id": "irons_spellbooks:copper_spell_book",
+            "slot": "mainhand"
+        },
+        {
+            "id": "minecraft:apple",
+            "count": 8
+        }
+    ],
+    "animation": "epicfight:biped/combat/sword_auto3",
+    "offset": [
+        0,
+        0
+    ]
 }

@@ -1,12 +1,122 @@
 {
-	"health+2": {
-		"title": "+1 Heart",
+	"warrior_root": {
+		"title": "A Warrior's Honor",
 		"icon": {
-			"type": "effect",
+			"type": "item",
 			"data": {
-				"effect": "health_boost"
+				"item": "nether_star"
 			}
 		},
+		"description": [
+			"You have pledged to be a warrior. ",
+			"Stamina +5% ",
+			"Melee Defense +4% ",
+			"Attack Speed +3% ",
+			"Magic Damage -5% ",
+			"Ranged Damage -6% ",
+			"Stealth -5% ",
+			"Max Mana -10 Mana "
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "puffish_attributes:stamina",
+					"value": 0.05,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "puffish_attributes:melee_resistance",
+					"value": 0.04,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.attack_speed",
+					"value": 0.03,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "puffish_attributes:magic_damage",
+					"value": -0.05,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "puffish_attributes:ranged_damage",
+					"value": -0.2,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "puffish_attributes:stealth",
+					"value": -0.05,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "irons_spellbooks:max_mana",
+					"value": -10,
+					"operation": "addition"
+				}
+			}
+		],
+		"metadata": {
+			"icon": "ufct82ltt2qmc1bh"
+		}
+	},
+	"warrior_offense_1": {
+		"title": "Offense I",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "iron_sword"
+			}
+		},
+		"description": [
+			"Practice makes perfect. ",
+			"Melee Damage +10%"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "puffish_attributes:melee_damage",
+					"value": 0.1,
+					"operation": "multiply_base"
+				}
+			}
+		],
+		"metadata": {
+			"icon": "do0sp6hkotsv0hii"
+		}
+	},
+	"warrior_defense_1": {
+		"title": "Defense I",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "legendarysurvivaloverhaul:heart_container"
+			}
+		},
+		"description": [
+			"Combat makes you tougher. ",
+			"Max Health +2HP"
+		],
 		"rewards": [
 			{
 				"type": "puffish_skills:attribute",
@@ -16,44 +126,35 @@
 					"operation": "addition"
 				}
 			}
-		]
+		],
+		"metadata": {
+			"icon": "4bkr4iaienvk4yvf"
+		}
 	},
-	"attack_speed+5%": {
-		"title": "+5% Attack Speed",
+	"warrior_utility_1": {
+		"title": "Utility I",
 		"icon": {
 			"type": "item",
 			"data": {
-				"item": "golden_sword"
+				"item": "apotheosis:potion_charm"
 			}
 		},
+		"description": [
+			"Exposure to combat has sharpened your mind. ",
+			"Experience Gain +2%"
+		],
 		"rewards": [
 			{
 				"type": "puffish_skills:attribute",
 				"data": {
-					"attribute": "generic.attack_speed",
-					"value": 0.05,
-					"operation": "multiply_total"
+					"attribute": "attributeslib:experience_gained",
+					"value": 0.02,
+					"operation": "multiply_base"
 				}
 			}
-		]
-	},
-	"movement_speed+5%": {
-		"title": "+5% Movement Speed",
-		"icon": {
-			"type": "effect",
-			"data": {
-				"effect": "speed"
-			}
-		},
-		"rewards": [
-			{
-				"type": "puffish_skills:attribute",
-				"data": {
-					"attribute": "generic.movement_speed",
-					"value": 0.05,
-					"operation": "multiply_total"
-				}
-			}
-		]
+		],
+		"metadata": {
+			"icon": "fbnsevjwrjdi0he6"
+		}
 	}
 }

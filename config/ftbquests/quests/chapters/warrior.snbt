@@ -3,50 +3,24 @@
 	default_quest_shape: "circle"
 	filename: "warrior"
 	group: ""
-	hide_quest_details_until_startable: true
-	hide_quest_until_deps_complete: true
 	icon: "alexsmobs:animal_dictionary"
 	id: "632124E0C7C726AC"
 	order_index: 0
-	progression_mode: "linear"
+	progression_mode: "flexible"
 	quest_links: [ ]
 	quests: [
 		{
 			id: "7971212D15B50CAD"
-			rewards: [
-				{
-					id: "2964673EA1FEB188"
-					item: {
-						Count: 1
-						id: "minecraft:chainmail_helmet"
-						tag: {
-							Damage: 0
-						}
-					}
-					type: "item"
-				}
-				{
-					id: "19258B945DCD58C9"
-					item: {
-						Count: 1
-						id: "minecraft:chainmail_boots"
-						tag: {
-							Damage: 0
-						}
-					}
-					type: "item"
-				}
-				{
-					id: "7FBCB2F80C48008B"
-					type: "xp"
-					xp: 100
-				}
-			]
+			rewards: [{
+				id: "7FBCB2F80C48008B"
+				type: "xp"
+				xp: 100
+			}]
 			subtitle: "You have chosen the path of a warrior."
 			tasks: [{
 				icon: {
 					Count: 1
-					id: "minecraft:iron_sword"
+					id: "better_weaponry:amethyst_sword"
 					tag: {
 						Damage: 0
 					}
@@ -68,29 +42,35 @@
 					xp: 100
 				}
 				{
-					id: "44CD5E055CBB601C"
+					exclude_from_claim_all: true
+					id: "418BF06655142BBC"
+					table_id: 2274867275190187412L
+					type: "random"
+				}
+				{
+					id: "58FEAFCD6ED8C2BA"
 					item: {
 						Count: 1
-						id: "minecraft:bow"
+						id: "spartanweaponry:stone_dagger"
 						tag: {
 							Damage: 0
 						}
 					}
 					type: "item"
 				}
-				{
-					exclude_from_claim_all: true
-					id: "418BF06655142BBC"
-					table_id: 2274867275190187412L
-					type: "random"
-				}
 			]
 			subtitle: "You have chosen to be a scout!"
 			tasks: [{
-				icon: "minecraft:rabbit_foot"
+				icon: {
+					Count: 1
+					id: "spartanfire:lightning_dragon_bone_longbow"
+					tag: {
+						Damage: 0
+					}
+				}
 				id: "654326218EDBCAD7"
-				stage: "class_scout"
-				title: "Select the Scout Class"
+				stage: "class_ranger"
+				title: "Select the Ranger Class"
 				type: "gamestage"
 			}]
 			title: "Become a Scout"
@@ -104,15 +84,21 @@
 				type: "xp"
 				xp: 100
 			}]
-			subtitle: "You have chosen to be a berserker."
+			subtitle: "You have chosen to be a miner"
 			tasks: [{
-				icon: "mowziesmobs:wrought_axe"
+				icon: {
+					Count: 1
+					id: "better_weaponry:amethyst_pickaxe"
+					tag: {
+						Damage: 0
+					}
+				}
 				id: "123AA55ADFA862E0"
-				stage: "class_berserker"
+				stage: "class_miner"
 				title: "Select the Berserker Class"
 				type: "gamestage"
 			}]
-			title: "Become a Berserker"
+			title: "Become a Miner"
 			x: 0.5d
 			y: -0.5d
 		}
@@ -148,14 +134,145 @@
 			]
 			subtitle: "Learn to master the arcane elements."
 			tasks: [{
-				icon: "irons_spellbooks:book_stack"
+				icon: {
+					Count: 1
+					id: "irons_spellbooks:dragonskin_spell_book"
+					tag: {
+						"irons_spellbooks:spell_container": {
+							data: [ ]
+							maxSpells: 12
+							mustEquip: 1b
+							spellWheel: 1b
+						}
+					}
+				}
 				id: "5C7D4E4D6A01BED6"
 				stage: "class_mage"
 				title: "Select the mage class"
 				type: "gamestage"
 			}]
-			x: -6.5d
-			y: -2.5d
+			title: "Become a Mage"
+			x: -9.0d
+			y: -2.0d
+		}
+		{
+			id: "78B3FCBC6832A622"
+			rewards: [{
+				id: "1EA214342A43C3CF"
+				type: "xp"
+				xp: 100
+			}]
+			subtitle: "You have chosen to be a farmer."
+			tasks: [{
+				icon: {
+					Count: 1
+					id: "better_weaponry:amethyst_hoe"
+					tag: {
+						Damage: 0
+					}
+				}
+				id: "4201B6AD7FEA127B"
+				stage: "class_farmer"
+				title: "Become a Farmer"
+				type: "gamestage"
+			}]
+			title: "Become a farmer"
+			x: 3.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"4201B6AD7FEA127B"
+				"7971212D15B50CAD"
+				"0DCA7426EEE83E6C"
+				"78B3FCBC6832A622"
+				"3189E30438556ADF"
+				"6883C05A940931B7"
+				"314218519740E8BA"
+			]
+			dependency_requirement: "one_completed"
+			id: "1F3D17B3E556A962"
+			rewards: [
+				{
+					auto: "enabled"
+					id: "1F2354AB7572E778"
+					team_reward: false
+					type: "xp"
+					xp: 10
+				}
+				{
+					auto: "enabled"
+					command: "/ftbquests open_book 58378D08CF200F31"
+					icon: {
+						Count: 1
+						id: "irons_spellbooks:furled_map_ice_spider_den"
+						tag: {
+							display: {
+								Lore: ["{\"color\":\"gold\",\"translate\":\"item.irons_spellbooks.furled_map_descriptor_framing\",\"with\":[{\"translate\":\"item.irons_spellbooks.ice_spider_den_map\"}]}"]
+							}
+							"irons_spellbooks:furled_map_data": {
+								descriptionOverride: {
+									color: "gold"
+									translate: "item.irons_spellbooks.furled_map_descriptor_framing"
+									with: [{
+										translate: "item.irons_spellbooks.ice_spider_den_map"
+									}]
+								}
+								destination: "irons_spellbooks:ice_spider_den"
+								dimension: "minecraft:overworld"
+							}
+						}
+					}
+					id: "6B4F8E9362E4FBF2"
+					team_reward: false
+					title: "Discover the dungeon."
+					type: "command"
+				}
+				{
+					auto: "enabled"
+					command: "/locate structure dungeoncrawl:dungeon"
+					id: "2219B8FB13C7EF78"
+					team_reward: false
+					title: "Dungeon location"
+					type: "command"
+				}
+				{
+					id: "748694E826E8F07C"
+					item: "minecraft:compass"
+					type: "item"
+				}
+			]
+			subtitle: "Double down and show your resolve."
+			tasks: [{
+				id: "2E603F772EA3DF71"
+				title: "I accept my class."
+				type: "checkmark"
+			}]
+			title: "Confirm your fealty."
+			x: -3.0d
+			y: -7.5d
+		}
+		{
+			id: "314218519740E8BA"
+			rewards: [{
+				id: "3F61DC5CCB73B4F5"
+				type: "xp"
+				xp: 100
+			}]
+			subtitle: "Chose the path of an explorer and map the entire world!"
+			tasks: [{
+				icon: {
+					Count: 1
+					id: "naturescompass:naturescompass"
+					tag: { }
+				}
+				id: "414EAABCEB82AEA1"
+				stage: "class_explorer"
+				title: "Become an Explorer"
+				type: "gamestage"
+			}]
+			x: -3.0d
+			y: -12.0d
 		}
 	]
 	subtitle: ["Class selection rewards."]

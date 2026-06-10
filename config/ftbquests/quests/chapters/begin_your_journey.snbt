@@ -1,5 +1,5 @@
 {
-	autofocus_id: "46ADCEF8897A09AC"
+	autofocus_id: "58378D08CF200F31"
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "begin_your_journey"
@@ -28,6 +28,8 @@
 			y: -2.5d
 		}
 		{
+			dependencies: ["1F3D17B3E556A962"]
+			description: ["Check your chat to see the coordinates of the nearest dungeon and travel to it to begin your journey."]
 			id: "58378D08CF200F31"
 			rewards: [
 				{
@@ -52,27 +54,123 @@
 					}
 					type: "item"
 				}
+				{
+					count: 2
+					id: "626AED328C958776"
+					item: "legendarysurvivaloverhaul:bandage"
+					type: "item"
+				}
 			]
 			subtitle: "A strange building lies in wait nearby. I wonder what is inside..."
 			tasks: [{
-				dimension: "minecraft:overworld"
-				id: "542E620F270BCCC8"
-				ignore_dimension: false
-				position: [I;
-					-218
-					154
-					144
-				]
-				size: [I;
-					25
-					5
-					25
-				]
-				title: "Find your first dungeon."
-				type: "location"
+				icon: "minecraft:skeleton_skull"
+				id: "5A77922BD0343957"
+				structure: "dungeoncrawl:dungeon"
+				title: "Find a dungeon."
+				type: "structure"
 			}]
 			x: -0.5d
 			y: 0.5d
+		}
+		{
+			dependencies: ["4BBB0E8E62B66BC8"]
+			id: "43F9B0E2F615F268"
+			rewards: [
+				{
+					id: "0782EEE32A40F5A3"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 2
+					id: "7CFD4556224602B5"
+					item: "legendarysurvivaloverhaul:bandage"
+					type: "item"
+				}
+			]
+			subtitle: "Explore the dungeon and unlock its secrets."
+			tasks: [{
+				block: "lootr:lootr_chest"
+				block_type: 0
+				checkItem: false
+				icon: "minecraft:chest"
+				id: "76CADF4C795F25F6"
+				isItemInteraction: false
+				title: "Open 10 chests."
+				type: "questsadditions:use"
+				value: 10L
+			}]
+			x: -2.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["4BBB0E8E62B66BC8"]
+			id: "085011DABB80528D"
+			rewards: [{
+				id: "37206513AE01A800"
+				type: "xp"
+				xp: 300
+			}]
+			subtitle: "Fight your way through the dungeon."
+			tasks: [{
+				id: "4C5F7D4F2F0F188C"
+				stat: "minecraft:mob_kills"
+				title: "Kill 10 enemies."
+				type: "stat"
+				value: 11
+			}]
+			x: 1.5d
+			y: -5.0d
+		}
+		{
+			dependencies: [
+				"085011DABB80528D"
+				"43F9B0E2F615F268"
+			]
+			id: "40A455A72CABA1AC"
+			rewards: [
+				{
+					auto: "invisible"
+					icon: "ftbquests:book"
+					id: "73B58166780D0AEA"
+					ignore_reward_blocking: true
+					stage: "adventure_start"
+					title: "The rite of an adventurer."
+					type: "gamestage"
+				}
+				{
+					id: "79B581A5EE86718B"
+					type: "xp"
+					xp: 500
+				}
+			]
+			subtitle: "Overcome your first challenge."
+			tasks: [{
+				icon: "apotheosis:boss_summoner"
+				id: "21C29D05BD752B17"
+				tags: ["introbossquest"]
+				title: "Kill the boss."
+				type: "custom"
+			}]
+			x: -0.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["40A455A72CABA1AC"]
+			id: "1A71EF4326AEC698"
+			rewards: [{
+				id: "31773A3B62F636F2"
+				item: "antiqueatlas:empty_antique_atlas"
+				type: "item"
+			}]
+			subtitle: "Escape and begin your adventure."
+			tasks: [{
+				id: "35C789820284AAED"
+				title: "Escape the dungeon."
+				type: "checkmark"
+			}]
+			x: -0.5d
+			y: -10.0d
 		}
 	]
 	subtitle: ["Learn the basics of dungeoneering."]

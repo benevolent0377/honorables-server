@@ -1,0 +1,436 @@
+# Honorables: Bird's-Eye View
+
+At the highest level, **Honorables is not a survival modpack—it is a civilization simulator built on top of Minecraft.**
+
+The server revolves around a single central principle:
+
+> **Players do not become powerful by finding better loot. They become powerful by building better civilization.**
+
+Everything else exists to reinforce that philosophy.
+
+---
+
+# 1. Core Design Pillars
+
+## Deterministic Progression
+
+Progression should rarely depend on RNG.
+
+Instead, advancement comes from:
+
+* exploration
+* specialization
+* infrastructure
+* player knowledge
+* industrial capability
+* regional access
+* craftsmanship
+
+Luck may influence opportunities but should never replace investment.
+
+---
+
+## Civilization Over Individualism
+
+The primary long-term progression object is **the settlement**, not the player.
+
+Players improve:
+
+* workshops
+* foundries
+* farms
+* libraries
+* magical facilities
+* transportation
+* resource networks
+
+The settlement enables everyone to reach greater heights.
+
+---
+
+## Player Economy
+
+There is **no explicit currency**.
+
+Trade occurs through:
+
+* services
+* specialization
+* materials
+* crafted goods
+* negotiated exchange
+
+The economy emerges naturally from scarcity and expertise.
+
+---
+
+# 2. Regional Quality Framework
+
+The world is divided into hidden Voronoi-style regions.
+
+Each region possesses deterministic quality profiles.
+
+```
+Dimension
+        ↓
+Voronoi Capital
+        ↓
+Category Quality
+        ↓
+Subcategory Quality
+        ↓
+Resource Quality
+```
+
+Categories include:
+
+* Geological
+* Botanical
+* Agricultural
+* Faunal
+* Cultural
+
+These influence:
+
+* ores
+* plants
+* animals
+* dungeon rewards
+* monster materials
+* artifacts
+
+Quality is geographic rather than random.
+
+---
+
+# 3. Quality System
+
+Quality is stored only as:
+
+```
+honorables.quality
+```
+
+The numeric value is canonical.
+
+Frontend names are presentation only.
+
+Quality propagates through production.
+
+```
+Raw Resource
+      ↓
+Processing
+      ↓
+Refinement
+      ↓
+Crafting
+      ↓
+Enhancement
+      ↓
+Final Equipment
+```
+
+Higher-quality materials become better substrates for future work.
+
+Quality is intended to compound.
+
+---
+
+# 4. Industrial Framework
+
+Primitive crafting exists only for survival.
+
+```
+Crafting Table
+```
+
+Produces:
+
+* simple tools
+* primitive components
+* emergency equipment
+
+Primitive furnaces intentionally lose quality.
+
+```
+Ore
+    ↓
+Furnace
+    ↓
+Quality degradation
+```
+
+Immersive Engineering forms the industrial backbone.
+
+It exists to:
+
+* preserve quality
+* automate production
+* remove primitive penalties
+* enable civilization-scale manufacturing
+
+Industry is not the endgame.
+
+Industry enables the endgame.
+
+---
+
+# 5. Crafting Philosophy
+
+Equipment quality depends on:
+
+```
+Material Quality
+        +
+Player Skill
+        +
+Traits
+        +
+Profession
+        +
+Workshop
+        +
+Infrastructure
+        ↓
+Equipment Quality
+```
+
+The best gear cannot simply be found.
+
+It must be produced.
+
+---
+
+# 6. Class Framework
+
+Classes provide specialization rather than exclusivity.
+
+A farmer may wield a greatsword.
+
+A warrior simply uses it more effectively.
+
+Traits remain canonical.
+
+Attributes exist primarily as engine-facing values.
+
+Classes guide:
+
+* abilities
+* efficiency
+* specialization
+* economic role
+* progression identity
+
+without hard-locking gameplay.
+
+---
+
+# 7. Dungeon Framework
+
+Dungeon generation:
+
+* Dungeon Crawl
+* Claustrophobic Dungeons
+
+Respawning:
+
+* Respawning Structures
+
+Loot access:
+
+* Lootr
+
+Loot control:
+
+* LootJS
+* KubeJS
+
+Dungeons become renewable expedition sites.
+
+```
+Generate
+    ↓
+Explore
+    ↓
+Clear
+    ↓
+Cooldown
+    ↓
+Respawn
+    ↓
+Repeat
+```
+
+---
+
+# 8. Combat Ecosystem
+
+Each combat mod has a distinct purpose.
+
+## Vanilla
+
+Baseline enemies.
+
+## Brutal Bosses
+
+Elite procedural encounters.
+
+Only scales vanilla mobs.
+
+Represents exceptional specimens.
+
+---
+
+## Born in Chaos
+
+Roaming overworld danger.
+
+Makes exploration hazardous.
+
+Primary ambient threat system.
+
+---
+
+## Legendary Monsters
+
+Handcrafted dungeon and raid encounters.
+
+Provides curated miniboss experiences.
+
+---
+
+## L_Ender's Cataclysm
+
+Major expedition bosses.
+
+Large progression milestones.
+
+Never intended to overlap with Brutal Bosses.
+
+---
+
+# 9. Loot Philosophy
+
+Combat provides:
+
+* monster organs
+* catalysts
+* relics
+* schematics
+* biological resources
+* crafting ingredients
+* research items
+* progression tokens
+
+Combat should generally **not** provide:
+
+* best weapons
+* best armor
+* permanent power spikes
+
+Monsters provide ingredients.
+
+Civilization creates greatness.
+
+---
+
+# 10. Food Framework
+
+Food is generated dynamically through KubeJS.
+
+Effects derive from:
+
+* ingredients
+* nutrition
+* composition
+* `honorables.quality`
+
+Quality primarily scales:
+
+* potency
+* duration
+
+Long-term nutrition becomes another progression vector.
+
+---
+
+# 11. Enchanting and Equipment Enhancement
+
+Enchantments remain distinct from item perks.
+
+* **Vanilla/ESO enchantments** represent magical augmentation and are integrated with the quality framework rather than bypassing it.
+* **Item perks** are implemented separately (through your custom systems) and remain bound to crafted equipment.
+* Enchanting functions as a parallel profession to smithing, realizing magical potential while respecting material and production quality.
+
+---
+
+# 12. Exploration Philosophy
+
+Players should travel because regions matter.
+
+Different regions provide:
+
+* different qualities
+* different monsters
+* different materials
+* different opportunities
+
+Exploration is economically meaningful.
+
+---
+
+# 13. Settlement Loop
+
+The intended gameplay cycle is:
+
+```
+Explore
+      ↓
+Fight
+      ↓
+Gather Resources
+      ↓
+Return Home
+      ↓
+Process Materials
+      ↓
+Industrial Production
+      ↓
+Craft Equipment
+      ↓
+Upgrade Settlement
+      ↓
+Unlock New Capabilities
+      ↓
+Explore Further
+```
+
+The settlement is the engine that converts exploration into long-term progress.
+
+---
+
+# 14. Canonical Core Systems
+
+The server is built around these interconnected systems:
+
+| System                                 | Purpose                                                                                            |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Regional Quality Framework**         | Deterministic geographic resource and loot identity                                                |
+| **Continuous Quality System**          | Numeric `honorables.quality` propagated through production                                         |
+| **Class & Trait Framework**            | Long-term specialization and player identity                                                       |
+| **Settlement/Civilization Framework**  | Shared infrastructure as the primary progression object                                            |
+| **Industrial Framework**               | Immersive Engineering–based quality-preserving production                                          |
+| **Crafting Framework**                 | Equipment derived from material potential and craftsmanship                                        |
+| **Dungeon Framework**                  | Renewable expedition sites with controlled loot and respawns                                       |
+| **Combat Framework**                   | Distinct roles for ambient threats, procedural elites, handcrafted bosses, and pinnacle encounters |
+| **Loot Framework**                     | Materials and progression resources instead of direct power                                        |
+| **Food & Nutrition Framework**         | Dynamic nutrition and quality-driven effects                                                       |
+| **Enchanting & Enhancement Framework** | Magical progression integrated with quality without replacing production                           |
+| **Exploration Framework**              | Region-driven incentives for travel and discovery                                                  |
+| **Player Economy**                     | Resource- and service-based trade with no explicit currency                                        |
+| **GameStages & Progression Framework** | Binary unlocks layered on top of skills, traits, and infrastructure                                |
+
+## In one sentence
+
+**Honorables is a deterministic, region-driven civilization RPG where exploration, combat, industry, and specialization feed a shared settlement that transforms high-quality resources into ever-greater capability, making production—not loot—the true source of power.**

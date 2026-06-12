@@ -1,0 +1,306 @@
+# Honorables – Immersive Engineering Integration Handbook (Canonical)
+
+# Purpose
+
+Immersive Engineering (IE) is the **industrial backbone** of Honorables.
+
+It is **not** the primary progression system and it is **not** the endgame. Instead, IE provides the infrastructure that allows settlements and specialized players to consistently produce high-quality equipment while minimizing the losses associated with primitive production.
+
+The Honorables progression loop remains centered on:
+
+* Regional quality
+* Player traits
+* Class specialization
+* Skills and passives
+* GameStages
+* Tool quality
+* Workshops
+* Quality realization
+
+IE simply provides the machinery that supports those systems.
+
+---
+
+# Core Philosophy
+
+Machines do not create quality.
+
+Machines help preserve and realize the quality already present in materials and craftsmanship.
+
+A player with poor skills or poor materials cannot compensate simply by building an Arc Furnace.
+
+Likewise, exceptional materials should not lose unnecessary quality simply because they were processed with primitive technology.
+
+---
+
+# Primitive Production
+
+The vanilla crafting table represents survival-level manufacturing.
+
+It should primarily remain responsible for:
+
+* Basic tools
+* Basic weapons
+* Utility items
+* Emergency crafting
+* Simple recipes
+
+It is not intended to be the primary method for manufacturing advanced civilization equipment.
+
+---
+
+# Furnace Philosophy
+
+Vanilla furnaces and blast furnaces remain useful throughout progression.
+
+However, they represent crude processing methods.
+
+Primitive smelting may preserve less of an item's potential than industrial alternatives.
+
+The goal is not to make furnaces obsolete, but to make industrial refinement desirable.
+
+---
+
+# IE as Industrial Infrastructure
+
+Immersive Engineering provides the machinery required for scalable production.
+
+Its strengths include:
+
+* Automation
+* Repeatability
+* Throughput
+* Resource processing
+* Material handling
+* Workshop expansion
+
+IE should reduce production inefficiencies rather than grant arbitrary bonuses.
+
+---
+
+# Arc Furnace
+
+The Arc Furnace becomes the preferred late-game refining solution.
+
+It should serve as the settlement's primary method for:
+
+* Ore processing
+* Alloy production
+* Metal recycling
+* Salvaging equipment
+* Bulk refinement
+
+Compared to primitive furnaces, it should better preserve material quality during transformation.
+
+---
+
+# Crusher
+
+The Crusher provides industrial-scale material preparation.
+
+It replaces repetitive manual processing while integrating naturally into automated production lines.
+
+Its value comes from consistency and efficiency rather than direct stat bonuses.
+
+---
+
+# Metal Press
+
+The Metal Press becomes the preferred method for manufacturing metal forms already provided by the modpack.
+
+Examples include:
+
+* Plates
+* Rods
+* Wire
+
+Using dedicated machinery should better preserve production quality than equivalent primitive recipes where applicable.
+
+---
+
+# Automated Production
+
+The Assembler and conveyor systems enable settlement-scale manufacturing.
+
+Automation increases:
+
+* Consistency
+* Throughput
+* Labor efficiency
+
+Automation does not replace player specialization.
+
+The player's traits, progression, and production context remain part of the quality calculation.
+
+---
+
+# Tool Production
+
+Tools are part of the production chain.
+
+The quality of crafting tools contributes to production realization.
+
+For example:
+
+* Smith hammers
+* Engineering hammers
+* Specialized workstations
+
+Producing better tools naturally improves future manufacturing outcomes.
+
+---
+
+# Workshop Progression
+
+Industrial capability should evolve gradually.
+
+Example progression:
+
+```text
+Crafting Table
+        ↓
+Primitive Forge
+        ↓
+Manual Workshop
+        ↓
+Immersive Engineering Workshop
+        ↓
+Automated Industrial Settlement
+```
+
+Each stage increases the player's ability to consistently realize high-quality production.
+
+---
+
+# Relationship with Quality
+
+Immersive Engineering is one factor in production realization.
+
+Final quality depends on the interaction between:
+
+* Material quality
+* Existing component quality
+* Relevant player traits
+* Class specialization
+* Skills and passives
+* GameStages
+* Tool quality
+* Workshop capability
+* Industrial infrastructure
+* Temporary modifiers
+
+After production, the resulting value is written to:
+
+```text
+honorables.quality
+```
+
+and becomes the canonical quality of the finished item.
+
+---
+
+# Relationship with Tetra
+
+Tetra is not a competing progression system.
+
+It is a modular equipment system that performs production transformations.
+
+When equipment is modified through Tetra:
+
+* Components change.
+* The production operation is evaluated.
+* Quality is recalculated.
+* The updated value is stored in `honorables.quality`.
+
+IE provides the infrastructure that allows these transformations to occur with greater consistency and reduced quality loss.
+
+---
+
+# Relationship with Enchanting
+
+Enchanting should mirror smithing philosophically.
+
+Just as IE supports physical production, enchanting infrastructure supports magical production.
+
+Neither system bypasses quality.
+
+Instead, both participate in realizing the potential already present in the item and its production context.
+
+---
+
+# Salvaging
+
+Industrial salvaging should be encouraged.
+
+Existing equipment may be:
+
+* Recycled
+* Melted
+* Broken down
+* Reprocessed
+
+using Immersive Engineering machinery.
+
+Recovered materials should retain quality according to the production system rather than being arbitrarily reset.
+
+---
+
+# Dungeon Economy
+
+Dungeon Crawl, Claustrophobic Dungeons, Respawning Structures, and similar content should primarily inject:
+
+* Existing materials
+* Existing components
+* Existing tools
+* Existing equipment
+* Existing mob and boss drops
+
+into the economy.
+
+IE gives those recovered resources long-term value by making industrial reuse practical.
+
+---
+
+# Settlement Identity
+
+Settlements should naturally develop industrial districts centered around IE.
+
+Players benefit from specializing into roles such as:
+
+* Miner
+* Blacksmith
+* Engineer
+* Enchanter
+* Explorer
+
+No individual profession should replace the others.
+
+The highest-quality equipment emerges from cooperation across the production chain.
+
+---
+
+# Endgame Philosophy
+
+The Honorables endgame is not obtaining Immersive Engineering machines.
+
+The endgame is coordinating:
+
+* Exceptional regional resources
+* Specialized players
+* Advanced workshops
+* Industrial automation
+* Quality-aware production
+* Enchanting
+* Modular equipment modification
+
+to consistently manufacture equipment that exceeds what can typically be found through exploration alone.
+
+---
+
+# Canonical Principle
+
+Immersive Engineering is the infrastructure of civilization.
+
+It exists to make large-scale, repeatable, high-quality production possible.
+
+The machines are valuable not because they make items stronger by themselves, but because they enable skilled players using exceptional materials to fully realize the potential of the Honorables quality system.

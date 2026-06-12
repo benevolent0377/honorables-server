@@ -1,0 +1,390 @@
+Here's a draft handbook section that synthesizes the design decisions we've made into a canonical reference.
+
+# Honorables Player System Development Framework
+
+# Dungeon and Mob Loot Framework
+
+## Warrior Core Gameplay Loop
+
+## 1. Design Philosophy
+
+The dungeon and mob loot framework exists to support the central Honorables philosophy:
+
+> **Power is produced through civilization, craftsmanship, and specialization—not directly looted from enemies.**
+
+Combat is an avenue for acquiring materials, knowledge, catalysts, and progression, while the production pipeline remains the primary source of equipment quality.
+
+Players should feel rewarded for exploration and conquest without bypassing the industrial, crafting, and quality systems.
+
+---
+
+# 2. Core Gameplay Loop
+
+The intended warrior gameplay loop is:
+
+```
+Explore
+    ↓
+Fight enemies
+    ↓
+Clear dungeons
+    ↓
+Acquire materials, relics, and catalysts
+    ↓
+Return to settlement
+    ↓
+Process and refine resources
+    ↓
+Craft improved equipment
+    ↓
+Unlock more dangerous regions
+    ↓
+Repeat
+```
+
+Combat and production are mutually reinforcing rather than competing systems.
+
+---
+
+# 3. Loot Philosophy
+
+Enemies should primarily provide:
+
+* Raw materials
+* Biological resources
+* Crafting catalysts
+* Alchemical ingredients
+* Quest items
+* Regional artifacts
+* Schematics
+* Research components
+* Reputation items
+* Progression tokens
+
+Enemies should generally **not** provide:
+
+* Endgame equipment
+* Fully enchanted gear
+* Best-in-slot weapons
+* Craftsmanship replacements
+
+The strongest equipment should always originate from player production.
+
+---
+
+# 4. Equipment Acquisition
+
+Equipment quality is determined by:
+
+```
+Material Quality
+        +
+Player Skills
+        +
+Traits
+        +
+Profession
+        +
+Infrastructure
+        +
+Production Environment
+        ↓
+Final Item Quality
+```
+
+Looted equipment serves primarily as:
+
+* salvage
+* repair bases
+* temporary upgrades
+* collectible artifacts
+* dismantling resources
+
+rather than permanent progression.
+
+---
+
+# 5. Regional Identity
+
+Every region possesses deterministic quality profiles.
+
+These influence:
+
+* resource quality
+* dungeon rewards
+* monster materials
+* boss drops
+* crafting opportunities
+
+Traveling to different regions should produce meaningfully different rewards rather than simply larger quantities.
+
+---
+
+# 6. Mob Loot
+
+## Vanilla Mobs
+
+Vanilla mobs provide predictable ecosystem resources.
+
+Examples:
+
+* leather
+* hides
+* bones
+* rotten tissue
+* arrows
+* feathers
+* monster organs
+
+Quality derives from regional values.
+
+---
+
+## Brutal Bosses
+
+Brutal Bosses transforms vanilla mobs into elite encounters.
+
+These represent exceptional specimens of local wildlife.
+
+Rewards include:
+
+* higher-quality biological materials
+* rare catalysts
+* enhanced trophies
+* regional relics
+
+Brutal Bosses does **not** replace handcrafted boss encounters.
+
+---
+
+## Born in Chaos
+
+Born in Chaos populates the wilderness.
+
+Purpose:
+
+* exploration danger
+* ambient threats
+* unpredictable travel
+* monster ecology
+
+Drops emphasize:
+
+* biological components
+* occult materials
+* alchemy ingredients
+* rare creature parts
+
+rather than finished equipment.
+
+---
+
+## Legendary Monsters
+
+Legendary Monsters supplies handcrafted dungeon and raid encounters.
+
+Purpose:
+
+* memorable minibosses
+* curated fights
+* encounter diversity
+
+Rewards should focus on:
+
+* unique components
+* schematics
+* trophies
+* crafting resources
+
+rather than direct equipment progression.
+
+---
+
+## Cataclysm
+
+Cataclysm provides pinnacle expedition bosses.
+
+These represent major milestones.
+
+Rewards unlock new production capabilities through:
+
+* forge components
+* ancient relics
+* magical catalysts
+* infrastructure upgrades
+* legendary crafting ingredients
+
+rather than immediately granting superior weapons.
+
+---
+
+# 7. Dungeon Framework
+
+Dungeon generation uses:
+
+* Dungeon Crawl
+* Claustrophobic Dungeons
+
+These create permanent world locations.
+
+Respawning Structures restores approved dungeon structures after configurable cooldowns.
+
+This regeneration restores:
+
+* chests
+* spawners
+* blocks
+* encounters
+
+allowing renewable dungeon gameplay.
+
+---
+
+# 8. Loot Generation Pipeline
+
+Loot generation follows:
+
+```
+Dungeon Generated
+        ↓
+Respawning Structures
+        ↓
+Lootr
+        ↓
+LootJS
+        ↓
+KubeJS
+        ↓
+Honorables Quality Assignment
+```
+
+Lootr provides per-player rewards.
+
+LootJS and KubeJS remain authoritative over reward composition.
+
+---
+
+# 9. Regional Quality Integration
+
+Dungeon rewards inherit regional characteristics.
+
+For example:
+
+High geological regions:
+
+* superior ores
+* stone relics
+* forging catalysts
+
+High botanical regions:
+
+* herbs
+* spores
+* alchemical reagents
+
+High faunal regions:
+
+* exceptional hides
+* monster organs
+* rare biological materials
+
+High cultural regions:
+
+* relics
+* manuscripts
+* artifacts
+* ancient technologies
+
+---
+
+# 10. Dungeon Repeatability
+
+Dungeons function as renewable resource sites.
+
+Lifecycle:
+
+```
+Dungeon Spawned
+        ↓
+Players Explore
+        ↓
+Boss Defeated
+        ↓
+Resources Harvested
+        ↓
+Respawn Cooldown
+        ↓
+Structure Restored
+        ↓
+Next Expedition
+```
+
+The world therefore supports long-term replayability without requiring infinite world expansion.
+
+---
+
+# 11. Encounter Hierarchy
+
+The combat ecosystem intentionally separates encounter types.
+
+## Normal mobs
+
+Baseline combat.
+
+## Brutal Bosses
+
+Procedural elite vanilla encounters.
+
+## Born in Chaos
+
+Roaming environmental threats.
+
+## Legendary Monsters
+
+Handcrafted dungeon bosses.
+
+## Cataclysm
+
+Major expedition objectives.
+
+These systems complement one another rather than overlap.
+
+---
+
+# 12. Warrior Progression
+
+The warrior's advancement loop is:
+
+```
+Train
+    ↓
+Fight
+    ↓
+Acquire resources
+    ↓
+Improve equipment
+    ↓
+Challenge stronger enemies
+    ↓
+Reach richer regions
+    ↓
+Acquire superior materials
+    ↓
+Produce superior gear
+```
+
+Combat enables craftsmanship.
+
+Craftsmanship enables greater combat capability.
+
+Neither system invalidates the other.
+
+---
+
+# 13. Canonical Principle
+
+The Honorables dungeon framework exists to reward exploration while preserving the integrity of player-driven progression.
+
+**Players defeat monsters to obtain the ingredients for greatness.**
+
+**Players become great by what they create with those ingredients.**

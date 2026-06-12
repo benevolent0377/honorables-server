@@ -1,0 +1,313 @@
+Here's a concise canonical handbook that captures the current state of the Honorables quality framework.
+
+# Honorables Quality Handbook (Canonical)
+
+## Core Philosophy
+
+Quality is the universal measure of production excellence within Honorables.
+
+It represents the cumulative result of:
+
+* Material origin
+* Previous transformations
+* Craftsmanship
+* Production methods
+* Player capability
+* Infrastructure
+* Preservation of potential
+
+Quality is the primary progression axis for equipment and resources. It is not intended to be bypassed by random loot or magical systems.
+
+---
+
+# Quality Range
+
+Quality is stored as a continuous numeric value.
+
+```
+honorables.quality
+```
+
+The minimum quality is:
+
+```
+1.0
+```
+
+Quality never falls below 1.0.
+
+The current design target assumes a practical maximum of approximately 5.0.
+
+Frontend rarity labels are presentation only and are derived from the numeric value.
+
+---
+
+# Single Source of Truth
+
+The only authoritative value is:
+
+```
+honorables.quality
+```
+
+Names such as Common, Exceptional, or Exceptional++ are UI representations and are never authoritative backend values.
+
+---
+
+# Production Philosophy
+
+Quality is not simply inherited from materials.
+
+Every production operation computes a new quality.
+
+Production combines:
+
+## Potential
+
+Derived from:
+
+* Material quality
+* Component quality
+* Existing item quality
+* Inherited inputs
+
+## Realization
+
+Derived from:
+
+* Weighted relevant traits
+* Class specialization
+* Unlocked perks/passives
+* GameStages
+* Tool quality
+* Workshop capability
+* Industrial capability
+* Production method
+* Temporary modifiers
+
+The result becomes the new:
+
+```
+honorables.quality
+```
+
+---
+
+# Transformative Operations
+
+Every meaningful transformation recalculates quality.
+
+Examples:
+
+* Crafting
+* Reforging
+* Tetra modifications
+* Blade replacement
+* Component replacement
+* Advanced repairs
+* Industrial processing
+* Enchanting operations
+
+The previous quality is an input, not a permanent property.
+
+---
+
+# Quality Storage
+
+After calculation:
+
+```
+honorables.quality = final value
+```
+
+This value becomes canonical until the next transformation.
+
+No runtime recalculation is required.
+
+---
+
+# Materials
+
+Materials contribute potential.
+
+Higher-quality materials enable higher-quality outputs but do not guarantee them.
+
+Poor production can waste excellent materials.
+
+Excellent production can maximize their realized potential.
+
+---
+
+# Components
+
+For modular equipment, component quality contributes to the final calculation.
+
+Different components may have different weights depending on the recipe.
+
+Replacing components should trigger a full recalculation.
+
+---
+
+# Regional Distribution
+
+Regional quality is determined procedurally.
+
+Sources include:
+
+* Dimension baseline
+* Spawn-distance bias
+* Voronoi regional capitals
+* Category specialization
+* Distance falloff
+* Border blending
+
+These values influence:
+
+* Ores
+* Crops
+* Flora
+* Fauna
+* Mob drops
+* Dungeon loot
+* Boss rewards
+* Generated equipment
+
+---
+
+# Loot Philosophy
+
+Loot should provide:
+
+* Immediate survival
+* Production materials
+* Archaeological relics
+
+Loot should not bypass production progression.
+
+Most power should come from transforming found resources into superior equipment.
+
+Low-quality finished equipment is intentionally allowed to support early-game survival.
+
+---
+
+# Mob Drops
+
+Mob drops represent biological or structural materials.
+
+Examples include:
+
+* Bones
+* Hides
+* Chitin
+* Silk
+* Venom
+* Dragon parts
+
+Their quality is determined by regional quality and generation context.
+
+---
+
+# Boss Rewards
+
+Bosses primarily provide deterministic progression materials.
+
+Bosses should reward ingredients and components rather than random best-in-slot equipment.
+
+---
+
+# Smithing
+
+Smithing realizes physical potential.
+
+Final results depend on:
+
+* Materials
+* Components
+* Traits
+* Class specialization
+* Perks
+* Tool quality
+* Workshop quality
+* Industrial capability
+* GameStages
+
+Blacksmiths may imbue physical item perks.
+
+Examples:
+
+* Balanced Grip
+* Heavy Impact
+* Reinforced Spine
+
+---
+
+# Enchanting
+
+Enchanting realizes magical potential.
+
+Enchantments should scale using the same realization philosophy as smithing.
+
+Factors may include:
+
+* Item quality
+* Player traits
+* Class specialization
+* GameStages
+* Enchanter progression
+* Infrastructure
+
+Enchanting complements quality rather than replacing it.
+
+---
+
+# Item Perks
+
+Item perks are separate from enchantments.
+
+Perks are stored on equipment and implemented through Honorables/KubeJS.
+
+Perks may be:
+
+* Passive
+* State-triggered
+* Event-triggered
+
+Blacksmiths create physical perks.
+
+Enchanters create magical perks.
+
+---
+
+# Player Abilities
+
+Player abilities are separate from item perks.
+
+Abilities belong to the player through:
+
+* Classes
+* Skills
+* Progression
+* Quests
+* Passives
+
+Unequipping an item does not remove player abilities.
+
+---
+
+# Enchantments
+
+Enchantments remain Minecraft's standardized magical modification system.
+
+They are distinct from item perks.
+
+Enchantments should integrate with the quality framework and scale with production capability rather than functioning as an isolated power system.
+
+---
+
+# Design Principle
+
+The world provides potential.
+
+The player realizes that potential.
+
+The greatest equipment is not found—it is created through exceptional materials, exceptional craftsmanship, exceptional specialization, and exceptional infrastructure.

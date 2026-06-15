@@ -2,25 +2,133 @@
 	"y6pqwrf4us04ip0l": {
 		"definition": "warrior_root",
 		"x": 0,
-		"y": 256,
-		"root": false
-	},
-	"f3x0plztjtihgz7u": {
-		"definition": "warrior_offense_1",
-		"x": 0,
-		"y": 192,
+		"y": 288,
 		"root": false
 	},
 	"u25vy73zd1xpc2pa": {
 		"definition": "warrior_defense_1",
 		"x": -64,
+		"y": 256,
+		"root": false
+	},
+	"eow9uj51t2tf5twf": {
+		"definition": "warrior_tactics_1",
+		"x": 64,
+		"y": 256,
+		"root": false
+	},
+	"zif6vr0glltxvsnq": {
+		"definition": "warrior_combat_2",
+		"x": 0,
 		"y": 224,
 		"root": false
 	},
-	"ksbwbjsg2fhxxlx6": {
-		"definition": "warrior_utility_1",
-		"x": 64,
-		"y": 224,
+	"5t6em1tfn847pajd": {
+		"definition": "warrior_combat_3",
+		"x": 0,
+		"y": 192,
+		"root": false
+	},
+	"u8h5vx6pzbyx5gae": {
+		"definition": "warrior_combat_4",
+		"x": 0,
+		"y": 160,
+		"root": false
+	},
+	"n5n6tfl5dtlqnali": {
+		"definition": "warrior_combat_5",
+		"x": 0,
+		"y": 128,
+		"root": false
+	},
+	"wk6pjtb9myv9tur6": {
+		"definition": "warrior_combat_6",
+		"x": 0,
+		"y": 96,
+		"root": false
+	},
+	"wghugttxoippzt9r": {
+		"definition": "warrior_combat_7",
+		"x": 0,
+		"y": 64,
+		"root": false
+	},
+	"5yuzlfn6gapxwhl9": {
+		"definition": "warrior_combat_1",
+		"x": 0,
+		"y": 256,
+		"root": false
+	},
+	"1m6d2o5vrblzomq3": {
+		"definition": "warrior_defense_2",
+		"x": -96,
+		"y": 256,
+		"root": false
+	},
+	"q4ksthfsw1l9yqsf": {
+		"definition": "warrior_defense_3",
+		"x": -128,
+		"y": 256,
+		"root": false
+	},
+	"razwn14spcjg60vb": {
+		"definition": "warrior_defense_4",
+		"x": -160,
+		"y": 256,
+		"root": false
+	},
+	"9piqpgpgf9vzzrxo": {
+		"definition": "warrior_defense_5",
+		"x": -192,
+		"y": 256,
+		"root": false
+	},
+	"4yrafgkl9rt56ntz": {
+		"definition": "warrior_defense_6",
+		"x": -224,
+		"y": 256,
+		"root": false
+	},
+	"kaktdxrusafzsoev": {
+		"definition": "warrior_defense_7",
+		"x": -256,
+		"y": 256,
+		"root": false
+	},
+	"nax7v6nxrao3o6s4": {
+		"definition": "warrior_tactics_2",
+		"x": 96,
+		"y": 256,
+		"root": false
+	},
+	"wieq8zvw82ft0tmv": {
+		"definition": "warrior_tactics_3",
+		"x": 128,
+		"y": 256,
+		"root": false
+	},
+	"234yo3b0ghj8a4l5": {
+		"definition": "warrior_tactics_4",
+		"x": 160,
+		"y": 256,
+		"root": false
+	},
+	"w1yl0v5awluli0hc": {
+		"definition": "warrior_tactics_5",
+		"x": 192,
+		"y": 256,
+		"root": false
+	},
+	"8sjvu4t45cowsbp1": {
+		"definition": "warrior_tactics_6",
+		"x": 224,
+		"y": 256,
+		"root": false
+	},
+	"rofq31zgty61tlku": {
+		"definition": "warrior_tactics_7",
+		"x": 256,
+		"y": 256,
 		"root": false
 	}
 }

@@ -8,14 +8,19 @@
 			}
 		},
 		"description": [
-			"You have pledged to be a warrior. ",
-			"Stamina +5% ",
-			"Melee Defense +4% ",
-			"Attack Speed +3% ",
-			"Magic Damage -5% ",
-			"Ranged Damage -6% ",
-			"Stealth -5% ",
-			"Max Mana -10 Mana "
+			"My body remembers what my mind has forgotten. The blade feels familiar, though I cannot say why.\n\n",
+			"Passive Ability Unlocked: Martial Instinct\n",
+			"-> +5% Melee Damage while holding a melee weapon\n",
+			"-> +.25 Blocks Attack Range\n\n",
+			"Other Bonuses:\n",
+			"Stamina +5%\n",
+			"Melee Defense +4%\n",
+			"Attack Speed +3%\n",
+			"Magic Damage -5%\n",
+			"Ranged Damage +6%\n",
+			"Stealth -5%\n",
+			"Max Mana -10 Mana\n",
+			"Magic Resistance -5%"
 		],
 		"rewards": [
 			{
@@ -54,7 +59,7 @@
 				"type": "puffish_skills:attribute",
 				"data": {
 					"attribute": "puffish_attributes:ranged_damage",
-					"value": -0.2,
+					"value": 0.06,
 					"operation": "multiply_base"
 				}
 			},
@@ -73,30 +78,71 @@
 					"value": -10,
 					"operation": "addition"
 				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "irons_spellbooks:spell_resist",
+					"value": -0.05,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data":{
+					"attribute": "forge:entity_reach",
+					"value": 0.25,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:command",
+				"data": {
+					"command": "gamestage add @s warrior_martial_instinct_unlock"
+				}
 			}
+
 		],
 		"metadata": {
 			"icon": "ufct82ltt2qmc1bh"
 		}
 	},
-	"warrior_offense_1": {
-		"title": "Offense I",
+	"warrior_combat_1": {
+		"title": "Combat I",
 		"icon": {
 			"type": "item",
 			"data": {
-				"item": "iron_sword"
+				"item": "wooden_sword"
 			}
 		},
 		"description": [
-			"Practice makes perfect. ",
-			"Melee Damage +10%"
+			"My first kill unlocks a forgotten strength. I must continue to recover what was lost.\n",
+			"Melee Damage +5%\n",
+			"Attack Damage +3%\n",
+			"Attack Speed +2%\n"
 		],
 		"rewards": [
 			{
 				"type": "puffish_skills:attribute",
 				"data": {
 					"attribute": "puffish_attributes:melee_damage",
-					"value": 0.1,
+					"value": 0.05,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.attack_damage",
+					"value": 0.03,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.attack_speed",
+					"value": 0.02,
 					"operation": "multiply_base"
 				}
 			}
@@ -104,6 +150,180 @@
 		"metadata": {
 			"icon": "do0sp6hkotsv0hii"
 		}
+	},
+	"warrior_combat_2": {
+		"title": "Combat II",
+		"icon": {
+				"type": "item",
+				"data": {
+					"item": "wooden_sword"
+				}
+		},
+		"description": [
+			"The blade is becoming lighter in my hands.\n",
+			"Attack Speed +2%\n",
+			"Attack Damage +1%\n"
+		],
+		"rewards":[
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.attack_speed",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.attack_damage",
+					"value": 0.01,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_combat_3": {
+		"title": "Combat III: Milestone I",
+		"icon": {
+				"type": "item",
+				"data": {
+					"item": "stone_sword"
+				}
+		},
+		"description": [
+			"I remember wearing down my foes with vicious strikes. I will reapply these techniques.",
+			"\n\nActive Ability Unlocked: Battle Rhythm",
+			"\n-> Landing consecutive melee hits increases my damage by 2% per strike, stacking up to 10%. The rhythm fades after 3 seconds without striking an enemy."
+		],
+		"rewards":[
+			{
+				"type": "puffish_skills:command",
+				"data": {
+					"command": "gamestage add @s warrior_battle_rhythm_unlock"
+				}
+			}
+		],
+		"cost": 3
+	},
+	"warrior_combat_4": {
+		"title": "Combat IV",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "stone_sword"
+			}
+		},
+		"description":[
+			"Once the rhythm returned to me, I realized it was never about striking harder. It was about never letting my opponent breathe.\n",
+			"Attack Speed +2%\n",
+			"Melee Damage +3%"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data":{
+					"attribute": "generic.attack_speed",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data":{
+					"attribute": "puffish_attributes:melee_damage",
+					"value": 0.03,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},	
+	"warrior_combat_5": {
+		"title": "Combat V",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "iron_sword"
+			}
+		},
+		"description":[
+			"Steel breaks before resolve does. I remember how to shatter both. I feel their armor bend under the force of my blade.\n",
+			"Melee Damage +2%\n",
+			"Armor Shred +5%"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data":{
+					"attribute": "puffish_attributes:melee_damage",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data":{
+					"attribute": "puffish_attributes:armor_shred",
+					"value": 0.05,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_combat_6": {
+		"title": "Combat VI",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "golden_sword"
+			}
+		},
+		"description":[
+			"Even the best armor is no longer any match for me. I recall how to break and bend, no matter the foe before me.\n",
+			"Attack Speed +2%\n",
+			"Toughness Shred +3%"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data":{
+					"attribute": "generic.attack_speed",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data":{
+					"attribute": "puffish_attributes:toughness_shred",
+					"value": 0.03,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_combat_7": {
+		"title": "Combat VII: Milestone II",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "diamond_sword"
+			}
+		},
+		"description":[
+			"I remember how one strike can become many, and how many foes can become few.\n\n",
+			"Passive Ability Unlocked: Cleave\n",
+			"-> My attacks deal 10% of the previous hit's damage to enemies within 2 blocks."
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:command",
+				"data": {
+					"command": "gamestage add @s warrior_cleave_unlock"
+				}
+			}
+		],
+		"cost": 5
 	},
 	"warrior_defense_1": {
 		"title": "Defense I",
@@ -114,8 +334,9 @@
 			}
 		},
 		"description": [
-			"Combat makes you tougher. ",
-			"Max Health +2HP"
+			"The first blow stunned me. The second taught me never to fear being struck again.\n",
+			"Max Health +2HP\n",
+			"Knockback Resistance +2%\n"
 		],
 		"rewards": [
 			{
@@ -125,36 +346,495 @@
 					"value": 2,
 					"operation": "addition"
 				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.knockback_resistance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
 			}
-		],
-		"metadata": {
-			"icon": "4bkr4iaienvk4yvf"
-		}
+		]
 	},
-	"warrior_utility_1": {
-		"title": "Utility I",
+	"warrior_defense_2": {
+		"title": "Defense II",
 		"icon": {
 			"type": "item",
 			"data": {
-				"item": "apotheosis:potion_charm"
+				"item": "leather_chestplate"
 			}
 		},
 		"description": [
-			"Exposure to combat has sharpened your mind. ",
-			"Experience Gain +2%"
+			"The first blow stunned me. The second taught me never to fear being struck again.\n",
+			"Max Health +2HP\n",
+			"Knockback Resistance +2%\n"
 		],
 		"rewards": [
 			{
 				"type": "puffish_skills:attribute",
 				"data": {
-					"attribute": "attributeslib:experience_gained",
+					"attribute": "generic.max_health",
+					"value": 2,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.knockback_resistance",
 					"value": 0.02,
 					"operation": "multiply_base"
 				}
 			}
+		]
+	},
+	"warrior_defense_3": {
+		"title": "Defense III: Milestone I",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "chainmail_chestplate"
+			}
+		},
+		"description": [
+			"The first blow stunned me. The second taught me never to fear being struck again.\n",
+			"Max Health +2HP\n",
+			"Knockback Resistance +2%\n"
 		],
-		"metadata": {
-			"icon": "fbnsevjwrjdi0he6"
-		}
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.max_health",
+					"value": 2,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.knockback_resistance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_defense_4": {
+		"title": "Defense IV",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "shield"
+			}
+		},
+		"description": [
+			"The first blow stunned me. The second taught me never to fear being struck again.\n",
+			"Max Health +2HP\n",
+			"Knockback Resistance +2%\n"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.max_health",
+					"value": 2,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.knockback_resistance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_defense_5": {
+		"title": "Defense V",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "iron_block"
+			}
+		},
+		"description": [
+			"The first blow stunned me. The second taught me never to fear being struck again.\n",
+			"Max Health +2HP\n",
+			"Knockback Resistance +2%\n"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.max_health",
+					"value": 2,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.knockback_resistance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_defense_6": {
+		"title": "Defense VI",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "golden_carrot"
+			}
+		},
+		"description": [
+			"The first blow stunned me. The second taught me never to fear being struck again.\n",
+			"Max Health +2HP\n",
+			"Knockback Resistance +2%\n"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.max_health",
+					"value": 2,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.knockback_resistance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_defense_7": {
+		"title": "Defense VII: Milestone II",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "iron_chestplate"
+			}
+		},
+		"description": [
+			"The first blow stunned me. The second taught me never to fear being struck again.\n",
+			"Max Health +2HP\n",
+			"Knockback Resistance +2%\n"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.max_health",
+					"value": 2,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "generic.knockback_resistance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+
+	"warrior_tactics_1": {
+		"title": "Tactics I",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "minecraft:spyglass"
+			}
+		},
+		"description": [
+			"The battlefield at first looked like chaos to my untrained eye, but now I see clearly.\n",
+			"Reach +.10 blocks\n",
+			"Crit Damage +1%\n",
+			"Crit Chance +2%\n"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "forge:entity_reach",
+					"value": 0.10,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_damage",
+					"value": 0.01,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_chance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_tactics_2": {
+		"title": "Tactics II",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "spartanweaponry:stone_dagger"
+			}
+		},
+		"description": [
+			"The battlefield at first looked like chaos to my untrained eye, but now I see clearly.\n",
+			"Reach +.10 blocks\n",
+			"Crit Damage +1%\n",
+			"Crit Chance +2%\n"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "forge:entity_reach",
+					"value": 0.10,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_damage",
+					"value": 0.01,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_chance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_tactics_3": {
+		"title": "Tactics III: Milestone I",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "minecraft:ender_eye"
+			}
+		},
+		"description": [
+			"The battlefield at first looked like chaos to my untrained eye, but now I see clearly.\n",
+			"Reach +.10 blocks\n",
+			"Crit Damage +1%\n",
+			"Crit Chance +2%\n"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "forge:entity_reach",
+					"value": 0.10,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_damage",
+					"value": 0.01,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_chance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_tactics_4": {
+		"title": "Tactics IV",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "minecraft:book"
+			}
+		},
+		"description": [
+			"The battlefield at first looked like chaos to my untrained eye, but now I see clearly.\n",
+			"Reach +.10 blocks\n",
+			"Crit Damage +1%\n",
+			"Crit Chance +2%\n"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "forge:entity_reach",
+					"value": 0.10,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_damage",
+					"value": 0.01,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_chance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_tactics_5": {
+		"title": "Tactics V",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "minecraft:bone"
+			}
+		},
+		"description": [
+			"The battlefield at first looked like chaos to my untrained eye, but now I see clearly.\n",
+			"Reach +.10 blocks\n",
+			"Crit Damage +1%\n",
+			"Crit Chance +2%\n"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "forge:entity_reach",
+					"value": 0.10,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_damage",
+					"value": 0.01,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_chance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_tactics_6": {
+		"title": "Tactics VI",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "minecraft:map"
+			}
+		},
+		"description": [
+			"The battlefield at first looked like chaos to my untrained eye, but now I see clearly.\n",
+			"Reach +.10 blocks\n",
+			"Crit Damage +1%\n",
+			"Crit Chance +2%\n"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "forge:entity_reach",
+					"value": 0.10,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_damage",
+					"value": 0.01,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_chance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
+	},
+	"warrior_tactics_7": {
+		"title": "Tactics VII: Milestone II",
+		"icon": {
+			"type": "item",
+			"data": {
+				"item": "minecraft:lodestone"
+			}
+		},
+		"description": [
+			"The battlefield at first looked like chaos to my untrained eye, but now I see clearly.\n",
+			"Reach +.10 blocks\n",
+			"Crit Damage +1%\n",
+			"Crit Chance +2%\n"
+		],
+		"rewards": [
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "forge:entity_reach",
+					"value": 0.10,
+					"operation": "addition"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_damage",
+					"value": 0.01,
+					"operation": "multiply_base"
+				}
+			},
+			{
+				"type": "puffish_skills:attribute",
+				"data": {
+					"attribute": "attributeslib:crit_chance",
+					"value": 0.02,
+					"operation": "multiply_base"
+				}
+			}
+		]
 	}
 }

@@ -231,6 +231,26 @@
 				{
 					auto: "enabled"
 					command: "/locate structure dungeoncrawl:dungeon"
+					icon: {
+						Count: 1
+						id: "irons_spellbooks:furled_map_ice_spider_den"
+						tag: {
+							display: {
+								Lore: ["{\"color\":\"gold\",\"translate\":\"item.irons_spellbooks.furled_map_descriptor_framing\",\"with\":[{\"translate\":\"item.irons_spellbooks.ice_spider_den_map\"}]}"]
+							}
+							"irons_spellbooks:furled_map_data": {
+								descriptionOverride: {
+									color: "gold"
+									translate: "item.irons_spellbooks.furled_map_descriptor_framing"
+									with: [{
+										translate: "item.irons_spellbooks.ice_spider_den_map"
+									}]
+								}
+								destination: "irons_spellbooks:ice_spider_den"
+								dimension: "minecraft:overworld"
+							}
+						}
+					}
 					id: "2219B8FB13C7EF78"
 					team_reward: false
 					title: "Dungeon location"
@@ -239,6 +259,11 @@
 				{
 					id: "748694E826E8F07C"
 					item: "minecraft:compass"
+					type: "item"
+				}
+				{
+					id: "26ABD861AA7C3796"
+					item: "minecraft:campfire"
 					type: "item"
 				}
 			]

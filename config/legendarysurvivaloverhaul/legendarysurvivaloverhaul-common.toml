@@ -81,12 +81,12 @@
 		"Temperature Immunity On Death Enabled" = true
 		# Temperature immunity period in ticks while the player is immune to temperature effects after death.
 		#Range: 0 ~ 100000
-		"Temperature Immunity On Death Time" = 1800
+		"Temperature Immunity On Death Time" = 1200
 		# If enabled, players will be immune to temperature effects on first spawn in a world.
 		"Temperature Immunity On First Spawn Enabled" = true
 		# Temperature immunity period in ticks while the player is immune to temperature effects on first spawn.
 		#Range: 0 ~ 100000
-		"Temperature Immunity On First Spawn Time" = 1800
+		"Temperature Immunity On First Spawn Time" = 2400
 
 	[temperature.secondary_effects]
 		# If enabled, players will also receive other effects from their current temperature state.

@@ -1,13 +1,10 @@
 {
     "index": 3,
     "attributes": {
-        "puffish_attributes:melee_damage": 1.5,
+        "generic.health": 20,
         "generic.armor": 3.0,
-        "puffish_attributes:resistance": 1.2
+        "generic.attack_speed": 1
     },
-    "starting_skills": [
-        "epicfight:roll"
-    ],
     "items": [
         {
             "id": "legendarysurvivaloverhaul:bandage",

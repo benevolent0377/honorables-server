@@ -1,17 +1,5 @@
 {
     "index": 5,
-    "attributes": {
-        "irons_spellbooks:spell_power": 1.5,
-        "irons_spellbooks:max_mana": 140,
-        "irons_spellbooks:mana_regen": 1.3,
-        "irons_spellbooks:cooldown_reduction": 1.2,
-        "puffish_attributes:magic_damage": 1.2,
-        "irons_spellbooks:cast_time_reduction": 1.15,
-        "puffish_attributes:melee_damage": 0.75,
-        "puffish_attributes:ranged_damage": 0.75,
-        "puffish_attributes:pickaxe_speed": 0.85,
-        "puffish_attributes:stamina": 0.9
-    },
     "starting_skills": [],
     "items": [
         {

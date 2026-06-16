@@ -1,59 +1,800 @@
 {
-	"health+2": {
-		"title": "+1 Heart",
-		"icon": {
-			"type": "effect",
-			"data": {
-				"effect": "health_boost"
-			}
-		},
-		"rewards": [
-			{
-				"type": "puffish_skills:attribute",
-				"data": {
-					"attribute": "generic.max_health",
-					"value": 2,
-					"operation": "addition"
-				}
-			}
-		]
-	},
-	"attack_speed+5%": {
-		"title": "+5% Attack Speed",
-		"icon": {
-			"type": "item",
-			"data": {
-				"item": "golden_sword"
-			}
-		},
-		"rewards": [
-			{
-				"type": "puffish_skills:attribute",
-				"data": {
-					"attribute": "generic.attack_speed",
-					"value": 0.05,
-					"operation": "multiply_total"
-				}
-			}
-		]
-	},
-	"movement_speed+5%": {
-		"title": "+5% Movement Speed",
-		"icon": {
-			"type": "effect",
-			"data": {
-				"effect": "speed"
-			}
-		},
-		"rewards": [
-			{
-				"type": "puffish_skills:attribute",
-				"data": {
-					"attribute": "generic.movement_speed",
-					"value": 0.05,
-					"operation": "multiply_total"
-				}
-			}
-		]
-	}
+    "mage_root": {
+        "title": "The Mage's Calling",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "nether_star"
+            }
+        },
+        "description": [
+            "Magic is neither innate nor inherited. It is a discipline of observation, repetition, and restraint. Those who devote themselves to its study often neglect the pursuits of body in favor of mind.\n\n",
+            "Starting Spell Granted: Magic Missile\n\n",
+            "Passive Ability Unlocked: Arcane Poise\n",
+            "-> Arcane conductivity decreases as physical encumbrance increases.\n",
+            "-> Encumbrance = Armor + (2 × Armor Toughness)\n",
+            "-> Light Equipment: +5% Spell Power, +5% Mana Regeneration, +5% Cast Time Reduction\n",
+            "-> Medium Equipment: No bonuses and no penalties\n",
+            "-> Heavy Equipment: -10% Mana Regeneration, -10% Cast Time Reduction, +10% Mana Cost\n",
+            "-> Spell-Sword rewrites Arcane Poise upon subclass selection rather than gradually mitigating its penalties.\n\n",
+            "Other Bonuses:\n",
+            "Spell Power +3%\n",
+            "Maximum Mana +20\n",
+            "Mana Regeneration +5%\n",
+            "Armor -2\n",
+            "Maximum Health -2\n",
+            "Mining Speed -10%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_power",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": 20,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:mana_regen",
+                    "value": 0.05,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.armor",
+                    "value": -2,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.max_health",
+                    "value": -2,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_lib:mining_speed",
+                    "value": -0.1,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s mage_arcane_poise_unlock"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s mage_magic_missile_starting_spell"
+                }
+            }
+        ],
+        "cost": 0
+    },
+    "mage_theory_1": {
+        "title": "Theory I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "book"
+            }
+        },
+        "description": [
+            "\"Every spell is first an equation before it is an incantation.\"\n\n",
+            "The simplest manipulations of mana reveal that precision is achieved through comprehension rather than repetition alone.\n",
+            "Spell Power +2%\n",
+            "Spell Resistance +2%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_power",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_resist",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_theory_2": {
+        "title": "Theory II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "writable_book"
+            }
+        },
+        "description": [
+            "Increased familiarity with arcane structures permits greater internal mana storage without compromising stability.\n",
+            "Spell Power +2%\n",
+            "Maximum Mana +10"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_power",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": 10,
+                    "operation": "addition"
+                }
+            }
+        ]
+    },
+    "mage_theory_3": {
+        "title": "Theory III: Milestone I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "enchanted_book"
+            }
+        },
+        "description": [
+            "Mana expenditure is inversely proportional to preparation. An anticipated casting sequence minimizes unnecessary dissipation.\n\n",
+            "Passive Ability Unlocked: Arcane Insight\n",
+            "-> After 8 seconds without casting a spell, my next spell costs 25% less mana.\n\n",
+            "Practical Examination Unlocked: Arcane Insight Curriculum\n",
+            "-> Completes a hidden FTB examination, allowing me to select one spell from the Arcane Insight curriculum.\n\n",
+            "Other Bonuses:\n",
+            "Spell Resistance +3%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_resist",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s mage_arcane_insight_unlock"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s mage_arcane_insight_exam"
+                }
+            }
+        ],
+        "cost": 3
+    },
+    "mage_theory_4": {
+        "title": "Theory IV",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "lectern"
+            }
+        },
+        "description": [
+            "As theoretical understanding expands, both capacity and efficiency improve in tandem.\n",
+            "Spell Power +3%\n",
+            "Maximum Mana +15"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_power",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": 15,
+                    "operation": "addition"
+                }
+            }
+        ]
+    },
+    "mage_theory_5": {
+        "title": "Theory V",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "amethyst_shard"
+            }
+        },
+        "description": [
+            "Stable formulae resist disruption, allowing the practitioner to maintain composure even under hostile interference.\n",
+            "Spell Power +3%\n",
+            "Spell Resistance +3%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_power",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_resist",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_theory_6": {
+        "title": "Theory VI",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "ender_eye"
+            }
+        },
+        "description": [
+            "Larger reservoirs permit more sophisticated manipulations, provided they remain mathematically stable.\n",
+            "Spell Power +4%\n",
+            "Maximum Mana +15"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_power",
+                    "value": 0.04,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": 15,
+                    "operation": "addition"
+                }
+            }
+        ]
+    },
+    "mage_theory_7": {
+        "title": "Theory VII: Milestone II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "end_crystal"
+            }
+        },
+        "description": [
+            "Stable reserves permit greater precision in the manipulation of arcane formulae.\n\n",
+            "Passive Ability Unlocked: Scholarly Mind\n",
+            "-> While above 90% mana, I gain 10% Spell Power.\n\n",
+            "Other Bonuses:\n",
+            "Spell Power +5%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_power",
+                    "value": 0.05,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s mage_scholarly_mind_unlock"
+                }
+            }
+        ],
+        "cost": 5
+    },
+    "mage_discipline_1": {
+        "title": "Discipline I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "clock"
+            }
+        },
+        "description": [
+            "\"Perfection is not achieved through speed, but through the elimination of error.\"\n\n",
+            "The proper execution of an incantation begins long before the first word is spoken. Initial posture and preparation determine the efficiency of every motion that follows.\n",
+            "Cooldown Reduction +2%\n",
+            "Cast Time Reduction +2%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:cooldown_reduction",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:cast_time_reduction",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_discipline_2": {
+        "title": "Discipline II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "spyglass"
+            }
+        },
+        "description": [
+            "External interference need not disrupt a spell. A properly stabilized casting matrix maintains its integrity despite adverse conditions.\n",
+            "Cast Time Reduction +2%\n",
+            "Spell Resistance +2%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:cast_time_reduction",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_resist",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_discipline_3": {
+        "title": "Discipline III: Milestone I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "compass"
+            }
+        },
+        "description": [
+            "Measured procedure produces predictable outcomes. The disciplined practitioner values consistency above speed, for reliability is the precursor to mastery.\n\n",
+            "Passive Ability Unlocked: Measured Casting\n",
+            "-> Casting a spell grants 10% Spell Resistance for 5 seconds.\n\n",
+            "Other Bonuses:\n",
+            "Cooldown Reduction +3%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:cooldown_reduction",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s mage_measured_casting_unlock"
+                }
+            }
+        ],
+        "cost": 3
+    },
+    "mage_discipline_4": {
+        "title": "Discipline IV",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "blaze_rod"
+            }
+        },
+        "description": [
+            "Every unnecessary gesture delays completion. Refinement is achieved not by learning new movements, but by abandoning inefficient ones.\n",
+            "Cooldown Reduction +3%\n",
+            "Cast Time Reduction +2%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:cooldown_reduction",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:cast_time_reduction",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_discipline_5": {
+        "title": "Discipline V",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "recovery_compass"
+            }
+        },
+        "description": [
+            "The completion of one operation should establish the conditions required for the next. Proper sequencing minimizes interruption and preserves momentum.\n",
+            "Spell Resistance +3%\n",
+            "Cooldown Reduction +3%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_resist",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:cooldown_reduction",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_discipline_6": {
+        "title": "Discipline VI",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "calibrated_sculk_sensor"
+            }
+        },
+        "description": [
+            "Repeated correctness removes deliberation. What once required conscious thought becomes automatic through disciplined repetition.\n",
+            "Cast Time Reduction +3%\n",
+            "Spell Resistance +2%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:cast_time_reduction",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_resist",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_discipline_7": {
+        "title": "Discipline VII: Milestone II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "conduit"
+            }
+        },
+        "description": [
+            "When execution ceases to require conscious correction, efficiency approaches its theoretical limit. Sequential casting reduces corrective overhead, permitting subsequent incantations to be formed with greater efficiency.\n\n",
+            "Passive Ability Unlocked: Perfect Discipline\n",
+            "-> Casting three different spells consecutively within 15 seconds, without repeating a spell, grants 15% Cast Time Reduction for 10 seconds.\n\n",
+            "Practical Examination Unlocked: Discipline Curriculum\n",
+            "-> Completes a hidden FTB practical examination, allowing me to select one spell from the Discipline curriculum.\n",
+            "-> The available spell pool emphasizes execution, mobility, precision, and technical proficiency rather than raw destructive power.\n\n",
+            "Other Bonuses:\n",
+            "Cooldown Reduction +4%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:cooldown_reduction",
+                    "value": 0.04,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s mage_perfect_discipline_unlock"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s mage_perfect_discipline_exam"
+                }
+            }
+        ],
+        "cost": 5
+    },
+    "mage_attunement_1": {
+        "title": "Attunement I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "amethyst_shard"
+            }
+        },
+        "description": [
+            "\"The novice relies upon the mana within. The master enriches it with the currents without.\"\n\n",
+            "Mana does not originate with the caster. It merely passes through them. The first lesson is to recognize its presence beyond oneself.\n",
+            "Maximum Mana +10\n",
+            "Mana Regeneration +2%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": 10,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:mana_regen",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_attunement_2": {
+        "title": "Attunement II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "prismarine_crystals"
+            }
+        },
+        "description": [
+            "Sensitivity to ambient currents permits gradual replenishment of mana without conscious effort, provided the practitioner does not resist its flow.\n",
+            "Maximum Mana +15\n",
+            "Spell Resistance +2%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": 15,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_resist",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_attunement_3": {
+        "title": "Attunement III: Milestone I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "ghast_tear"
+            }
+        },
+        "description": [
+            "External mana currents are most readily observed when internal interference is minimized. Deliberate stillness permits natural replenishment.\n\n",
+            "Passive Ability Unlocked: Meditation\n",
+            "-> After 5 seconds without casting, my mana regeneration is doubled until I cast another spell.\n\n",
+            "Other Bonuses:\n",
+            "Maximum Mana +10"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": 10,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s mage_meditation_unlock"
+                }
+            }
+        ],
+        "cost": 3
+    },
+    "mage_attunement_4": {
+        "title": "Attunement IV",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "heart_of_the_sea"
+            }
+        },
+        "description": [
+            "A stone stands unmoved in a rushing current, yet is shaped by it all the same. Likewise, the mage who wades in the currents of the world is refined by them.\n",
+            "Maximum Mana +20\n",
+            "Spell Resistance +2%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": 20,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_resist",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_attunement_5": {
+        "title": "Attunement V",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "echo_shard"
+            }
+        },
+        "description": [
+            "Balance is achieved not by accumulation alone, but by maintaining uninterrupted harmony between self and environment.\n",
+            "Maximum Mana +15\n",
+            "Mana Regeneration +3%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": 15,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:mana_regen",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_attunement_6": {
+        "title": "Attunement VI",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "respawn_anchor"
+            }
+        },
+        "description": [
+            "Continuous exposure to ambient mana gradually conditions the practitioner, increasing both capacity and receptivity.\n",
+            "Maximum Mana +20\n",
+            "Spell Resistance +3%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": 20,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_resist",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "mage_attunement_7": {
+        "title": "Attunement VII: Milestone II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "dragon_breath"
+            }
+        },
+        "description": [
+            "Critical depletion induces accelerated synchronization with surrounding mana fields. Under sufficient strain, environmental currents compensate for diminishing internal reserves.\n\n",
+            "Passive Ability Unlocked: Resonance\n",
+            "-> When my mana falls below 20%, I gain 50% increased mana regeneration for 5 seconds.\n",
+            "-> This effect cannot retrigger while active and is subject to an internal cooldown.\n\n",
+            "Practical Examination Unlocked: Attunement Curriculum\n",
+            "-> Completes a hidden FTB practical examination, allowing me to select one spell from the Attunement curriculum.\n",
+            "-> The available spell pool emphasizes sustain, protection, restoration, and harmony with magical energy rather than offensive capability.\n\n",
+            "Other Bonuses:\n",
+            "Maximum Mana +15"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": 15,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s mage_resonance_unlock"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s mage_resonance_exam"
+                }
+            }
+        ],
+        "cost": 5
+    }
 }

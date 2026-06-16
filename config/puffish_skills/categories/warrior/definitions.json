@@ -22,6 +22,7 @@
             "Max Mana -10 Mana\n",
             "Magic Resistance -5%"
         ],
+        "cost": 0,
         "rewards": [
             {
                 "type": "puffish_skills:attribute",
@@ -436,7 +437,8 @@
                     "command": "gamestage add @s warrior_frontline_unlock"
                 }
             }
-        ]
+        ],
+		"cost": 3
     },
     "warrior_defense_4": {
         "title": "Defense IV",
@@ -588,7 +590,8 @@
                     "command": "gamestage add @s warrior_bulwark_unlock"
                 }
             }
-        ]
+        ],
+		"cost": 5
     },
     "warrior_tactics_1": {
         "title": "Tactics I",
@@ -674,7 +677,8 @@
                     "command": "gamestage add @s warrior_adrenaline_unlock"
                 }
             }
-        ]
+        ],
+		"cost": 3
     },
     "warrior_tactics_4": {
         "title": "Tactics IV",
@@ -798,6 +802,7 @@
                     "command": "gamestage add @s warrior_counter_unlock"
                 }
             }
-        ]
+        ],
+		"cost": 5
     }
 }

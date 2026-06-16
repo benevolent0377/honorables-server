@@ -1,13 +1,11 @@
 {
 	"class.dcclasses.miner" : "Miner",
-	"class.dcclasses.ranger" : "Ranger",
 	"class.dcclasses.warrior" : "Warrior",
 	"class.dcclasses.mage": "Mage",
-	"class.dcclasses.farmer": "Farmer",
-	"class.dcclasses.explorer": "Explorer",
+	"class.dcclasses.naturalist": "Naturalist",
+	"class.dcclasses.adventurer": "Adventurer",
 	"class.dcclasses.miner.desc" : "Masters of ore extraction and underground labor. Excels at gathering resources and fueling industry, but sacrifices mobility and combat versatility.",
-	"class.dcclasses.ranger.desc" : "A skilled hunter and ranged combat specialist. Excels at scouting and striking from afar, but struggles when enemies close the distance.",
 	"class.dcclasses.warrior.desc" : "A frontline fighter focused on protection and melee combat. Tough and dependable in battle, but less effective at magic and resource gathering.",
 	"class.dcclasses.mage.desc": "TA wielder of powerful arcane magic. Commands devastating spells and utility abilities, but is physically fragile and vulnerable in close combat.",
-	"class.dcclasses.farmer.desc": "Provider of food and renewable resources. Gains strong utility and sustainability bonuses, but is weaker in direct combat and exploration.",
-	"class.dcclasses.explorer.desc": "A traveler and scout built for discovery. Moves quickly across the world and locates valuable sites, but lacks durability in dangerous fights."}
+	"class.dcclasses.naturalist.desc": "Provider of food and renewable resources. Gains strong utility and sustainability bonuses, but is weaker in direct combat and exploration.",
+	"class.dcclasses.adventurer.desc": "A traveler and scout built for discovery. Moves quickly across the world and locates valuable sites, but lacks durability in dangerous fights."}

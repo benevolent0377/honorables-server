@@ -11,11 +11,22 @@
 	quests: [
 		{
 			id: "7971212D15B50CAD"
-			rewards: [{
-				id: "7FBCB2F80C48008B"
-				type: "xp"
-				xp: 100
-			}]
+			rewards: [
+				{
+					auto: "enabled"
+					id: "7FBCB2F80C48008B"
+					type: "xp"
+					xp: 100
+				}
+				{
+					auto: "enabled"
+					command: "/puffish_skills experience add @s warrior 50"
+					icon: "minecraft:experience_bottle"
+					id: "5CE40F29AE555102"
+					silent: true
+					type: "command"
+				}
+			]
 			subtitle: "You have chosen the path of a warrior."
 			tasks: [{
 				icon: {
@@ -257,11 +268,13 @@
 					type: "command"
 				}
 				{
+					auto: "enabled"
 					id: "748694E826E8F07C"
 					item: "minecraft:compass"
 					type: "item"
 				}
 				{
+					auto: "enabled"
 					id: "26ABD861AA7C3796"
 					item: "minecraft:campfire"
 					type: "item"

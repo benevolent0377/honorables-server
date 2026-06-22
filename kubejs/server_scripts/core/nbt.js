@@ -1,5 +1,6 @@
 // this file is responsible for all nbt operations
 import { CONSTANTS } from "./constants";
+import { log } from "./log";
 
 export function init(player){
 
@@ -54,7 +55,6 @@ export function editTrait(player, trait, item, value, append=false) {
     const traitData = playerData.traits[trait];
 
     if (traitData[item] == undefined) {
-        console.log(`[ERROR] @ (nbt.js:modTrait) -> Item ${item} not found in player data under ${trait} trait.`);
         return 1;
     }
 

@@ -1,59 +1,808 @@
 {
-	"health+2": {
-		"title": "+1 Heart",
-		"icon": {
-			"type": "effect",
-			"data": {
-				"effect": "health_boost"
-			}
-		},
-		"rewards": [
-			{
-				"type": "puffish_skills:attribute",
-				"data": {
-					"attribute": "generic.max_health",
-					"value": 2,
-					"operation": "addition"
-				}
-			}
-		]
-	},
-	"attack_speed+5%": {
-		"title": "+5% Attack Speed",
-		"icon": {
-			"type": "item",
-			"data": {
-				"item": "golden_sword"
-			}
-		},
-		"rewards": [
-			{
-				"type": "puffish_skills:attribute",
-				"data": {
-					"attribute": "generic.attack_speed",
-					"value": 0.05,
-					"operation": "multiply_total"
-				}
-			}
-		]
-	},
-	"movement_speed+5%": {
-		"title": "+5% Movement Speed",
-		"icon": {
-			"type": "effect",
-			"data": {
-				"effect": "speed"
-			}
-		},
-		"rewards": [
-			{
-				"type": "puffish_skills:attribute",
-				"data": {
-					"attribute": "generic.movement_speed",
-					"value": 0.05,
-					"operation": "multiply_total"
-				}
-			}
-		]
-	}
+    "warrior_root": {
+        "title": "A Warrior's Honor",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "nether_star"
+            }
+        },
+        "description": [
+            "My body remembers what my mind has forgotten. The blade feels familiar, though I cannot say why.\n\n",
+            "Passive Ability Unlocked: Martial Instinct\n",
+            "-> +5% Melee Damage while holding a melee weapon\n",
+            "-> +.25 Blocks Attack Range\n\n",
+            "Other Bonuses:\n",
+            "Stamina +5%\n",
+            "Melee Defense +4%\n",
+            "Attack Speed +3%\n",
+            "Magic Damage -5%\n",
+            "Ranged Damage +6%\n",
+            "Stealth -5%\n",
+            "Max Mana -10 Mana\n",
+            "Magic Resistance -5%"
+        ],
+        "cost": 0,
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:stamina",
+                    "value": 0.05,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:melee_resistance",
+                    "value": 0.04,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.attack_speed",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:magic_damage",
+                    "value": -0.05,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:ranged_damage",
+                    "value": 0.06,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:stealth",
+                    "value": -0.05,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:max_mana",
+                    "value": -10,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_resist",
+                    "value": -0.05,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "forge:entity_reach",
+                    "value": 0.25,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s warrior_martial_instinct_unlock"
+                }
+            }
+        ],
+        "metadata": {
+            "icon": "ufct82ltt2qmc1bh"
+        }
+    },
+    "warrior_combat_1": {
+        "title": "Combat I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "wooden_sword"
+            }
+        },
+        "description": [
+            "My first kill unlocks a forgotten strength. I must continue to recover what was lost.\n",
+            "Melee Damage +5%\n",
+            "Attack Damage +3%\n",
+            "Attack Speed +2%\n"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:melee_damage",
+                    "value": 0.05,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.attack_damage",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.attack_speed",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            }
+        ],
+        "metadata": {
+            "icon": "do0sp6hkotsv0hii"
+        }
+    },
+    "warrior_combat_2": {
+        "title": "Combat II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "wooden_sword"
+            }
+        },
+        "description": [
+            "The blade is becoming lighter in my hands.\n",
+            "Attack Speed +2%\n",
+            "Attack Damage +1%\n"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.attack_speed",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.attack_damage",
+                    "value": 0.01,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_combat_3": {
+        "title": "Combat III: Milestone I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "stone_sword"
+            }
+        },
+        "description": [
+            "I remember wearing down my foes with vicious strikes. I will reapply these techniques.",
+            "\n\nActive Ability Unlocked: Battle Rhythm",
+            "\n-> Landing consecutive melee hits increases my damage by 2% per strike, stacking up to 10%. The rhythm fades after 3 seconds without striking an enemy."
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s warrior_battle_rhythm_unlock"
+                }
+            }
+        ],
+        "cost": 3
+    },
+    "warrior_combat_4": {
+        "title": "Combat IV",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "stone_sword"
+            }
+        },
+        "description": [
+            "Once the rhythm returned to me, I realized it was never about striking harder. It was about never letting my opponent breathe.\n",
+            "Attack Speed +2%\n",
+            "Melee Damage +3%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.attack_speed",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:melee_damage",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_combat_5": {
+        "title": "Combat V",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "iron_sword"
+            }
+        },
+        "description": [
+            "Steel breaks before resolve does. I remember how to shatter both. I feel their armor bend under the force of my blade.\n",
+            "Melee Damage +2%\n",
+            "Armor Shred +5%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:melee_damage",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:armor_shred",
+                    "value": 0.05,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_combat_6": {
+        "title": "Combat VI",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "golden_sword"
+            }
+        },
+        "description": [
+            "Even the best armor is no longer any match for me. I recall how to break and bend, no matter the foe before me.\n",
+            "Attack Speed +2%\n",
+            "Toughness Shred +3%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.attack_speed",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:toughness_shred",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_combat_7": {
+        "title": "Combat VII: Milestone II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "diamond_sword"
+            }
+        },
+        "description": [
+            "I remember how one strike can become many, and how many foes can become few.\n\n",
+            "Passive Ability Unlocked: Cleave\n",
+            "-> My attacks deal 10% of the previous hit's damage to enemies within 2 blocks."
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s warrior_cleave_unlock"
+                }
+            }
+        ],
+        "cost": 5
+    },
+    "warrior_defense_1": {
+        "title": "Defense I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "legendarysurvivaloverhaul:heart_container"
+            }
+        },
+        "description": [
+            "The first blow stunned me. The second taught me never to fear being struck again.\n\n",
+            "Max Health +2HP\n",
+            "Knockback Resistance +2%\n",
+            "Resilience +10%\n",
+            "Injury Resistance +5%\n"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.max_health",
+                    "value": 2,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.knockback_resistance",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "legendarysurvivaloverhaul:body_resistance",
+                    "value": 0.1,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "legendarysurvivaloverhaul:chest_resistance",
+                    "value": 0.05,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_defense_2": {
+        "title": "Defense II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "chainmail_chestplate"
+            }
+        },
+        "description": [
+            "The bruises callous and my skin hardens.\n\n",
+            "Armor +2\n",
+            "Armor Toughness +1\n",
+            "Resilience +5%\n"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.armor",
+                    "value": 2,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.armor_toughness",
+                    "value": 1,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "legendarysurvivaloverhaul:body_resistance",
+                    "value": 0.05,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_defense_3": {
+        "title": "Defense III: Milestone I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "golden_chestplate"
+            }
+        },
+        "description": [
+            "I remember an all consuming flame broke my surroundings down, but I did not fall. I will hold the line.\n\n",
+            "Passive Ability Unlocked: Frontline\n",
+            "-> While my health is at or below 20% of its maximum, while in combat, I get +50% knockback resistance and take 50% less damage.\n",
+            "-> Wearing heavy armor while frontline is active grants status immunity for 10 seconds after the initial proc and gives me +25% attack speed for 15 seconds."
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s warrior_frontline_unlock"
+                }
+            }
+        ],
+		"cost": 3
+    },
+    "warrior_defense_4": {
+        "title": "Defense IV",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "shield"
+            }
+        },
+        "description": [
+            "Cold steel cannot tear my flesh any longer. Conventional weapons are not enough to stop me.\n\n",
+            "Melee Resistance +10%\n",
+            "Ranged Resistance +10%\n",
+            "Damage Reflection +3%\n"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:damage_reflection",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:ranged_resistance",
+                    "value": 0.1,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:melee_resistance",
+                    "value": 0.1,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_defense_5": {
+        "title": "Defense V",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "iron_block"
+            }
+        },
+        "description": [
+            "I grow stronger after each fight. Each battle hardens my senses and numbs my injuries.\n\n",
+            "Magic Resistance +5%\n",
+            "Heat Resistance +10%\n",
+            "Cold Resistance +15%\n",
+            "Health Degradation Resistance +1\n"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "irons_spellbooks:spell_resist",
+                    "value": 0.05,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "legendarysurvivaloverhaul:heat_resistance",
+                    "value": 0.1,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "legendarysurvivaloverhaul:cold_resistance",
+                    "value": 0.15,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "legendarysurvivaloverhaul:broken_heart_resilience",
+                    "value": 1,
+                    "operation": "addition"
+                }
+            }
+        ]
+    },
+    "warrior_defense_6": {
+        "title": "Defense VI",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "golden_carrot"
+            }
+        },
+        "description": [
+            "I will not be pushed back, not an inch.\n\n",
+            "Knockback Resistance +5%\n",
+            "Armor Toughness +2\n"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.knockback_resistance",
+                    "value": 0.05,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.armor_toughness",
+                    "value": 2,
+                    "operation": "addition"
+                }
+            }
+        ]
+    },
+    "warrior_defense_7": {
+        "title": "Defense VII: Milestone II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "diamond_chestplate"
+            }
+        },
+        "description": [
+            "I stand for my honor, and fall for no-one. We all will go home.\n\n",
+            "Active Ability Unlocked: Bulwark\n",
+            "-> When blocking, enemies in a 10 block radius aggro on me instead of my allies.\n",
+            "-> If allies are in the radius, they gain Courage.\n",
+            "-> Each successful block adds one stack of Resolve to my allies, up to 5 stacks, increasing the potency of Courage.\n",
+            "-> Resets after releasing block.\n",
+            "-> Synergy: Frontline increases my bulwark radius to 15 blocks and Resolve stacks to 10 when the ability is active.\n\n",
+            " Courage: \n",
+            "-> Allies gain +15% attack damage increase and +25% projectile resistance.\n",
+            "-> Each stack of Resolve increases attack damage and projectile resistance by +2%."
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s warrior_bulwark_unlock"
+                }
+            }
+        ],
+		"cost": 5
+    },
+    "warrior_tactics_1": {
+        "title": "Tactics I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "minecraft:spyglass"
+            }
+        },
+        "description": [
+            "The battlefield at first looked like chaos to my untrained eye, but now I see clearly.\n\n",
+            "Reach +.10 blocks\n",
+            "Crit Damage +1%\n"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "forge:entity_reach",
+                    "value": 0.1,
+                    "operation": "addition"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "attributeslib:crit_damage",
+                    "value": 0.01,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_tactics_2": {
+        "title": "Tactics II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "spartanweaponry:stone_dagger"
+            }
+        },
+        "description": [
+            "As I watch, more weaknesses in my foes appear. I can punish their weakness with my strength.\n\n",
+            "Crit Chance +3%\n",
+            "Armor Pierce +2%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "attributeslib:crit_chance",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "attributeslib:armor_pierce",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_tactics_3": {
+        "title": "Tactics III: Milestone I",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "minecraft:ender_eye"
+            }
+        },
+        "description": [
+            "The first breath of battle stretches into an eternity. I remember long the most intense battle could feel.\n\n",
+            "Active Ability Unlocked: Adrenaline\n",
+            "->My perception quickens for 5 seconds, slowing the enemies around me and increasing my defense."
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s warrior_adrenaline_unlock"
+                }
+            }
+        ],
+		"cost": 3
+    },
+    "warrior_tactics_4": {
+        "title": "Tactics IV",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "minecraft:sugar"
+            }
+        },
+        "description": [
+            "I no longer chase opportunity, I am there before it strikes.\n\n",
+            "Attack Speed +4%\n",
+            "Movement Speed +5%\n"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.attack_speed",
+                    "value": 0.04,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "generic.movement_speed",
+                    "value": 0.05,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_tactics_5": {
+        "title": "Tactics V",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "minecraft:bone"
+            }
+        },
+        "description": [
+            "The more enemies I face at once, the more they grow arrogant.\n\n",
+            "Crit Damage +5%\n",
+            "Crit Chance +3%\n"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "attributeslib:crit_damage",
+                    "value": 0.05,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "attributeslib:crit_chance",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_tactics_6": {
+        "title": "Tactics VI",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "minecraft:map"
+            }
+        },
+        "description": [
+            "No matter the enemy... I know exactly where to strike.\n\n",
+            "Armor Pierce +3%\n",
+            "Protection Pierce +2%"
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "attributeslib:armor_pierce",
+                    "value": 0.03,
+                    "operation": "multiply_base"
+                }
+            },
+            {
+                "type": "puffish_skills:attribute",
+                "data": {
+                    "attribute": "puffish_attributes:protection_shred",
+                    "value": 0.02,
+                    "operation": "multiply_base"
+                }
+            }
+        ]
+    },
+    "warrior_tactics_7": {
+        "title": "Tactics VII: Milestone II",
+        "icon": {
+            "type": "item",
+            "data": {
+                "item": "minecraft:wither_rose"
+            }
+        },
+        "description": [
+            "I remember the tempo of war. My blade meets my opponents and leaves them open to a counter.\n\n",
+            "Passive Ability Unlocked: Counter\n",
+            "-> Timing a counter with right-click on an opponent just before I am hit counters my attacker.\nCannot be used while wielding a shield.\n",
+            "-> Swords parry, granting a 3 second strength buff and a 1 second damage immunity.\n",
+            "-> Axes hook, slowing and stunning the enemy while pulling them closer for my next attack.\n",
+            "-> Maces negate the attack, increasing the damage of my next hit by 100% and ignoring armor.\n",
+            "-> Spears brace and knockback the opponent with a stun, granting me regen for 1 second and doubles my reach momentarily.\n",
+            "-> Tridents stun and disarm, leaving the enemy with a 5 second weakness debuff.\n",
+            "-> Daggers negate the hit, and increase my critical damage by x2. My next two attacks are guaranteed crits."
+        ],
+        "rewards": [
+            {
+                "type": "puffish_skills:command",
+                "data": {
+                    "command": "gamestage add @s warrior_counter_unlock"
+                }
+            }
+        ],
+		"cost": 5
+    }
 }

@@ -74,12 +74,12 @@ export function addTraitModifier(player, trait, item, value) {
     const playerData = player.fullNBT.honorables;
     const traitData = playerData.traits[trait];
 
-    if (traitData[item] == undefined) {
+    if (traitData.modifiers[item] == undefined) {
         console.log(`[ERROR] @ (nbt.js:modTrait) -> Item ${item} not found in player data under ${trait} trait.`);
         return 1;
     }
 
-    traitData[item].insert(value);
+    traitData.modifiers[item].insert(value);
 
     return 0;
 

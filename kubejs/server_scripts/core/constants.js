@@ -6,17 +6,27 @@ export const CONSTANTS = {
         DATA: 1
     },
 
-    TRAITS: {
-        STR: "strength",
-        END: "endurance",
-        CONS: "constitution",
-        AGL: "agility",
-        DEX: "dexterity",
-        WIS: "wisdom",
-        INT: "intelligence",
+    TRAIT_ID: {
+        STR: "traits_strength",
+        END: "traits_endurance",
+        CONS: "traits_constitution",
+        AGL: "traits_agility",
+        DEX: "traits_dexterity",
+        WIS: "traits_wisdom",
+        INT: "traits_intelligence",
 
         // lists internal attribute names, unformatted
         LIST: [
+            "traits_strength",
+            "traits_endurance",
+            "traits_constitution",
+            "traits_agility",
+            "traits_dexterity",
+            "traits_wisdom",
+            "traits_intelligence"
+        ],
+
+        LIST_F: [
             "strength",
             "endurance",
             "constitution",

@@ -3,10 +3,10 @@ import { CONSTANTS } from "../../core/constants";
 
 class Trait {
     constructor(id, display, DEFAULT_BASE, description) {
-        this.id = id,
-        this.display = display,
-        this.DEFAULT_BASE = DEFAULT_BASE,
-        this.description = description
+        this.id = id;
+        this.display = display;
+        this.DEFAULT_BASE = DEFAULT_BASE;
+        this.description = description;
     }
 
     export(){

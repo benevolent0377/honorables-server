@@ -1,10 +1,5 @@
 {
     "index": 3,
-    "attributes": {
-        "generic.health": 20,
-        "generic.armor": 3.0,
-        "generic.attack_speed": 4
-    },
     "items": [
         {
             "id": "legendarysurvivaloverhaul:bandage",

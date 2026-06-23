@@ -2,6 +2,7 @@
 
 import { CONSTANTS } from "../../core/constants";
 import { verifyTraitExists } from "./trait_registry";
+import { TRAIT_FACTORS, FACTOR_WEIGHTS } from "./trait_factors"
 
 function isValidTrait(player, trait=undefined) {
 
@@ -30,8 +31,13 @@ export function calculateTraitValue(player, trait=undefined) {
         return 0;
     }
 
-    // do calculations
     
+
+}
+
+function calculateWeightedValue(trait, factor) {
+
+    // make the weight calculation here
 
 }
 

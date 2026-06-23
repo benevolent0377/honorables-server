@@ -1,34 +1,36 @@
 // this file is responsible for all nbt operations
-import { CONSTANTS } from "./constants";
 import { log } from "./log";
+import { TRAITS } from "../player/traits/trait_registry";
 
-export function init(player){
+export function initPlayerNBT(player){
 
     player.fullNBT.honorables = {
-        traits: {},
-        abilities: {},
-        history: {}
+        traits: {
+            "__runtime__": {
+                "recalculate-tick": 0
+            }
+        },
+        abilities: {
+            "__runtime__": {}
+        },
+        history: {},
     };
 
-    traits = CONSTANTS.TRAITS.LIST;
+    traits = TRAITS;
 
     // populate the traits list in the player nbt
     for (const trait of traits) {
-        player.fullNBT.honorables.traits[trait] = {
-            "base": 10,
-            "active": null,
-            "modifiers": []
-        };
+        player.fullNBT.honorables.traits[trait.ID] = trait.export()
     }
 
     return 0;
 
 }
 
-export function hasRoot(player, quickInit=false) {
+export function playerHasRoot(player, quickInit=false) {
     if (player.fullNBT.honorables == undefined){
         if (quickInit) {
-            init(player);
+            initPlayerNBT(player);
             return true;
         }
 

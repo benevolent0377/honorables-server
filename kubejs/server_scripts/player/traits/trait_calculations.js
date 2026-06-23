@@ -27,8 +27,10 @@ function isValidTrait(player, trait=undefined) {
 export function calculateTraitValue(player, trait=undefined) {
 
     if (!isValidTrait(player, trait)) {
-
+        return 0;
     }
+
+    // do calculations
     
 
 }

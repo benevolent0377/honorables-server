@@ -8,13 +8,6 @@ const FACTOR_WEIGHTS = {
         }
     },
 
-    PLAYER_EVENTS: {
-        WEIGHT: 1,
-        SUBFACTOR_WEIGHTS: {
-            //ibid
-        }
-    },
-
     PLAYER_HISTORY: {
         WEIGHT: 1,
         SUBFACTOR_WEIGHTS: {
@@ -33,13 +26,11 @@ const FACTOR_WEIGHTS = {
 const TRAIT_FACTORS = {
     STRENGTH: {
         VANILLA_STATS: [],
-        PLAYER_EVENTS: [],
         PLAYER_HISTORY: [],
         STAGES: []
     },
     ENDURANCE: {
         VANILLA_STATS: [],
-        PLAYER_EVENTS: [],
         PLAYER_HISTORY: [],
         STAGES: []
     },
@@ -51,25 +42,21 @@ const TRAIT_FACTORS = {
     },
     AGILITY: {
         VANILLA_STATS: [],
-        PLAYER_EVENTS: [],
         PLAYER_HISTORY: [],
         STAGES: []
     },
     DEXTERITY: {
         VANILLA_STATS: [],
-        PLAYER_EVENTS: [],
         PLAYER_HISTORY: [],
         STAGES: []
     },
     INTELLIGENCE: {
         VANILLA_STATS: [],
-        PLAYER_EVENTS: [],
         PLAYER_HISTORY: [],
         STAGES: []
     },
     WISDOM: {
         VANILLA_STATS: [],
-        PLAYER_EVENTS: [],
         PLAYER_HISTORY: [],
         STAGES: []
     }

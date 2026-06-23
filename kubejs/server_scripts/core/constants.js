@@ -106,6 +106,18 @@ export const CONSTANTS = {
         ON_TIMER: "onTimer"
     },
 
+    TRAIT_FACTOR_TYPES: {
+        VANILLA_STATS: "vanilla_stats",
+        PLAYER_HISTORY: "player_history",
+        STAGES: "stages",
+
+        LIST = [
+            "vanilla_stats",
+            "player_history",
+            "stages"
+        ]
+    },
+
     QUALITY: {
         MIN: 1.00,
         MAX: 5.00,

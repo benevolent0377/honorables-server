@@ -1,3 +1,5 @@
+// this file will be the access point for all the trait calculation data
+
 import { CONSTANTS } from "../../core/constants";
 
 export function getValueFromSource(player, source, factor) {

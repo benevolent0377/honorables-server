@@ -29,3 +29,17 @@ export const TRAITS = {
     INTELLIGENCE: new Trait(CONSTANTS.TRAIT_ID.INT, "Intelligence", 10, ""),
     WISDOM: new Trait(CONSTANTS.TRAIT_ID.WIS, "Wisdom", 10, ""),
 }
+
+export function verifyTraitExists(player, trait) {
+
+    const traitList = CONSTANTS.TRAIT_ID.LIST;
+
+    for (eachTrait of traitList) {
+        if (trait == eachTrait) {
+            return true;
+        }
+    }
+
+    return false;
+
+}

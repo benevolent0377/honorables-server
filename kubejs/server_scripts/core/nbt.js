@@ -6,21 +6,18 @@ export function initPlayerNBT(player){
 
     player.fullNBT.honorables = {
         traits: {
-            "__runtime__": {
+            "$runtime": {
                 "recalculate-tick": 0
             }
         },
         abilities: {
-            "__runtime__": {}
+            "$runtime": {}
         },
         history: {},
     };
-
-    traits = TRAITS;
-
-    // populate the traits list in the player nbt
-    for (const trait of traits) {
-        player.fullNBT.honorables.traits[trait.ID] = trait.export()
+    
+    for (const [key, trait] of Object.entries(TRAITS)) {
+        playerData.honorables.traits[trait.id] = trait.export();
     }
 
     return 0;
@@ -114,21 +111,19 @@ export function getAbilities(player, ability=undefined) {
 
 export function editAbilities(player, abilityExport, operation){
 
-    const playerData = player.fullNBT.honorables;
-    const abilityList = playerData.abilities;
-
+    const abilityList = getAbilities(player);
     const newAbilityID = abilityExport.ID;
 
     //validateAbility() a function to check the ability registry to ensure this ability exists
 
     // checking the existence of the ability in the data
-    var undefinedState = hasAbility(player, newAbilityID);
+    var abilityExists = hasAbility(player, newAbilityID);
 
     //parsing operation
 
     if (operation == "add"){
 
-        if (!undefinedState){
+        if (abilityExists){
             return 1;
         }
 
@@ -138,7 +133,7 @@ export function editAbilities(player, abilityExport, operation){
     }
     else if (operation == "remove"){
 
-        if (undefinedState){
+        if (!abilityExists){
             return 1;
         }
 

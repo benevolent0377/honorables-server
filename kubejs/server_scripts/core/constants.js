@@ -7,23 +7,23 @@ export const CONSTANTS = {
     },
 
     TRAIT_ID: {
-        STR: "traits_strength",
-        END: "traits_endurance",
-        CONS: "traits_constitution",
-        AGL: "traits_agility",
-        DEX: "traits_dexterity",
-        WIS: "traits_wisdom",
-        INT: "traits_intelligence",
+        STR: "trait_strength",
+        END: "trait_endurance",
+        CONS: "trait_constitution",
+        AGL: "trait_agility",
+        DEX: "trait_dexterity",
+        WIS: "trait_wisdom",
+        INT: "trait_intelligence",
 
         // lists internal attribute names, unformatted
         LIST: [
-            "traits_strength",
-            "traits_endurance",
-            "traits_constitution",
-            "traits_agility",
-            "traits_dexterity",
-            "traits_wisdom",
-            "traits_intelligence"
+            "trait_strength",
+            "trait_endurance",
+            "trait_constitution",
+            "trait_agility",
+            "trait_dexterity",
+            "trait_wisdom",
+            "trait_intelligence"
         ],
 
         LIST_F: [
@@ -111,7 +111,7 @@ export const CONSTANTS = {
         PLAYER_HISTORY: "player_history",
         STAGES: "stages",
 
-        LIST = [
+        LIST: [
             "vanilla_stats",
             "player_history",
             "stages"

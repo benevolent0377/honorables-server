@@ -13,7 +13,7 @@ export function getValueFromSource(player, source, factor) {
             return readPlayerHistory(player, factor);
 
         case CONSTANTS.TRAIT_FACTOR_TYPES.STAGES:
-            return hasStage(player, factor);
+            return readStageValue(player, factor);
 
         default:
             return undefined;
@@ -45,6 +45,6 @@ function readPlayerHistory(player, factor) {
     }
 }
 
-function hasStage(player, factor) {
+function readStageValue(player, factor) {
     return 0;
 }

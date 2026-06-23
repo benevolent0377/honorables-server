@@ -111,6 +111,12 @@ export const CONSTANTS = {
         PLAYER_HISTORY: "player_history",
         STAGES: "stages",
 
+        LIST_KEYS: [
+            "VANILLA_STATS",
+            "PLAYER_HISTORY",
+            "STAGES"
+        ],
+
         LIST: [
             "vanilla_stats",
             "player_history",

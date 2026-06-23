@@ -2,7 +2,7 @@
 
 export const CONSTANTS = {
 
-    VERSION : {
+    VERSION: {
         DATA: 1
     },
 
@@ -37,7 +37,7 @@ export const CONSTANTS = {
         ]
     },
 
-    PLAYER_CLASS: {
+    PLAYER_CLASS_ID: {
         WARRIOR: "class_warrior",
         NATURALIST: "class_naturalist",
         MINER: "class_miner",
@@ -53,7 +53,7 @@ export const CONSTANTS = {
         ]
     },
 
-    PLAYER_SUBCLASS: {
+    PLAYER_SUBCLASS_ID: {
         KNIGHT: "subclass_knight",
         BERSERKER: "subclass_berserker",
         SKIRMISHER: "subclass_skirmisher",

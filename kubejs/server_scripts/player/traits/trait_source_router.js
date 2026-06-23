@@ -6,13 +6,13 @@ export function getValueFromSource(player, source, factor) {
 
     switch (source) {
 
-        case "vanilla_stat":
+        case CONSTANTS.TRAIT_FACTOR_TYPES.VANILLA_STATS:
             return readVanillaStat(player, factor);
         
-        case "player_history":
+        case CONSTANTS.TRAIT_FACTOR_TYPES.PLAYER_HISTORY:
             return readPlayerHistory(player, factor);
 
-        case "stage":
+        case CONSTANTS.TRAIT_FACTOR_TYPES.STAGES:
             return hasStage(player, factor);
 
         default:

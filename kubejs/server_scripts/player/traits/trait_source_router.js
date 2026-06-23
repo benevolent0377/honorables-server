@@ -27,12 +27,8 @@ function readVanillaStat(player, factor) {
 
     playerData = player.fullNBT;
     
-    if (playerData[factor] == undefined) {
-        return 0;
-    }
-    else {
-        return playerData[factor];
-    }
+    // undeveloped call to minecraft nbt data
+    return 0;
 
 }
 

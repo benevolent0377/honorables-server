@@ -23,6 +23,7 @@ const FACTOR_WEIGHTS = {
     }
 }
 
+// this contains all the factors, sorted by type, that affect each trait
 const TRAIT_FACTORS = {
     STRENGTH: {
         VANILLA_STATS: [],
@@ -36,7 +37,6 @@ const TRAIT_FACTORS = {
     },
     CONSTITUTION: {
         VANILLA_STATS: [],
-        PLAYER_EVENTS: [],
         PLAYER_HISTORY: [],
         STAGES: []
     },

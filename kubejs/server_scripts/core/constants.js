@@ -34,6 +34,16 @@ export const CONSTANTS = {
             "dexterity",
             "wisdom",
             "intelligence"
+        ],
+
+        LIST_KEYS: [
+            "STRENGTH",
+            "ENDURANCE",
+            "CONSTITUTION",
+            "AGILITY",
+            "DEXTERITY",
+            "WISDOM",
+            "INTELLIGENCE",
         ]
     },
 

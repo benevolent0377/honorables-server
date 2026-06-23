@@ -39,7 +39,7 @@ function getFactors(trait) {
     // this function gets the applicable factors for the trait given
 
     const traitIDList = CONSTANTS.TRAIT_ID.LIST;
-    const traitKeys = TRAITS.LIST_KEYS;
+    const traitKeys = CONSTANTS.TRAIT_ID.LIST_KEYS;
 
     var factors = {};
 

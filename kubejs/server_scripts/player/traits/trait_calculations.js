@@ -1,7 +1,7 @@
 // this file will contain all the calculations for trait data, including the recalculation function
 
 import { CONSTANTS } from "../../core/constants";
-import { verifyTraitExists } from "./trait_registry";
+import { TRAITS, verifyTraitExists } from "./trait_registry";
 import { TRAIT_FACTORS, FACTOR_WEIGHTS } from "./trait_factors"
 
 function isValidTrait(player, trait=undefined) {
@@ -23,21 +23,62 @@ function isValidTrait(player, trait=undefined) {
     }
 }
 
-
-
 export function calculateTraitValue(player, trait=undefined) {
 
     if (!isValidTrait(player, trait)) {
         return 0;
     }
 
+    var weightedValues = calculateWeightedValues(trait, getFactors(trait));
+
+    // calculation goes here
     
+}
+
+function getFactors(trait) {
+    // this function gets the applicable factors for the trait given
+
+    const traitIDList = CONSTANTS.TRAIT_ID.LIST;
+    const traitKeys = TRAITS.LIST_KEYS;
+
+    var factors = {};
+
+    for (index in traitIDList) {
+
+        if (trait == traitIDList[index] || trait == undefined) {
+
+            factors[traitKeys[index]] = TRAIT_FACTORS[traitKeys[index]];
+
+        }
+
+    }
+
+    return factors;
 
 }
 
-function calculateWeightedValue(trait, factor) {
+function getFactorValuesFromSource(factors) {
+    // this function will return the values of the factors
 
-    // make the weight calculation here
+
+}
+
+function getWeights(factors) {
+    // this function gets the weights of the factors provided to it
+    // the factors dict will be organized like TRAIT: {
+    //      SUBCAT_1: [factor 1, factor 2, factor 3, ....],
+    //      SUBCAT_2: [factor 1, factor 2, ....],
+    //         ....
+    //}
+
+
+
+}
+
+function calculateWeightedValues(trait, factors) {
+    // this function weighs the values of the factors and returns them in a formatted dict
+
+
 
 }
 

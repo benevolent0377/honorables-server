@@ -28,6 +28,7 @@ export const TRAITS = {
     DEXTERITY: new Trait(CONSTANTS.TRAIT_ID.DEX, "Dexterity", 10, ""),
     INTELLIGENCE: new Trait(CONSTANTS.TRAIT_ID.INT, "Intelligence", 10, ""),
     WISDOM: new Trait(CONSTANTS.TRAIT_ID.WIS, "Wisdom", 10, ""),
+
 }
 
 export function verifyTraitExists(player, trait) {

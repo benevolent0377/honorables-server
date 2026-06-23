@@ -2,9 +2,6 @@ import { CONSTANTS } from "../../core/constants";
 
 export function getValueFromSource(player, source, factor) {
 
-    const playerData = player.fullNBT;
-    const honorablesData = playerData.honorables;
-    const history = honorablesData.history;
     const sourceTypes = CONSTANTS.TRAIT_FACTOR_TYPES.LIST;
 
     var isFound = false;
@@ -16,34 +13,34 @@ export function getValueFromSource(player, source, factor) {
     }
 
     if (!isFound) {
-        return 1;
+        return undefined;
     }
 
     switch (source) {
 
         case "vanilla_stat":
-            return fetchVanillaData(player, factor);
+            return readVanillaStat(player, factor);
             break;
         
         case "player_history":
-            return fetchPlayerData(player, factor);
+            return readPlayerHistory(player, factor);
             break;
 
         case "stage":
-            return fetchPlayerStages(player, factor);
+            return hasStage(player, factor);
             break;
     }
 
 }
 
-function fetchVanillaData(player, factor) {
+function readVanillaStat(player, factor) {
     return 0;
 }
 
-function fetchPlayerData(player, factor) {
+function readPlayerHistory(player, factor) {
     return 0;
 }
 
-function fetchPlayerStage(player, factor) {
+function hasStage(player, factor) {
     return 0;   
 }

@@ -22,13 +22,29 @@ export function getValueFromSource(player, source, factor) {
 }
 
 function readVanillaStat(player, factor) {
-    return 0;
+
+    playerData = player.fullNBT;
+    
+    if (playerData[factor] == undefined) {
+        return 0;
+    }
+    else {
+        return playerData[factor];
+    }
+
 }
 
 function readPlayerHistory(player, factor) {
-    return 0;
+    history = player.fullNBT.honorables.history;
+
+    if (history[factor] == undefined){
+        return 0;
+    }
+    else {
+        return history[factor];
+    }
 }
 
 function hasStage(player, factor) {
-    return 0;   
+    return 0;
 }

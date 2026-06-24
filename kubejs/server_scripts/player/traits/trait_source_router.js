@@ -6,7 +6,7 @@ export function getValueFromSource(player, source, factor) {
 
     const sourceTypes = CONSTANTS.TRAIT_FACTOR_TYPES.LIST;
 
-    switch (source) {
+    switch (source.toLowerCase()) {
 
         case CONSTANTS.TRAIT_FACTOR_TYPES.VANILLA_STATS:
             return readVanillaStat(player, factor);

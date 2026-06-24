@@ -1,22 +1,24 @@
 // this file will contain all the weights for each factor used in trait calculation
 
-const FACTOR_WEIGHTS = {
+export const FACTOR_WEIGHTS = {
     VANILLA_STATS: {
-        WEIGHT: 1,
+        WEIGHT: .35,
         SUBFACTOR_WEIGHTS: {
             //various subfactors and their weights go here
+            "minecraft:damage_dealt": .02,
+            "minecraft:killed": .05
         }
     },
 
     PLAYER_HISTORY: {
-        WEIGHT: 1,
+        WEIGHT: .15,
         SUBFACTOR_WEIGHTS: {
             //ibid
         }
     },
 
     STAGES: {
-        WEIGHT: 1,
+        WEIGHT: .75,
         SUBFACTOR_WEIGHTS: {
             //ibid
         }
@@ -24,7 +26,7 @@ const FACTOR_WEIGHTS = {
 }
 
 // this contains all the factors, sorted by type, that affect each trait
-const TRAIT_FACTORS = {
+export const TRAIT_FACTORS = {
     STRENGTH: {
         VANILLA_STATS: [],
         PLAYER_HISTORY: [],

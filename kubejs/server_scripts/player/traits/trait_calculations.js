@@ -1,19 +1,24 @@
 // this file will contain all the calculations for trait data, including the recalculation function
 
 import { CONSTANTS } from "../../core/constants";
-import { TRAITS, verifyTraitExists } from "./trait_registry";
-import { TRAIT_FACTORS, FACTOR_WEIGHTS } from "./trait_factors"
+import { verifyTraitExists } from "./trait_registry";
+import { TRAIT_FACTORS, FACTOR_WEIGHTS } from "./trait_factors";
+import { getValueFromSource } from "./trait_source_router";
+import { editTrait } from "../../core/nbt";
 
 function isValidTrait(player, trait=undefined) {
 
     //error testing, return code 1 is an error
+    if (trait == undefined) {
+        return true;
+    }
 
-    if (!verifyTraitExists(trait)){
+    else if (!verifyTraitExists(trait)){
         //log the error as an invalid trait
         return false;
     }
 
-    else if (trait == undefined) {
+    else if (player.fullNBT.honorables.traits[trait] == undefined) {
         //log the error as malformed player data
         return false;
     }
@@ -29,10 +34,68 @@ export function calculateTraitValue(player, trait=undefined) {
         return 0;
     }
 
-    var weightedValues = calculateWeightedValues(trait, getFactors(trait));
+    var weightedValues = calculateWeightedValues(player, getFactors(trait));
 
-    // calculation goes here
+    /**
+     * weightedValues structure: {
+     *      TRAIT: {
+     *          FACTORTYPE_1: {
+     *              categoryWeight: categoryWeight,
+     *              factor_1: weightedValue,
+     *              factor_2: weightedValue,
+     *              .....
+     *          },
+     *          FACTORTYPE_2: {
+     *              categoryWeight: categoryWeight,
+     *              factor_1: weightedValue,
+     *              ....
+     *          },
+     *          .....
+     *      },
+     *      .... (more traits if any)
+     * }
+     * 
+     * NOTE that the weighted values are precalculated, meaning the calculation function
+     * never sees the value of mods_killed or the value of a gamestage, it only sees the
+     * product of that value times the weight, already precalculated.
+     * 
+     * Thsi function takes all the subfactor weightedValues and derives
+     * the associated trait value from the categoryWeight and the sum of all the subfactor
+     * weighted values. It will then subtract the total trait value from the current player
+     * trait value, and package all the information in an easily digestible export.
+     */
+    const traitValues = {};
+
+    for (const [traitKey, traitData] of Object.entries(weightedValues)) { 
+
+        var traitValue = 0;
+
+        for (const [sourceKey, sourceData] of Object.entries(traitData)) {
+
+            if (sourceKey !== "id") {
+
+               traitValue = (sourceData["categoryWeight"] * sourceData["sum"]) + traitValue;
+
+            }
+
+        }
+
+        traitValues[traitData["id"]] = traitValue;
+
+    }
+
+    exportTraits(player, traitValues);
     
+}
+
+function exportTraits(player, traitValues) {
+
+    for (const [traitID, traitValue] of Object.entries(traitValues)) {
+
+        editTrait(player, traitID, "base", traitValue);
+
+    }
+
 }
 
 function getFactors(trait) {
@@ -43,7 +106,7 @@ function getFactors(trait) {
 
     var factors = {};
 
-    for (index in traitIDList) {
+    for (var index in traitIDList) {
 
         if (trait == traitIDList[index] || trait == undefined) {
 
@@ -57,32 +120,61 @@ function getFactors(trait) {
 
 }
 
-function getFactorValuesFromSource(factors) {
-    // this function will return the values of the factors
-
-
-}
-
-function getWeights(factors) {
-    // this function gets the weights of the factors provided to it
-    // the factors dict will be organized like TRAIT: {
-    //      SUBCAT_1: [factor 1, factor 2, factor 3, ....],
-    //      SUBCAT_2: [factor 1, factor 2, ....],
-    //         ....
-    //}
-
-
-
-}
-
-function calculateWeightedValues(trait, factors) {
+function calculateWeightedValues(player, factors) {
     // this function weighs the values of the factors and returns them in a formatted dict
+    /**
+     * This function should take the weights of each factor given and apply it to the value of the factor,
+     * then it should return the value as a formatted dict called weightedValues.
+     */
 
+    var weightedValues = {};
 
+    for (const [traitKey, sourceCategories] of Object.entries(factors)) {
+
+        weightedValues[traitKey] = {};
+        weightedValues[traitKey]["id"] = CONSTANTS.TRAIT_ID.TRAIT_KEY_TO_ID[traitKey];
+
+        for (const [sourceType, factorList] of Object.entries(sourceCategories)) {
+
+            weightedValues[traitKey][sourceType] = {};
+            weightedValues[traitKey][sourceType]["categoryWeight"] = FACTOR_WEIGHTS[sourceType].WEIGHT;
+            weightedValues[traitKey][sourceType]["factors"] = {};
+
+            var categorySum = 0;
+
+            for (const factor of factorList) {
+
+                var factorWeight = FACTOR_WEIGHTS[sourceType].SUBFACTOR_WEIGHTS[factor];
+
+                    if (factorWeight == undefined){
+                        factorWeight = 1;
+                    }
+
+                var factorValue = getValueFromSource(player, sourceType, factor);
+
+                    if (factorValue == undefined) {
+                        factorValue = 0;
+                    }
+
+                const weightedValue = factorWeight * factorValue;
+
+                categorySum = categorySum + weightedValue;
+
+                weightedValues[traitKey][sourceType]["factors"][factor] = weightedValue;
+
+            }
+
+            weightedValues[traitKey][sourceType]["sum"] = categorySum;
+
+        }
+    }
+
+    return weightedValues;
 
 }
 
-export async function recalculateAtInterval(player) {
+// this need to be made an onTick hook, or needs to be a wrapper for the ontick hook call in events
+export function recalculateAtInterval(player) {
 
     //when game tick reaches recalulate tick, then recalculate
 

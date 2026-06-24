@@ -9,3 +9,4 @@ saves/*
 options.txt
 rhino.local.properties
 fabricloader.log
+*.log

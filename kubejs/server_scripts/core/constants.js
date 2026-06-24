@@ -44,7 +44,27 @@ export const CONSTANTS = {
             "DEXTERITY",
             "WISDOM",
             "INTELLIGENCE",
-        ]
+        ],
+
+        TRAIT_ID_TO_KEY = {
+            "trait_strength": "STRENGTH",
+            "trait_endurance": "ENDURANCE",
+            "trait_constitution": "CONSTITUTION",
+            "trait_agility": "AGILITY",
+            "trait_dexterity": "DEXTERITY",
+            "trait_wisdom": "WISDOM",
+            "trait_intelligence": "INTELLIGENCE"
+        },
+
+        TRAIT_KEY_TO_ID = {
+            "STRENGTH": "trait_strength",
+            "ENDURANCE": "trait_endurance",
+            "CONSTITUTION": "trait_constitution",
+            "AGILITY": "trait_agility",
+            "DEXTERITY": "trait_dexterity",
+            "WISDOM": "trait_wisdom",
+            "INTELLIGENCE": "trait_intelligence"
+        }
     },
 
     PLAYER_CLASS_ID: {

@@ -29,7 +29,7 @@
     "underground_rivers": true
   },
   "general": {
-    "mod_enabled": true,
+    "mod_enabled": false,
     "snow_start_offset": 128
   },
   "global_terrain": {

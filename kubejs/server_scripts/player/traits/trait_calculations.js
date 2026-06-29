@@ -4,7 +4,7 @@ import { CONSTANTS } from "../../core/constants";
 import { verifyTraitExists } from "./trait_registry";
 import { TRAIT_FACTORS, FACTOR_WEIGHTS } from "./trait_factors";
 import { getValueFromSource } from "./trait_source_router";
-import { editTrait } from "../../core/nbt";
+import { editTrait, getPlayerData } from "../../core/presistence";
 
 function isValidTrait(player, trait=undefined) {
 
@@ -18,7 +18,7 @@ function isValidTrait(player, trait=undefined) {
         return false;
     }
 
-    else if (player.fullNBT.honorables.traits[trait] == undefined) {
+    else if (getPlayerData(player).traits[trait] == undefined) {
         //log the error as malformed player data
         return false;
     }

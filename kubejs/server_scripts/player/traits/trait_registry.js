@@ -13,7 +13,7 @@ class Trait {
 
     export(){
         return {
-            "base": this.DEFAULT_BASE,
+            "base": this.defaultBase,
             "active": null,
             "modifiers": []
         };
@@ -31,7 +31,7 @@ export const TRAITS = {
 
 }
 
-export function verifyTraitExists(player, trait) {
+export function verifyTraitExists(trait) {
 
     const traitList = CONSTANTS.TRAIT_ID.LIST;
 
@@ -43,4 +43,9 @@ export function verifyTraitExists(player, trait) {
 
     return false;
 
+}
+
+export function getEffectiveTrait(player, traitId) {
+  const trait = getTrait(player, traitId)
+  return trait.active == null ? trait.base : trait.active
 }

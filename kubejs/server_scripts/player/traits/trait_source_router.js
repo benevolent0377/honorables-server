@@ -1,6 +1,7 @@
 // this file will be the access point for all the trait calculation data
 
 import { CONSTANTS } from "../../core/constants";
+import { getPlayerData } from "../../core/presistence";
 
 export function getValueFromSource(player, source, factor) {
 
@@ -25,7 +26,7 @@ export function getValueFromSource(player, source, factor) {
 
 function readVanillaStat(player, factor) {
 
-    playerData = player.fullNBT;
+    playerData = getPlayerData(player, true);
     
     // undeveloped call to minecraft nbt data
     return 0;
@@ -33,7 +34,7 @@ function readVanillaStat(player, factor) {
 }
 
 function readPlayerHistory(player, factor) {
-    history = player.fullNBT.honorables.history;
+    const history = getPlayerData(player).history;
 
     if (history[factor] == undefined){
         return 0;

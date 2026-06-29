@@ -1,9 +1,9 @@
 // this file will hold all of the class information
-import { CONSTANTS } from "../../core/constants"
+global.Honorables = global.Honorables || {};
 
-const CLASSES = {
+global.Honorables.Classes = {
     WARRIOR: { 
-        ID: CONSTANTS.PLAYER_CLASS_ID.WARRIOR,
+        ID: global.Honorables.Constants.PLAYER_CLASS_ID.WARRIOR,
         DISPLAY: "Warrior",
         SUBCLASS: {
             KNIGHT: {
@@ -47,7 +47,7 @@ const CLASSES = {
     },
 
     NATURALIST: {
-        ID: CONSTANTS.PLAYER_CLASS_ID.NATURALIST,
+        ID: global.Honorables.Constants.PLAYER_CLASS_ID.NATURALIST,
         DISPLAY: "Naturalist",
         SUBCLASS: {
             AGRICULTURALIST: {
@@ -89,7 +89,7 @@ const CLASSES = {
     },
 
     MINER: {
-        ID: CONSTANTS.PLAYER_CLASS_ID.MINER,
+        ID: global.Honorables.Constants.PLAYER_CLASS_ID.MINER,
         DISPLAY: "Miner",
         SUBCLASS: {
             QUARRYMAN: {
@@ -132,7 +132,7 @@ const CLASSES = {
     },
 
     MAGE: {
-        ID: CONSTANTS.PLAYER_CLASS_ID.MAGE,
+        ID: global.Honorables.Constants.PLAYER_CLASS_ID.MAGE,
         DISPLAY: "Mage",
         SUBCLASS: {
             ARCANIST: {
@@ -174,7 +174,7 @@ const CLASSES = {
         CLASS_GAMESTAGE: "class_mage"
     },
     ADVENTURER: {
-        ID: CONSTANTS.PLAYER_CLASS_ID.ADVENTURER,
+        ID: global.Honorables.Constants.PLAYER_CLASS_ID.ADVENTURER,
         DISPLAY: "Adventurer",
         SUBCLASS: {
             EXPLORER: {
@@ -233,5 +233,4 @@ const CLASSES = {
         "adventurer"
     ],
 
-},
-
+};

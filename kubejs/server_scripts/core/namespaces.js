@@ -1,5 +1,7 @@
 
-export var NAMESPACES = {
+global.Honorables = global.Honorables || {};
+
+global.Honorables.Namespaces = {
     MOD_ID: "honorables",
 
     id(path) {

@@ -1,32 +1,32 @@
 // this file will be the access point for all the trait calculation data
 
-import { CONSTANTS } from "../../core/constants";
-import { getPlayerData } from "../../core/presistence";
+global.Honorables = global.Honorables || {};
+global.Honorables.TraitSourceRouter = global.Honorables.TraitSourceRouter || {};
 
-export function getValueFromSource(player, source, factor) {
+global.Honorables.TraitSourceRouter.getValueFromSource = function(player, source, factor) {
 
-    const sourceTypes = CONSTANTS.TRAIT_FACTOR_TYPES.LIST;
+    const sourceTypes = global.Honorables.Constants.TRAIT_FACTOR_TYPES.LIST;
 
     switch (source.toLowerCase()) {
 
-        case CONSTANTS.TRAIT_FACTOR_TYPES.VANILLA_STATS:
+        case global.Honorables.Constants.TRAIT_FACTOR_TYPES.VANILLA_STATS:
             return readVanillaStat(player, factor);
         
-        case CONSTANTS.TRAIT_FACTOR_TYPES.PLAYER_HISTORY:
+        case global.Honorables.Constants.TRAIT_FACTOR_TYPES.PLAYER_HISTORY:
             return readPlayerHistory(player, factor);
 
-        case CONSTANTS.TRAIT_FACTOR_TYPES.STAGES:
+        case global.Honorables.Constants.TRAIT_FACTOR_TYPES.STAGES:
             return readStageValue(player, factor);
 
         default:
             return undefined;
     }
 
-}
+};
 
 function readVanillaStat(player, factor) {
 
-    playerData = getPlayerData(player, true);
+    const playerData = global.Honorables.PlayerData.get(player, true);
     
     // undeveloped call to minecraft nbt data
     return 0;
@@ -34,7 +34,7 @@ function readVanillaStat(player, factor) {
 }
 
 function readPlayerHistory(player, factor) {
-    const history = getPlayerData(player).history;
+    const history = global.Honorables.PlayerData.get(player).history;
 
     if (history[factor] == undefined){
         return 0;

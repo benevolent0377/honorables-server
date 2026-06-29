@@ -1,8 +1,9 @@
 // this file is responsible for all nbt operations
-import { log } from "./log";
-import { TRAITS } from "../player/traits/trait_registry";
+global.Honorables = global.Honorables || {};
+global.Honorables.PlayerData = global.Honorables.PlayerData || {};
+global.Honorables.ItemData = global.Honorables.ItemData || {};
 
-export function initPlayerData(player){
+global.Honorables.PlayerData.init = function(player){
 
     player.persistentData.honorables = {
         class: "",
@@ -18,20 +19,20 @@ export function initPlayerData(player){
         $debug: {}
     };
 
-    playerData = getPlayerData(player);
+    const playerData = global.Honorables.PlayerData.get(player);
     
-    for (const [key, trait] of Object.entries(TRAITS)) {
+    for (const [key, trait] of Object.entries(global.Honorables.Traits.registry)) {
         playerData.traits[trait.id] = trait.export();
     }
 
     return 0;
 
-}
+};
 
-export function playerHasRoot(player, quickInit=false) {
+global.Honorables.PlayerData.hasRoot = function(player, quickInit=false) {
     if (player.persistentData.honorables == undefined){
         if (quickInit) {
-            initPlayerData(player);
+            global.Honorables.PlayerData.init(player);
             return true;
         }
 
@@ -40,9 +41,9 @@ export function playerHasRoot(player, quickInit=false) {
     else {
         return true;
     }
-}
+};
 
-export function getTrait(player, trait, item=null) {
+global.Honorables.PlayerData.getTrait = function(player, trait, item=null) {
 
     if (item !== null) {
         return player.persistentData.honorables.traits[trait][item]
@@ -50,9 +51,9 @@ export function getTrait(player, trait, item=null) {
 
     return player.persistentData.honorables.traits[trait];
 
-}
+};
 
-export function editTrait(player, trait, item, value, append=false) {
+global.Honorables.PlayerData.editTrait = function(player, trait, item, value, append=false) {
 
     const playerData = player.persistentData.honorables;
     const traitData = playerData.traits[trait];
@@ -70,9 +71,9 @@ export function editTrait(player, trait, item, value, append=false) {
 
     return 0;
 
-}
+};
 
-export function addTraitModifier(player, trait, item, value) {
+global.Honorables.PlayerData.addTraitModifier = function(player, trait, item, value) {
 
     const playerData = player.persistentData.honorables;
     const traitData = playerData.traits[trait];
@@ -86,17 +87,17 @@ export function addTraitModifier(player, trait, item, value) {
 
     return 0;
 
-}
+};
 
-export function hasAbility(player, abilityID) {
+global.Honorables.PlayerData.hasAbility = function(player, abilityID) {
     if (player.persistentData.honorables.abilities[abilityID] == undefined){
         return false;
     }
     
     return true;
-}
+};
 
-export function getAbilities(player, ability=undefined) {
+global.Honorables.PlayerData.getAbilities = function(player, ability=undefined) {
 
     const playerData = player.persistentData.honorables;
     const abilityList = playerData.abilities;
@@ -111,17 +112,17 @@ export function getAbilities(player, ability=undefined) {
     
     return abilityList[ability];
 
-}
+};
 
-export function editAbilities(player, abilityExport, operation){
+global.Honorables.PlayerData.editAbilities = function(player, abilityExport, operation){
 
-    const abilityList = getAbilities(player);
+    const abilityList = global.Honorables.PlayerData.getAbilities(player);
     const newAbilityID = abilityExport.ID;
 
     //validateAbility() a function to check the ability registry to ensure this ability exists
 
     // checking the existence of the ability in the data
-    var abilityExists = hasAbility(player, newAbilityID);
+    var abilityExists = global.Honorables.PlayerData.hasAbility(player, newAbilityID);
 
     //parsing operation
 
@@ -150,25 +151,25 @@ export function editAbilities(player, abilityExport, operation){
         return 1;
     }
 
-}
+};
 
-export function getPlayerData(player, isNBT=false) {
+global.Honorables.PlayerData.get = function(player, isNBT=false) {
 
     if (!isNBT) {
-    return player.persistentData.honorables;
+        return player.persistentData.honorables;
     }
     else {
         return player.fullNBT;
     }
 
-}
+};
 
-export function modAbility(player, abilityID, modifierExport, operation) {
+global.Honorables.PlayerData.modAbility = function(player, abilityID, modifierExport, operation) {
 
     const playerData = player.persistentData.honorables;
     const abilityList = playerData.abilities;
 
-    if (hasAbility(player, abilityID)){
+    if (global.Honorables.PlayerData.hasAbility(player, abilityID)){
         //log goes here
         return 1;
     }
@@ -197,18 +198,18 @@ export function modAbility(player, abilityID, modifierExport, operation) {
     }
     return 0;
 
-}
+};
 
 // the quality functions are hard to implement here, as the quality system has not been developed yet
 
-export function editQuality(player, itemID, qualityValue, operation="add"){
+global.Honorables.ItemData.editQuality = function(item, qualityValue, operation="add"){
 
     //add the function here to add or remove the item quality
 
-}
+};
 
-export function getQuality(player, item) {
+global.Honorables.ItemData.getQuality = function(item) {
 
     //return the quality of the item
 
-}
+};

@@ -1,6 +1,8 @@
 // this file will store all the constant data names and types
 
-export const CONSTANTS = {
+global.Honorables = global.Honorables || {};
+
+global.Honorables.Constants = {
 
     VERSION: {
         DATA: 1
@@ -46,7 +48,7 @@ export const CONSTANTS = {
             "INTELLIGENCE",
         ],
 
-        TRAIT_ID_TO_KEY = {
+        TRAIT_ID_TO_KEY: {
             "trait_strength": "STRENGTH",
             "trait_endurance": "ENDURANCE",
             "trait_constitution": "CONSTITUTION",
@@ -56,7 +58,7 @@ export const CONSTANTS = {
             "trait_intelligence": "INTELLIGENCE"
         },
 
-        TRAIT_KEY_TO_ID = {
+        TRAIT_KEY_TO_ID: {
             "STRENGTH": "trait_strength",
             "ENDURANCE": "trait_endurance",
             "CONSTITUTION": "trait_constitution",

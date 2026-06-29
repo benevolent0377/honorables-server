@@ -1,10 +1,7 @@
 // this file will contain all the calculations for trait data, including the recalculation function
 
-import { CONSTANTS } from "../../core/constants";
-import { verifyTraitExists } from "./trait_registry";
-import { TRAIT_FACTORS, FACTOR_WEIGHTS } from "./trait_factors";
-import { getValueFromSource } from "./trait_source_router";
-import { editTrait, getPlayerData } from "../../core/presistence";
+global.Honorables = global.Honorables || {};
+global.Honorables.TraitCalculations = global.Honorables.TraitCalculations || {};
 
 function isValidTrait(player, trait=undefined) {
 
@@ -13,12 +10,12 @@ function isValidTrait(player, trait=undefined) {
         return true;
     }
 
-    else if (!verifyTraitExists(trait)){
+    else if (!global.Honorables.Traits.verifyTraitExists(trait)){
         //log the error as an invalid trait
         return false;
     }
 
-    else if (getPlayerData(player).traits[trait] == undefined) {
+    else if (global.Honorables.PlayerData.get(player).traits[trait] == undefined) {
         //log the error as malformed player data
         return false;
     }
@@ -28,7 +25,7 @@ function isValidTrait(player, trait=undefined) {
     }
 }
 
-export function calculateTraitValue(player, trait=undefined) {
+global.Honorables.TraitCalculations.calculateTraitValue = function(player, trait=undefined) {
 
     if (!isValidTrait(player, trait)) {
         return 0;
@@ -86,13 +83,13 @@ export function calculateTraitValue(player, trait=undefined) {
 
     exportTraits(player, traitValues);
     
-}
+};
 
 function exportTraits(player, traitValues) {
 
     for (const [traitID, traitValue] of Object.entries(traitValues)) {
 
-        editTrait(player, traitID, "base", traitValue);
+        global.Honorables.PlayerData.editTrait(player, traitID, "base", traitValue);
 
     }
 
@@ -101,8 +98,8 @@ function exportTraits(player, traitValues) {
 function getFactors(trait) {
     // this function gets the applicable factors for the trait given
 
-    const traitIDList = CONSTANTS.TRAIT_ID.LIST;
-    const traitKeys = CONSTANTS.TRAIT_ID.LIST_KEYS;
+    const traitIDList = global.Honorables.Constants.TRAIT_ID.LIST;
+    const traitKeys = global.Honorables.Constants.TRAIT_ID.LIST_KEYS;
 
     var factors = {};
 
@@ -110,7 +107,7 @@ function getFactors(trait) {
 
         if (trait == traitIDList[index] || trait == undefined) {
 
-            factors[traitKeys[index]] = TRAIT_FACTORS[traitKeys[index]];
+            factors[traitKeys[index]] = global.Honorables.TraitFactors.traitFactors[traitKeys[index]];
 
         }
 
@@ -132,25 +129,25 @@ function calculateWeightedValues(player, factors) {
     for (const [traitKey, sourceCategories] of Object.entries(factors)) {
 
         weightedValues[traitKey] = {};
-        weightedValues[traitKey]["id"] = CONSTANTS.TRAIT_ID.TRAIT_KEY_TO_ID[traitKey];
+        weightedValues[traitKey]["id"] = global.Honorables.Constants.TRAIT_ID.TRAIT_KEY_TO_ID[traitKey];
 
         for (const [sourceType, factorList] of Object.entries(sourceCategories)) {
 
             weightedValues[traitKey][sourceType] = {};
-            weightedValues[traitKey][sourceType]["categoryWeight"] = FACTOR_WEIGHTS[sourceType].WEIGHT;
+            weightedValues[traitKey][sourceType]["categoryWeight"] = global.Honorables.TraitFactors.factorWeights[sourceType].WEIGHT;
             weightedValues[traitKey][sourceType]["factors"] = {};
 
             var categorySum = 0;
 
             for (const factor of factorList) {
 
-                var factorWeight = FACTOR_WEIGHTS[sourceType].SUBFACTOR_WEIGHTS[factor];
+                var factorWeight = global.Honorables.TraitFactors.factorWeights[sourceType].SUBFACTOR_WEIGHTS[factor];
 
                     if (factorWeight == undefined){
                         factorWeight = 1;
                     }
 
-                var factorValue = getValueFromSource(player, sourceType, factor);
+                var factorValue = global.Honorables.TraitSourceRouter.getValueFromSource(player, sourceType, factor);
 
                     if (factorValue == undefined) {
                         factorValue = 0;
@@ -174,8 +171,8 @@ function calculateWeightedValues(player, factors) {
 }
 
 // this need to be made an onTick hook, or needs to be a wrapper for the ontick hook call in events
-export function recalculateAtInterval(player) {
+global.Honorables.TraitCalculations.recalculateAtInterval = function(player) {
 
     //when game tick reaches recalulate tick, then recalculate
 
-}
+};

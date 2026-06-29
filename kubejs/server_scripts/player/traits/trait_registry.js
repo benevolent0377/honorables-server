@@ -1,5 +1,6 @@
 // this file will hold all of the basic trait data
-import { CONSTANTS } from "../../core/constants";
+global.Honorables = global.Honorables || {};
+global.Honorables.Traits = global.Honorables.Traits || {};
 
 class Trait {
     constructor(id, display, defaultBase, description) {
@@ -20,22 +21,21 @@ class Trait {
     }
 }
 
-export const TRAITS = {
-    STRENGTH: new Trait(CONSTANTS.TRAIT_ID.STR, "Strength", 10, ""),
-    CONSTITUTION: new Trait(CONSTANTS.TRAIT_ID.CONS, "Constitution", 10, ""),
-    ENDURANCE: new Trait(CONSTANTS.TRAIT_ID.END, "Endurance", 10, ""),
-    AGILITY: new Trait(CONSTANTS.TRAIT_ID.AGL, "Agility", 10, ""),
-    DEXTERITY: new Trait(CONSTANTS.TRAIT_ID.DEX, "Dexterity", 10, ""),
-    INTELLIGENCE: new Trait(CONSTANTS.TRAIT_ID.INT, "Intelligence", 10, ""),
-    WISDOM: new Trait(CONSTANTS.TRAIT_ID.WIS, "Wisdom", 10, ""),
+global.Honorables.Traits.registry = {
+    STRENGTH: new Trait(global.Honorables.Constants.TRAIT_ID.STR, "Strength", 10, ""),
+    CONSTITUTION: new Trait(global.Honorables.Constants.TRAIT_ID.CONS, "Constitution", 10, ""),
+    ENDURANCE: new Trait(global.Honorables.Constants.TRAIT_ID.END, "Endurance", 10, ""),
+    AGILITY: new Trait(global.Honorables.Constants.TRAIT_ID.AGL, "Agility", 10, ""),
+    DEXTERITY: new Trait(global.Honorables.Constants.TRAIT_ID.DEX, "Dexterity", 10, ""),
+    INTELLIGENCE: new Trait(global.Honorables.Constants.TRAIT_ID.INT, "Intelligence", 10, ""),
+    WISDOM: new Trait(global.Honorables.Constants.TRAIT_ID.WIS, "Wisdom", 10, ""),
+};
 
-}
+global.Honorables.Traits.verifyTraitExists = function(trait) {
 
-export function verifyTraitExists(trait) {
+    const traitList = global.Honorables.Constants.TRAIT_ID.LIST;
 
-    const traitList = CONSTANTS.TRAIT_ID.LIST;
-
-    for (eachTrait of traitList) {
+    for (const eachTrait of traitList) {
         if (trait == eachTrait) {
             return true;
         }
@@ -43,9 +43,9 @@ export function verifyTraitExists(trait) {
 
     return false;
 
-}
+};
 
-export function getEffectiveTrait(player, traitId) {
-  const trait = getTrait(player, traitId)
-  return trait.active == null ? trait.base : trait.active
-}
+global.Honorables.Traits.getEffectiveTrait = function(player, traitId) {
+    const trait = global.Honorables.PlayerData.getTrait(player, traitId);
+    return trait.active == null ? trait.base : trait.active;
+};

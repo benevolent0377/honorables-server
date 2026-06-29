@@ -1,6 +1,9 @@
 // this file will contain all the weights for each factor used in trait calculation
 
-export const FACTOR_WEIGHTS = {
+global.Honorables = global.Honorables || {};
+global.Honorables.TraitFactors = global.Honorables.TraitFactors || {};
+
+global.Honorables.TraitFactors.factorWeights = {
     VANILLA_STATS: {
         WEIGHT: .35,
         SUBFACTOR_WEIGHTS: {
@@ -26,7 +29,7 @@ export const FACTOR_WEIGHTS = {
 }
 
 // this contains all the factors, sorted by type, that affect each trait
-export const TRAIT_FACTORS = {
+global.Honorables.TraitFactors.traitFactors = {
     STRENGTH: {
         VANILLA_STATS: [],
         PLAYER_HISTORY: [],

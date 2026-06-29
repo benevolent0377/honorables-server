@@ -1,4 +1,7 @@
 
+global.Honorables = global.Honorables || {};
+global.Honorables.Log = global.Honorables.Log || {};
+
 class logData {
     constructor(type, fileName, functionName, params, msg){
         this.type = type,
@@ -15,10 +18,10 @@ function writeLog (data) {
 
 }
 
-export function log(type, fileName, functionName, argv, msg){
+global.Honorables.Log.write = function(type, fileName, functionName, argv, msg){
 
     const data = new logData(type, fileName, functionName, argv, msg);
 
     writeLog(data);
 
-}
+};

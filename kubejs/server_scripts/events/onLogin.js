@@ -1,11 +1,9 @@
-import { playerHasRoot } from "../core/presistence";
-
 PlayerEvents.onLogin(event => {
 
     // login functions go here
 
     //validate player data:
-    playerHasRoot(event.player, true);
+    global.Honorables.PlayerData.hasRoot(event.player, true);
 
 });
 

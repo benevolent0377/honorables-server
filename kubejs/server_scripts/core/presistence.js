@@ -2,9 +2,10 @@
 import { log } from "./log";
 import { TRAITS } from "../player/traits/trait_registry";
 
-export function initPlayerNBT(player){
+export function initPlayerData(player){
 
-    player.fullNBT.honorables = {
+    player.persistentData.honorables = {
+        class: "",
         traits: {
             "$runtime": {
                 "recalculate-tick": 0
@@ -14,10 +15,13 @@ export function initPlayerNBT(player){
             "$runtime": {}
         },
         history: {},
+        $debug: {}
     };
+
+    playerData = getPlayerData(player);
     
     for (const [key, trait] of Object.entries(TRAITS)) {
-        playerData.honorables.traits[trait.id] = trait.export();
+        playerData.traits[trait.id] = trait.export();
     }
 
     return 0;
@@ -25,9 +29,9 @@ export function initPlayerNBT(player){
 }
 
 export function playerHasRoot(player, quickInit=false) {
-    if (player.fullNBT.honorables == undefined){
+    if (player.persistentData.honorables == undefined){
         if (quickInit) {
-            initPlayerNBT(player);
+            initPlayerData(player);
             return true;
         }
 
@@ -41,16 +45,16 @@ export function playerHasRoot(player, quickInit=false) {
 export function getTrait(player, trait, item=null) {
 
     if (item !== null) {
-        return player.fullNBT.honorables.traits[trait][item]
+        return player.persistentData.honorables.traits[trait][item]
     }
 
-    return player.fullNBT.honorables.traits[trait];
+    return player.persistentData.honorables.traits[trait];
 
 }
 
 export function editTrait(player, trait, item, value, append=false) {
 
-    const playerData = player.fullNBT.honorables;
+    const playerData = player.persistentData.honorables;
     const traitData = playerData.traits[trait];
 
     if (traitData[item] == undefined) {
@@ -70,7 +74,7 @@ export function editTrait(player, trait, item, value, append=false) {
 
 export function addTraitModifier(player, trait, item, value) {
 
-    const playerData = player.fullNBT.honorables;
+    const playerData = player.persistentData.honorables;
     const traitData = playerData.traits[trait];
 
     if (traitData.modifiers[item] == undefined) {
@@ -85,7 +89,7 @@ export function addTraitModifier(player, trait, item, value) {
 }
 
 export function hasAbility(player, abilityID) {
-    if (player.fullNBT.honorables.abilities[abilityID] == undefined){
+    if (player.persistentData.honorables.abilities[abilityID] == undefined){
         return false;
     }
     
@@ -94,7 +98,7 @@ export function hasAbility(player, abilityID) {
 
 export function getAbilities(player, ability=undefined) {
 
-    const playerData = player.fullNBT.honorables;
+    const playerData = player.persistentData.honorables;
     const abilityList = playerData.abilities;
 
     if (ability == undefined) {
@@ -148,9 +152,20 @@ export function editAbilities(player, abilityExport, operation){
 
 }
 
+export function getPlayerData(player, isNBT=false) {
+
+    if (!isNBT) {
+    return player.persistentData.honorables;
+    }
+    else {
+        return player.fullNBT;
+    }
+
+}
+
 export function modAbility(player, abilityID, modifierExport, operation) {
 
-    const playerData = player.fullNBT.honorables;
+    const playerData = player.persistentData.honorables;
     const abilityList = playerData.abilities;
 
     if (hasAbility(player, abilityID)){

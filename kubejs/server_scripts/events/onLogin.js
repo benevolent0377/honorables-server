@@ -1,9 +1,12 @@
+global.Honorables = global.Honorables || {};
+var ROOT = global.HonorablesRoot || global.Honorables;
+
 PlayerEvents.loggedIn(event => {
 
     // login functions go here
 
     //validate player data:
-    global.Honorables.PlayerData.hasRoot(event.player, true);
+    ROOT.PlayerData.hasRoot(event.player, true);
 
 });
 

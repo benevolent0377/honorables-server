@@ -3,7 +3,7 @@
 global.Honorables = global.Honorables || {};
 global.Honorables.TraitCalculations = global.Honorables.TraitCalculations || {};
 
-function isValidTrait(player, trait=undefined) {
+function isValidTrait(player, trait) {
 
     //error testing, return code 1 is an error
     if (trait == undefined) {
@@ -25,7 +25,7 @@ function isValidTrait(player, trait=undefined) {
     }
 }
 
-global.Honorables.TraitCalculations.calculateTraitValue = function(player, trait=undefined) {
+global.Honorables.TraitCalculations.calculateTraitValue = function(player, trait) {
 
     if (!isValidTrait(player, trait)) {
         return 0;

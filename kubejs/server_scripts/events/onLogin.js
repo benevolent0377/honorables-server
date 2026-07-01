@@ -1,4 +1,4 @@
-PlayerEvents.onLogin(event => {
+PlayerEvents.loggedIn(event => {
 
     // login functions go here
 

@@ -2,15 +2,13 @@
 global.Honorables = global.Honorables || {};
 global.Honorables.Log = global.Honorables.Log || {};
 
-class logData {
-    constructor(type, fileName, functionName, params, msg){
+ function logData (type, fileName, functionName, params, msg) {
         this.type = type,
         this.fileName = fileName;
         this.functionName = functionName;
         this.params = params,
         this.msg = msg
     }
-}
 
 function writeLog (data) {
 

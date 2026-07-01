@@ -2,24 +2,23 @@
 global.Honorables = global.Honorables || {};
 global.Honorables.Traits = global.Honorables.Traits || {};
 
-class Trait {
-    constructor(id, display, defaultBase, description) {
+function Trait (id, display, defaultBase, description) {
         this.id = id;
         this.display = display;
         this.defaultBase = defaultBase;
         this.description = description;
         this.maxValue = 300;
         this.minValue = 1;
-    }
 
-    export(){
+}
+
+Trait.prototype.exportData = function() {
         return {
             "base": this.defaultBase,
             "active": null,
             "modifiers": []
         };
-    }
-}
+    };
 
 global.Honorables.Traits.registry = {
     STRENGTH: new Trait(global.Honorables.Constants.TRAIT_ID.STR, "Strength", 10, ""),

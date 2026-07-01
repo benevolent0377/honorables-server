@@ -22,14 +22,19 @@ global.Honorables.PlayerData.init = function(player){
     const playerData = global.Honorables.PlayerData.get(player);
     
     for (const [key, trait] of Object.entries(global.Honorables.Traits.registry)) {
-        playerData.traits[trait.id] = trait.export();
+        playerData.traits[trait.id] = trait.exportData();
     }
 
     return 0;
 
 };
 
-global.Honorables.PlayerData.hasRoot = function(player, quickInit=false) {
+global.Honorables.PlayerData.hasRoot = function(player, quickInit) {
+
+    if (quickInit == undefined) { 
+        quickInit = false;
+    }
+
     if (player.persistentData.honorables == undefined){
         if (quickInit) {
             global.Honorables.PlayerData.init(player);
@@ -43,7 +48,7 @@ global.Honorables.PlayerData.hasRoot = function(player, quickInit=false) {
     }
 };
 
-global.Honorables.PlayerData.getTrait = function(player, trait, item=null) {
+global.Honorables.PlayerData.getTrait = function(player, trait, item) {
 
     if (item !== null) {
         return player.persistentData.honorables.traits[trait][item]
@@ -53,7 +58,7 @@ global.Honorables.PlayerData.getTrait = function(player, trait, item=null) {
 
 };
 
-global.Honorables.PlayerData.editTrait = function(player, trait, item, value, append=false) {
+global.Honorables.PlayerData.editTrait = function(player, trait, item, value, append) {
 
     const playerData = player.persistentData.honorables;
     const traitData = playerData.traits[trait];
@@ -97,7 +102,7 @@ global.Honorables.PlayerData.hasAbility = function(player, abilityID) {
     return true;
 };
 
-global.Honorables.PlayerData.getAbilities = function(player, ability=undefined) {
+global.Honorables.PlayerData.getAbilities = function(player, ability) {
 
     const playerData = player.persistentData.honorables;
     const abilityList = playerData.abilities;
@@ -153,7 +158,7 @@ global.Honorables.PlayerData.editAbilities = function(player, abilityExport, ope
 
 };
 
-global.Honorables.PlayerData.get = function(player, isNBT=false) {
+global.Honorables.PlayerData.get = function(player, isNBT) {
 
     if (!isNBT) {
         return player.persistentData.honorables;
@@ -202,7 +207,7 @@ global.Honorables.PlayerData.modAbility = function(player, abilityID, modifierEx
 
 // the quality functions are hard to implement here, as the quality system has not been developed yet
 
-global.Honorables.ItemData.editQuality = function(item, qualityValue, operation="add"){
+global.Honorables.ItemData.editQuality = function(item, qualityValue, operation){
 
     //add the function here to add or remove the item quality
 

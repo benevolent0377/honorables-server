@@ -1,8 +1,9 @@
+global.Honorables = global.Honorables || {};
+var ROOT = global.HonorablesRoot || global.Honorables;
+
 // this file will store all the constant data names and types
 
-global.Honorables = global.Honorables || {};
-
-global.Honorables.Constants = {
+ROOT.Constants = {
 
     VERSION: {
         DATA: 1
@@ -159,5 +160,9 @@ global.Honorables.Constants = {
     QUALITY: {
         MIN: 1.00,
         MAX: 5.00,
+    },
+
+    COMMAND: {
+        ROOT_ADDR: "/honorables"
     }
 }

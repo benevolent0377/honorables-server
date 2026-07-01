@@ -1,7 +1,8 @@
-
 global.Honorables = global.Honorables || {};
+var ROOT = global.HonorablesRoot || global.Honorables;
 
-global.Honorables.Namespaces = {
+
+ROOT.Namespaces = {
     MOD_ID: "honorables",
 
     id(path) {

@@ -1,6 +1,8 @@
-
 global.Honorables = global.Honorables || {};
-global.Honorables.Log = global.Honorables.Log || {};
+var ROOT = global.HonorablesRoot || global.Honorables;
+
+
+ROOT.Log = ROOT.Log || {};
 
  function logData (type, fileName, functionName, params, msg) {
         this.type = type,
@@ -16,7 +18,7 @@ function writeLog (data) {
 
 }
 
-global.Honorables.Log.write = function(type, fileName, functionName, argv, msg){
+ROOT.Log.write = function(type, fileName, functionName, argv, msg){
 
     const data = new logData(type, fileName, functionName, argv, msg);
 

@@ -1,9 +1,11 @@
-// this file is responsible for all nbt operations
 global.Honorables = global.Honorables || {};
-global.Honorables.PlayerData = global.Honorables.PlayerData || {};
-global.Honorables.ItemData = global.Honorables.ItemData || {};
+var ROOT = global.HonorablesRoot || global.Honorables;
 
-global.Honorables.PlayerData.init = function(player){
+// this file is responsible for all nbt operations
+ROOT.PlayerData = ROOT.PlayerData || {};
+ROOT.ItemData = ROOT.ItemData || {};
+
+ROOT.PlayerData.init = function(player){
 
     player.persistentData.honorables = {
         class: "",
@@ -19,9 +21,9 @@ global.Honorables.PlayerData.init = function(player){
         $debug: {}
     };
 
-    const playerData = global.Honorables.PlayerData.get(player);
+    const playerData = ROOT.PlayerData.get(player);
     
-    for (const [key, trait] of Object.entries(global.Honorables.Traits.registry)) {
+    for (const [key, trait] of Object.entries(ROOT.Traits.registry)) {
         playerData.traits[trait.id] = trait.exportData();
     }
 
@@ -29,7 +31,7 @@ global.Honorables.PlayerData.init = function(player){
 
 };
 
-global.Honorables.PlayerData.hasRoot = function(player, quickInit) {
+ROOT.PlayerData.hasRoot = function(player, quickInit) {
 
     if (quickInit == undefined) { 
         quickInit = false;
@@ -37,7 +39,7 @@ global.Honorables.PlayerData.hasRoot = function(player, quickInit) {
 
     if (player.persistentData.honorables == undefined){
         if (quickInit) {
-            global.Honorables.PlayerData.init(player);
+            ROOT.PlayerData.init(player);
             return true;
         }
 
@@ -48,7 +50,7 @@ global.Honorables.PlayerData.hasRoot = function(player, quickInit) {
     }
 };
 
-global.Honorables.PlayerData.getTrait = function(player, trait, item) {
+ROOT.PlayerData.getTrait = function(player, trait, item) {
 
     if (item !== null) {
         return player.persistentData.honorables.traits[trait][item]
@@ -58,7 +60,7 @@ global.Honorables.PlayerData.getTrait = function(player, trait, item) {
 
 };
 
-global.Honorables.PlayerData.editTrait = function(player, trait, item, value, append) {
+ROOT.PlayerData.editTrait = function(player, trait, item, value, append) {
 
     const playerData = player.persistentData.honorables;
     const traitData = playerData.traits[trait];
@@ -78,7 +80,7 @@ global.Honorables.PlayerData.editTrait = function(player, trait, item, value, ap
 
 };
 
-global.Honorables.PlayerData.addTraitModifier = function(player, trait, item, value) {
+ROOT.PlayerData.addTraitModifier = function(player, trait, item, value) {
 
     const playerData = player.persistentData.honorables;
     const traitData = playerData.traits[trait];
@@ -94,7 +96,7 @@ global.Honorables.PlayerData.addTraitModifier = function(player, trait, item, va
 
 };
 
-global.Honorables.PlayerData.hasAbility = function(player, abilityID) {
+ROOT.PlayerData.hasAbility = function(player, abilityID) {
     if (player.persistentData.honorables.abilities[abilityID] == undefined){
         return false;
     }
@@ -102,7 +104,7 @@ global.Honorables.PlayerData.hasAbility = function(player, abilityID) {
     return true;
 };
 
-global.Honorables.PlayerData.getAbilities = function(player, ability) {
+ROOT.PlayerData.getAbilities = function(player, ability) {
 
     const playerData = player.persistentData.honorables;
     const abilityList = playerData.abilities;
@@ -119,15 +121,15 @@ global.Honorables.PlayerData.getAbilities = function(player, ability) {
 
 };
 
-global.Honorables.PlayerData.editAbilities = function(player, abilityExport, operation){
+ROOT.PlayerData.editAbilities = function(player, abilityExport, operation){
 
-    const abilityList = global.Honorables.PlayerData.getAbilities(player);
+    const abilityList = ROOT.PlayerData.getAbilities(player);
     const newAbilityID = abilityExport.ID;
 
     //validateAbility() a function to check the ability registry to ensure this ability exists
 
     // checking the existence of the ability in the data
-    var abilityExists = global.Honorables.PlayerData.hasAbility(player, newAbilityID);
+    var abilityExists = ROOT.PlayerData.hasAbility(player, newAbilityID);
 
     //parsing operation
 
@@ -158,7 +160,7 @@ global.Honorables.PlayerData.editAbilities = function(player, abilityExport, ope
 
 };
 
-global.Honorables.PlayerData.get = function(player, isNBT) {
+ROOT.PlayerData.get = function(player, isNBT) {
 
     if (!isNBT) {
         return player.persistentData.honorables;
@@ -169,12 +171,12 @@ global.Honorables.PlayerData.get = function(player, isNBT) {
 
 };
 
-global.Honorables.PlayerData.modAbility = function(player, abilityID, modifierExport, operation) {
+ROOT.PlayerData.modAbility = function(player, abilityID, modifierExport, operation) {
 
     const playerData = player.persistentData.honorables;
     const abilityList = playerData.abilities;
 
-    if (global.Honorables.PlayerData.hasAbility(player, abilityID)){
+    if (ROOT.PlayerData.hasAbility(player, abilityID)){
         //log goes here
         return 1;
     }
@@ -207,13 +209,13 @@ global.Honorables.PlayerData.modAbility = function(player, abilityID, modifierEx
 
 // the quality functions are hard to implement here, as the quality system has not been developed yet
 
-global.Honorables.ItemData.editQuality = function(item, qualityValue, operation){
+ROOT.ItemData.editQuality = function(item, qualityValue, operation){
 
     //add the function here to add or remove the item quality
 
 };
 
-global.Honorables.ItemData.getQuality = function(item) {
+ROOT.ItemData.getQuality = function(item) {
 
     //return the quality of the item
 

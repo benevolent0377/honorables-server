@@ -1,7 +1,9 @@
+global.Honorables = global.Honorables || {};
+var ROOT = global.HonorablesRoot || global.Honorables;
+
 // this file will contain all the calculations for trait data, including the recalculation function
 
-global.Honorables = global.Honorables || {};
-global.Honorables.TraitCalculations = global.Honorables.TraitCalculations || {};
+ROOT.TraitCalculations = ROOT.TraitCalculations || {};
 
 function isValidTrait(player, trait) {
 
@@ -10,12 +12,12 @@ function isValidTrait(player, trait) {
         return true;
     }
 
-    else if (!global.Honorables.Traits.verifyTraitExists(trait)){
+    else if (!ROOT.Traits.verifyTraitExists(trait)){
         //log the error as an invalid trait
         return false;
     }
 
-    else if (global.Honorables.PlayerData.get(player).traits[trait] == undefined) {
+    else if (ROOT.PlayerData.get(player).traits[trait] == undefined) {
         //log the error as malformed player data
         return false;
     }
@@ -25,7 +27,7 @@ function isValidTrait(player, trait) {
     }
 }
 
-global.Honorables.TraitCalculations.calculateTraitValue = function(player, trait) {
+ROOT.TraitCalculations.calculateTraitValue = function(player, trait) {
 
     if (!isValidTrait(player, trait)) {
         return 0;
@@ -89,7 +91,7 @@ function exportTraits(player, traitValues) {
 
     for (const [traitID, traitValue] of Object.entries(traitValues)) {
 
-        global.Honorables.PlayerData.editTrait(player, traitID, "base", traitValue);
+        ROOT.PlayerData.editTrait(player, traitID, "base", traitValue);
 
     }
 
@@ -98,8 +100,8 @@ function exportTraits(player, traitValues) {
 function getFactors(trait) {
     // this function gets the applicable factors for the trait given
 
-    const traitIDList = global.Honorables.Constants.TRAIT_ID.LIST;
-    const traitKeys = global.Honorables.Constants.TRAIT_ID.LIST_KEYS;
+    const traitIDList = ROOT.Constants.TRAIT_ID.LIST;
+    const traitKeys = ROOT.Constants.TRAIT_ID.LIST_KEYS;
 
     var factors = {};
 
@@ -107,7 +109,7 @@ function getFactors(trait) {
 
         if (trait == traitIDList[index] || trait == undefined) {
 
-            factors[traitKeys[index]] = global.Honorables.TraitFactors.traitFactors[traitKeys[index]];
+            factors[traitKeys[index]] = ROOT.TraitFactors.traitFactors[traitKeys[index]];
 
         }
 
@@ -129,25 +131,25 @@ function calculateWeightedValues(player, factors) {
     for (const [traitKey, sourceCategories] of Object.entries(factors)) {
 
         weightedValues[traitKey] = {};
-        weightedValues[traitKey]["id"] = global.Honorables.Constants.TRAIT_ID.TRAIT_KEY_TO_ID[traitKey];
+        weightedValues[traitKey]["id"] = ROOT.Constants.TRAIT_ID.TRAIT_KEY_TO_ID[traitKey];
 
         for (const [sourceType, factorList] of Object.entries(sourceCategories)) {
 
             weightedValues[traitKey][sourceType] = {};
-            weightedValues[traitKey][sourceType]["categoryWeight"] = global.Honorables.TraitFactors.factorWeights[sourceType].WEIGHT;
+            weightedValues[traitKey][sourceType]["categoryWeight"] = ROOT.TraitFactors.factorWeights[sourceType].WEIGHT;
             weightedValues[traitKey][sourceType]["factors"] = {};
 
             var categorySum = 0;
 
             for (const factor of factorList) {
 
-                var factorWeight = global.Honorables.TraitFactors.factorWeights[sourceType].SUBFACTOR_WEIGHTS[factor];
+                var factorWeight = ROOT.TraitFactors.factorWeights[sourceType].SUBFACTOR_WEIGHTS[factor];
 
                     if (factorWeight == undefined){
                         factorWeight = 1;
                     }
 
-                var factorValue = global.Honorables.TraitSourceRouter.getValueFromSource(player, sourceType, factor);
+                var factorValue = ROOT.TraitSourceRouter.getValueFromSource(player, sourceType, factor);
 
                     if (factorValue == undefined) {
                         factorValue = 0;
@@ -171,7 +173,7 @@ function calculateWeightedValues(player, factors) {
 }
 
 // this need to be made an onTick hook, or needs to be a wrapper for the ontick hook call in events
-global.Honorables.TraitCalculations.recalculateAtInterval = function(player) {
+ROOT.TraitCalculations.recalculateAtInterval = function(player) {
 
     //when game tick reaches recalulate tick, then recalculate
 

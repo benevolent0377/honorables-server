@@ -1,9 +1,10 @@
-// this file will hold all of the class information
 global.Honorables = global.Honorables || {};
+var ROOT = global.HonorablesRoot || global.Honorables;
 
-global.Honorables.Classes = {
+// this file will hold all of the class information
+ROOT.Classes = {
     WARRIOR: { 
-        ID: global.Honorables.Constants.PLAYER_CLASS_ID.WARRIOR,
+        ID: ROOT.Constants.PLAYER_CLASS_ID.WARRIOR,
         DISPLAY: "Warrior",
         SUBCLASS: {
             KNIGHT: {
@@ -47,7 +48,7 @@ global.Honorables.Classes = {
     },
 
     NATURALIST: {
-        ID: global.Honorables.Constants.PLAYER_CLASS_ID.NATURALIST,
+        ID: ROOT.Constants.PLAYER_CLASS_ID.NATURALIST,
         DISPLAY: "Naturalist",
         SUBCLASS: {
             AGRICULTURALIST: {
@@ -89,7 +90,7 @@ global.Honorables.Classes = {
     },
 
     MINER: {
-        ID: global.Honorables.Constants.PLAYER_CLASS_ID.MINER,
+        ID: ROOT.Constants.PLAYER_CLASS_ID.MINER,
         DISPLAY: "Miner",
         SUBCLASS: {
             QUARRYMAN: {
@@ -132,7 +133,7 @@ global.Honorables.Classes = {
     },
 
     MAGE: {
-        ID: global.Honorables.Constants.PLAYER_CLASS_ID.MAGE,
+        ID: ROOT.Constants.PLAYER_CLASS_ID.MAGE,
         DISPLAY: "Mage",
         SUBCLASS: {
             ARCANIST: {
@@ -174,7 +175,7 @@ global.Honorables.Classes = {
         CLASS_GAMESTAGE: "class_mage"
     },
     ADVENTURER: {
-        ID: global.Honorables.Constants.PLAYER_CLASS_ID.ADVENTURER,
+        ID: ROOT.Constants.PLAYER_CLASS_ID.ADVENTURER,
         DISPLAY: "Adventurer",
         SUBCLASS: {
             EXPLORER: {

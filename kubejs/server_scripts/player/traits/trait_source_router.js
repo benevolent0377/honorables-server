@@ -1,21 +1,23 @@
+global.Honorables = global.Honorables || {};
+var ROOT = global.HonorablesRoot || global.Honorables;
+
 // this file will be the access point for all the trait calculation data
 
-global.Honorables = global.Honorables || {};
-global.Honorables.TraitSourceRouter = global.Honorables.TraitSourceRouter || {};
+ROOT.TraitSourceRouter = ROOT.TraitSourceRouter || {};
 
-global.Honorables.TraitSourceRouter.getValueFromSource = function(player, source, factor) {
+ROOT.TraitSourceRouter.getValueFromSource = function(player, source, factor) {
 
-    const sourceTypes = global.Honorables.Constants.TRAIT_FACTOR_TYPES.LIST;
+    const sourceTypes = ROOT.Constants.TRAIT_FACTOR_TYPES.LIST;
 
     switch (source.toLowerCase()) {
 
-        case global.Honorables.Constants.TRAIT_FACTOR_TYPES.VANILLA_STATS:
+        case ROOT.Constants.TRAIT_FACTOR_TYPES.VANILLA_STATS:
             return readVanillaStat(player, factor);
         
-        case global.Honorables.Constants.TRAIT_FACTOR_TYPES.PLAYER_HISTORY:
+        case ROOT.Constants.TRAIT_FACTOR_TYPES.PLAYER_HISTORY:
             return readPlayerHistory(player, factor);
 
-        case global.Honorables.Constants.TRAIT_FACTOR_TYPES.STAGES:
+        case ROOT.Constants.TRAIT_FACTOR_TYPES.STAGES:
             return readStageValue(player, factor);
 
         default:
@@ -26,7 +28,7 @@ global.Honorables.TraitSourceRouter.getValueFromSource = function(player, source
 
 function readVanillaStat(player, factor) {
 
-    const playerData = global.Honorables.PlayerData.get(player, true);
+    const playerData = ROOT.PlayerData.get(player, true);
     
     // undeveloped call to minecraft nbt data
     return 0;
@@ -34,7 +36,7 @@ function readVanillaStat(player, factor) {
 }
 
 function readPlayerHistory(player, factor) {
-    const history = global.Honorables.PlayerData.get(player).history;
+    const history = ROOT.PlayerData.get(player).history;
 
     if (history[factor] == undefined){
         return 0;

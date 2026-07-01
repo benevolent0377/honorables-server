@@ -1,9 +1,11 @@
+global.Honorables = global.Honorables || {};
+var ROOT = global.HonorablesRoot || global.Honorables;
+
 // this file will contain all the weights for each factor used in trait calculation
 
-global.Honorables = global.Honorables || {};
-global.Honorables.TraitFactors = global.Honorables.TraitFactors || {};
+ROOT.TraitFactors = ROOT.TraitFactors || {};
 
-global.Honorables.TraitFactors.factorWeights = {
+ROOT.TraitFactors.factorWeights = {
     VANILLA_STATS: {
         WEIGHT: .35,
         SUBFACTOR_WEIGHTS: {
@@ -29,7 +31,7 @@ global.Honorables.TraitFactors.factorWeights = {
 }
 
 // this contains all the factors, sorted by type, that affect each trait
-global.Honorables.TraitFactors.traitFactors = {
+ROOT.TraitFactors.traitFactors = {
     STRENGTH: {
         VANILLA_STATS: [],
         PLAYER_HISTORY: [],

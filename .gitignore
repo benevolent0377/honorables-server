@@ -12,3 +12,5 @@ fabricloader.log
 *.log
 AGENTS.md
 .mixin-out/
+.mixin.out/class/net/minecraft/client/particle/ParticleEngine.class
+.mixin.out/class/net/minecraft/client/particle/SingleQuadParticle.class

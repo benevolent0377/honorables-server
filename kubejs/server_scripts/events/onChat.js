@@ -1,27 +1,25 @@
 global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
-// event listener
-PlayerEvent.chat(event => {
+var StringArgumentType = Java.loadClass("com.mojang.brigadier.arguments.StringArgumentType");
 
-    messageSpliced = event.message.trim().toLowerCase().split(" ");
+ServerEvents.commandRegistry(event => {
+    const Commands = event.commands;
+    const rootCommand = ROOT.Constants.COMMAND.ROOT_ADDR.replace("/", "");
 
-        if (messageSpliced[0] == ROOT.Constants.COMMAND.ROOT_ADDR) {
-
-            const commandName = messageSpliced[1];
-
-            if (!commandName) {
-                return;
-            }
-
-            const argv = messageSpliced.slice(2);
-
-            const command = ROOT.CommandRegistry.find(commandName.toLowerCase());
-
-            if (command) {
-                command.op(event, argv);
-            }
-
-        }
-
+    event.register(
+        Commands.literal(rootCommand)
+            .executes(context => {
+                return ROOT.CommandRegistry.run(context, "");
+            })
+            .then(
+                Commands.argument("args", StringArgumentType.greedyString())
+                    .executes(context => {
+                        return ROOT.CommandRegistry.run(
+                            context,
+                            StringArgumentType.getString(context, "args")
+                        );
+                    })
+            )
+    );
 });

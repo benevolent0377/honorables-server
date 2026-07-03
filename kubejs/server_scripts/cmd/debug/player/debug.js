@@ -5,9 +5,10 @@ ROOT.debug = ROOT.debug || {};
 ROOT.debug.player = ROOT.debug.player || {};
 
 new ROOT.Command("gethonorablesplayerdata", "playerObj")
-    .registerOperation(function(event, argv) {
+    .registerOperation(function(context, argv) {
+        const player = context.source.player;
+        const data = player.persistentData.honorables;
 
-        console.log(event.player.PersistentData.honorables);
-        event.server.runCommandSilent(`/say ${JSON.stringify(event.player.PersistentData.honorables)}`);
-
+        console.log(data);
+        context.source.server.runCommandSilent(`/w ${player.username} ${JSON.stringify(data)}`);
     });

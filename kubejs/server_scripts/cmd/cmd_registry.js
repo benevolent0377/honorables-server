@@ -32,6 +32,27 @@ ROOT.CommandRegistry = {
 
     find: function(commandID) {
         return this.commands[commandID.toLowerCase()];
-    }
+    },
+
+    run: function(context, input) {
+        const messageSpliced = input.trim().toLowerCase().split(" ").filter(function(arg) {
+            return arg.length > 0;
+        });
+
+        const commandName = messageSpliced[0];
+
+        if (!commandName) {
+            return 0;
+        }
+
+        const command = this.find(commandName);
+
+        if (!command) {
+            return 0;
+        }
+
+        command.op(context, messageSpliced.slice(1));
+        return 1;
+    },
 
 };

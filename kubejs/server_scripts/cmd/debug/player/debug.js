@@ -4,11 +4,11 @@ var ROOT = global.HonorablesRoot || global.Honorables;
 ROOT.debug = ROOT.debug || {};
 ROOT.debug.player = ROOT.debug.player || {};
 
-new ROOT.Command("gethonorablesplayerdata", "playerObj")
+new ROOT.Command("getplayerdata", "playerObj")
     .registerOperation(function(context, argv) {
         const player = context.source.player;
-        const data = player.persistentData.honorables;
+        const dump = ROOT.PlayerData.dump(player);
 
-        console.log(data);
-        context.source.server.runCommandSilent(`/w ${player.username} ${JSON.stringify(data)}`);
+        console.log(dump);
+        context.source.server.runCommandSilent(`/w ${player.username} ${dump}`);
     });

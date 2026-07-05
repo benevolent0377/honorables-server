@@ -35,11 +35,15 @@ ROOT.CommandRegistry = {
     },
 
     run: function(context, input) {
+        input = String(input || "");
+
         const messageSpliced = input.trim().toLowerCase().split(" ").filter(function(arg) {
             return arg.length > 0;
         });
 
         const commandName = messageSpliced[0];
+
+        console.log(`[Command Registry] input=${input}, commandName=${commandName}`)
 
         if (!commandName) {
             return 0;
@@ -51,6 +55,7 @@ ROOT.CommandRegistry = {
             return 0;
         }
 
+        console.log(`[Command Registry] Successfully found command: ${commandName}.`)
         command.op(context, messageSpliced.slice(1));
         return 1;
     },

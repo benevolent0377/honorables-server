@@ -1,11 +1,12 @@
 global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
-// this file will contain all the weights for each factor used in trait calculation
+// Weight tables for trait recalculation. Source categories are routed in trait_source_router.js.
 
 ROOT.TraitFactors = ROOT.TraitFactors || {};
 
 ROOT.TraitFactors.factorWeights = {
+    // WEIGHT applies to the whole source category; SUBFACTOR_WEIGHTS tune individual factors.
     VANILLA_STATS: {
         WEIGHT: .35,
         SUBFACTOR_WEIGHTS: {
@@ -30,7 +31,7 @@ ROOT.TraitFactors.factorWeights = {
     }
 }
 
-// this contains all the factors, sorted by type, that affect each trait
+// Factors are grouped by trait, then by source type. Empty arrays mean that source is not wired yet.
 ROOT.TraitFactors.traitFactors = {
     STRENGTH: {
         VANILLA_STATS: [],

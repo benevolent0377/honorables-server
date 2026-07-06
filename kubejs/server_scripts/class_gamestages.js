@@ -1,3 +1,4 @@
+// Mirrors a player's chosen DawnCraft class into GameStages and Puffish Skills access.
 PlayerEvents.tick(event => {
 
     const player = event.player;
@@ -9,12 +10,14 @@ PlayerEvents.tick(event => {
     const stageName = `class_${pickedClass}`;
     const puffCategory = pickedClass;
 
+    // Once the class stage exists, the player has already been synced.
     if (player.stages.has(stageName)) {
         return;
     }
 
     server.runCommandSilent(`gamestage add ${player.username} ${stageName}`);
 
+    // Lock every class category before opening the chosen class category.
     for (const classType of classList) {
 
         server.runCommandSilent(`puffish_skills category lock ${player.username} ${classType}`);
@@ -22,6 +25,7 @@ PlayerEvents.tick(event => {
     }
 
     server.runCommandSilent(`puffish_skills category unlock ${player.username} ${puffCategory}`);
+    // TODO: This currently always unlocks the warrior root ID; wire per-class root IDs before relying on it.
     server.runCommandSilent(`puffish_skills skills unlock ${player.username} ${puffCategory} ${skillRootList["warrior"]}`);
 
 });

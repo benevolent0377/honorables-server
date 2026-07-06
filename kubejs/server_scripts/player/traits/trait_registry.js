@@ -1,7 +1,7 @@
 global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
-// this file will hold all of the basic trait data
+// Registry for primary progression traits and the default persistent-data shape.
 ROOT.Traits = ROOT.Traits || {};
 
 function Trait (id, display, defaultBase, description) {
@@ -15,6 +15,7 @@ function Trait (id, display, defaultBase, description) {
 }
 
 Trait.prototype.exportData = function() {
+        // Stored per player at honorables.traits[trait_id].
         return {
             "base": this.defaultBase,
             "active": null,
@@ -34,6 +35,7 @@ ROOT.Traits.registry = {
 
 ROOT.Traits.verifyTraitExists = function(trait) {
 
+    // Verifies against canonical trait IDs, not display names or registry keys.
     const traitList = ROOT.Constants.TRAIT_ID.LIST;
 
     for (const eachTrait of traitList) {
@@ -47,6 +49,7 @@ ROOT.Traits.verifyTraitExists = function(trait) {
 };
 
 ROOT.Traits.getEffectiveTrait = function(player, traitId) {
+    // Active overrides base when temporary or recalculated effects are present.
     const trait = ROOT.PlayerData.getTrait(player, traitId);
     return trait.active == null ? trait.base : trait.active;
 };

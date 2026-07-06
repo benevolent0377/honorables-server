@@ -51,6 +51,9 @@
     "painting": true,
     "chiseled_bookshelf": true
   },
+  "yes_steve_model": {
+    "model_info": true
+  },
   "immersiveengineering": {
     "multiblock_icon": true
   },
@@ -61,10 +64,5 @@
     "coordinates": false,
     "registry_name": "OFF",
     "mod_name": true
-  },
-  "apotheosis": {
-    "adventure": true,
-    "ench": true,
-    "spawner": true
   }
 }

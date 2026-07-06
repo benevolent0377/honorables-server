@@ -1,15 +1,19 @@
 global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
-// this file will store all the constant data names and types
+// Canonical IDs and magic strings used across the KubeJS backend.
+// Keep these values stable once player data or progression gates depend on them.
 
 ROOT.Constants = {
+
+    NONE: undefined,
 
     VERSION: {
         DATA: 1
     },
 
     TRAIT_ID: {
+        // Internal persistent-data IDs for the primary progression traits.
         STR: "trait_strength",
         END: "trait_endurance",
         CONS: "trait_constitution",
@@ -71,6 +75,7 @@ ROOT.Constants = {
     },
 
     PLAYER_CLASS_ID: {
+        // Class IDs double as GameStage names in class/progression integrations.
         WARRIOR: "class_warrior",
         NATURALIST: "class_naturalist",
         MINER: "class_miner",
@@ -87,6 +92,7 @@ ROOT.Constants = {
     },
 
     PLAYER_SUBCLASS_ID: {
+        // Subclass IDs are registry/progression handles; display text belongs elsewhere.
         KNIGHT: "subclass_knight",
         BERSERKER: "subclass_berserker",
         SKIRMISHER: "subclass_skirmisher",
@@ -132,6 +138,7 @@ ROOT.Constants = {
     },
 
     TRIGGERS: {
+        // Ability runtime effects are grouped by these trigger names.
         ON_HIT: "onHit",
         ON_KILL: "onKill",
         ON_CAST: "onCast",
@@ -140,6 +147,7 @@ ROOT.Constants = {
     },
 
     TRAIT_FACTOR_TYPES: {
+        // Source categories consumed by TraitSourceRouter during recalculation.
         VANILLA_STATS: "vanilla_stats",
         PLAYER_HISTORY: "player_history",
         STAGES: "stages",
@@ -158,11 +166,13 @@ ROOT.Constants = {
     },
 
     QUALITY: {
+        // Item quality is item-owned state; player data may only mirror or derive from it.
         MIN: 1.00,
         MAX: 5.00,
     },
 
     COMMAND: {
+        // Registered without the slash in onCommandRegistry.
         ROOT_ADDR: "/honorables"
     }
 }

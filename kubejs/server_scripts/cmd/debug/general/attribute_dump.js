@@ -1,3 +1,4 @@
+// Disabled registry dump helper. Uncomment temporarily when attribute IDs need to be inspected.
 ServerEvents.commandRegistry(event => {
 //    console.log("=== ATTRIBUTE DUMP START ===")
 

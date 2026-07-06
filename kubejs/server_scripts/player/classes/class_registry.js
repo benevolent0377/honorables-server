@@ -1,7 +1,7 @@
 global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
-// this file will hold all of the class information
+// Static class/subclass registry. These IDs are used by GameStages and Puffish Skills wiring.
 ROOT.Classes = {
     WARRIOR: { 
         ID: ROOT.Constants.PLAYER_CLASS_ID.WARRIOR,
@@ -217,6 +217,7 @@ ROOT.Classes = {
     },
 
     // lists internal, raw classnames
+    // These should match ROOT.Constants.PLAYER_CLASS_ID.LIST.
     LIST: [
         "class_warrior",
         "class_naturalist",
@@ -226,6 +227,7 @@ ROOT.Classes = {
     ],
 
     // lists stripped, or split and formatted class names, for easy abstraction
+    // Useful for commands or UI-facing formatting that does not want the class_ prefix.
     LIST_F: [
         "warrior",
         "naturalist",

@@ -1,13 +1,13 @@
 global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
-// this file will contain all the calculations for trait data, including the recalculation function
+// Trait recalculation pipeline: validate trait -> collect factors -> weight sources -> export to player data.
 
-ROOT.TraitCalculations = ROOT.TraitCalculations || {};
+ROOT.player.traits = ROOT.player.traits || {};
 
 function isValidTrait(player, trait) {
 
-    //error testing, return code 1 is an error
+    // Undefined means "calculate all traits"; otherwise require a known trait and matching player data.
     if (trait == undefined) {
         return true;
     }
@@ -27,8 +27,9 @@ function isValidTrait(player, trait) {
     }
 }
 
-ROOT.TraitCalculations.calculateTraitValue = function(player, trait) {
+ROOT.player.traits.calculateTraitValue = function(player, trait) {
 
+    // Public entrypoint used by commands and future scheduled recalculation hooks.
     if (!isValidTrait(player, trait)) {
         return 0;
     }
@@ -89,6 +90,7 @@ ROOT.TraitCalculations.calculateTraitValue = function(player, trait) {
 
 function exportTraits(player, traitValues) {
 
+    // Writes newly calculated base values back into persistent player trait data.
     for (const [traitID, traitValue] of Object.entries(traitValues)) {
 
         ROOT.PlayerData.editTrait(player, traitID, "base", traitValue);
@@ -98,7 +100,7 @@ function exportTraits(player, traitValues) {
 }
 
 function getFactors(trait) {
-    // this function gets the applicable factors for the trait given
+    // Selects factor definitions for one trait, or all traits when trait is undefined.
 
     const traitIDList = ROOT.Constants.TRAIT_ID.LIST;
     const traitKeys = ROOT.Constants.TRAIT_ID.LIST_KEYS;
@@ -120,7 +122,7 @@ function getFactors(trait) {
 }
 
 function calculateWeightedValues(player, factors) {
-    // this function weighs the values of the factors and returns them in a formatted dict
+    // Weighs factor values by source category and by individual subfactor.
     /**
      * This function should take the weights of each factor given and apply it to the value of the factor,
      * then it should return the value as a formatted dict called weightedValues.
@@ -141,6 +143,7 @@ function calculateWeightedValues(player, factors) {
 
             var categorySum = 0;
 
+            // Each factor is read through TraitSourceRouter so source-specific logic stays isolated.
             for (const factor of factorList) {
 
                 var factorWeight = ROOT.TraitFactors.factorWeights[sourceType].SUBFACTOR_WEIGHTS[factor];
@@ -172,8 +175,8 @@ function calculateWeightedValues(player, factors) {
 
 }
 
-// this need to be made an onTick hook, or needs to be a wrapper for the ontick hook call in events
-ROOT.TraitCalculations.recalculateAtInterval = function(player) {
+// Placeholder for a future onTick wrapper that throttles trait recalculation.
+ROOT.player.traits.recalculateAtInterval = function(player) {
 
     //when game tick reaches recalulate tick, then recalculate
 

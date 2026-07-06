@@ -1,13 +1,15 @@
 global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
-// this file is responsible for all nbt operations
+// Persistence boundary for player-owned and item-owned Honorables data.
+// Player data lives under player.persistentData.honorables; item quality should live on item NBT.
 ROOT.Persistence = ROOT.Persistence || {};
 ROOT.Persistence.Filter = ROOT.Persistence.Filter || {};
 ROOT.PlayerData = ROOT.PlayerData || {};
 ROOT.ItemData = ROOT.ItemData || {};
 
 ROOT.Persistence.Filter.toString = function(value) {
+    // Console-safe conversion for debug output.
     if (value == undefined) {
         return "";
     }
@@ -16,6 +18,7 @@ ROOT.Persistence.Filter.toString = function(value) {
 };
 
 ROOT.Persistence.Filter.toData = function(value, depth) {
+    // Converts Java NBT tags and KubeJS/JS objects into plain data for dumps and exports.
     if (depth == undefined) {
         depth = 0;
     }
@@ -54,6 +57,7 @@ ROOT.Persistence.Filter.toData = function(value, depth) {
         const compoundOut = {};
         const keys = value.getAllKeys().toArray();
 
+        // CompoundTag keys must be read through the Java API before conversion can recurse.
         for (var compoundIndex = 0; compoundIndex < keys.length; compoundIndex++) {
             const compoundKey = String(keys[compoundIndex]);
             compoundOut[compoundKey] = ROOT.Persistence.Filter.toData(value.get(compoundKey), depth + 1);
@@ -104,6 +108,7 @@ ROOT.Persistence.Filter.isListTag = function(value) {
 };
 
 ROOT.Persistence.Filter.unwrapTag = function(value) {
+    // Primitive NBT tags are flattened here; compound/list tags are handled by toData.
     const className = ROOT.Persistence.Filter.getJavaClassName(value);
 
     if (className == "net.minecraft.nbt.StringTag") {
@@ -136,6 +141,7 @@ ROOT.Persistence.Filter.unwrapTag = function(value) {
 
 ROOT.PlayerData.init = function(player){
 
+    // Base shape expected by login repair, trait recalculation, abilities, and debug commands.
     player.persistentData.honorables = {
         class: "",
         traits: {
@@ -152,6 +158,7 @@ ROOT.PlayerData.init = function(player){
 
     const playerData = ROOT.PlayerData.get(player);
     
+    // Seed every registered trait with its default structure.
     for (const [key, trait] of Object.entries(ROOT.Traits.registry)) {
         playerData.traits[trait.id] = trait.exportData();
     }
@@ -162,6 +169,7 @@ ROOT.PlayerData.init = function(player){
 
 ROOT.PlayerData.hasRoot = function(player, quickInit) {
 
+    // quickInit lets login repair missing data without every caller needing a separate init branch.
     if (quickInit == undefined) { 
         quickInit = false;
     }
@@ -181,6 +189,7 @@ ROOT.PlayerData.hasRoot = function(player, quickInit) {
 
 ROOT.PlayerData.getTrait = function(player, trait, item) {
 
+    // If item is null, return the full trait object; otherwise read a named field such as base.
     if (item !== null) {
         return player.persistentData.honorables.traits[trait][item]
     }
@@ -191,6 +200,7 @@ ROOT.PlayerData.getTrait = function(player, trait, item) {
 
 ROOT.PlayerData.editTrait = function(player, trait, item, value, append) {
 
+    // Return code 0 means success; 1 means the requested trait field was not present.
     const playerData = player.persistentData.honorables;
     const traitData = playerData.traits[trait];
 
@@ -211,6 +221,7 @@ ROOT.PlayerData.editTrait = function(player, trait, item, value, append) {
 
 ROOT.PlayerData.addTraitModifier = function(player, trait, item, value) {
 
+    // Modifiers are stored inside the trait data and are intended to affect derived active values.
     const playerData = player.persistentData.honorables;
     const traitData = playerData.traits[trait];
 
@@ -226,6 +237,7 @@ ROOT.PlayerData.addTraitModifier = function(player, trait, item, value) {
 };
 
 ROOT.PlayerData.hasAbility = function(player, abilityID) {
+    // Ability presence check is intentionally data-based; registry validation belongs elsewhere.
     if (player.persistentData.honorables.abilities[abilityID] == undefined){
         return false;
     }
@@ -235,6 +247,7 @@ ROOT.PlayerData.hasAbility = function(player, abilityID) {
 
 ROOT.PlayerData.getAbilities = function(player, ability) {
 
+    // With no ability ID, expose the whole ability map for command/debug use.
     const playerData = player.persistentData.honorables;
     const abilityList = playerData.abilities;
 
@@ -252,6 +265,7 @@ ROOT.PlayerData.getAbilities = function(player, ability) {
 
 ROOT.PlayerData.editAbilities = function(player, abilityExport, operation){
 
+    // Adds or removes serialized ability data from the player's persistent ability map.
     const abilityList = ROOT.PlayerData.getAbilities(player);
     const newAbilityID = abilityExport.ID;
 
@@ -291,6 +305,7 @@ ROOT.PlayerData.editAbilities = function(player, abilityExport, operation){
 
 ROOT.PlayerData.get = function(player, isNBT) {
 
+    // Default path is Honorables persistent data; isNBT exposes full player NBT for source readers.
     if (!isNBT) {
         return player.persistentData.honorables;
     }
@@ -301,17 +316,20 @@ ROOT.PlayerData.get = function(player, isNBT) {
 };
 
 ROOT.PlayerData.dump = function(player) {
+    // Human-readable-ish dump for debug commands.
     const playerData = ROOT.PlayerData.get(player);
     return ROOT.Persistence.Filter.toString(playerData);
 };
 
 ROOT.PlayerData.exportData = function(player) {
+    // Plain JS export suitable for logging, comparison, or future migration helpers.
     const playerData = ROOT.PlayerData.get(player);
     return ROOT.Persistence.Filter.toData(playerData);
 };
 
 ROOT.PlayerData.modAbility = function(player, abilityID, modifierExport, operation) {
 
+    // Modifier updates target an existing ability entry and use the modifier export ID as the key.
     const playerData = player.persistentData.honorables;
     const abilityList = playerData.abilities;
 
@@ -346,7 +364,7 @@ ROOT.PlayerData.modAbility = function(player, abilityID, modifierExport, operati
 
 };
 
-// the quality functions are hard to implement here, as the quality system has not been developed yet
+// Quality helpers are placeholders. Canonically, quality is item-owned state at honorables.quality.
 
 ROOT.ItemData.editQuality = function(item, qualityValue, operation){
 

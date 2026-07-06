@@ -1,12 +1,13 @@
 global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
-// this file will be the access point for all the trait calculation data
+// Read layer for trait calculation sources. Calculation code should call this instead of reading NBT directly.
 
 ROOT.TraitSourceRouter = ROOT.TraitSourceRouter || {};
 
 ROOT.TraitSourceRouter.getValueFromSource = function(player, source, factor) {
 
+    // Returns a numeric source value or undefined for unsupported source types.
     const sourceTypes = ROOT.Constants.TRAIT_FACTOR_TYPES.LIST;
 
     switch (source.toLowerCase()) {
@@ -28,6 +29,7 @@ ROOT.TraitSourceRouter.getValueFromSource = function(player, source, factor) {
 
 function readVanillaStat(player, factor) {
 
+    // Placeholder for stat/NBT-backed sources; currently contributes zero to calculations.
     const playerData = ROOT.PlayerData.get(player, true);
     
     // undeveloped call to minecraft nbt data
@@ -36,6 +38,7 @@ function readVanillaStat(player, factor) {
 }
 
 function readPlayerHistory(player, factor) {
+    // Player history is Honorables-owned persistent data, not vanilla stat NBT.
     const history = ROOT.PlayerData.get(player).history;
 
     if (history[factor] == undefined){
@@ -47,5 +50,6 @@ function readPlayerHistory(player, factor) {
 }
 
 function readStageValue(player, factor) {
+    // Placeholder for GameStage/Puffish-derived signals.
     return 0;
 }

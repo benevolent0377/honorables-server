@@ -1,13 +1,14 @@
 global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
+// Login repair/init hook for the Honorables player data root.
 PlayerEvents.loggedIn(event => {
 
-    // login functions go here
+    // Add future login operations here as calls into shared helpers, not inline systems.
 
     //validate player data:
     ROOT.PlayerData.hasRoot(event.player, true);
 
 });
 
-// the above event hook is meant to call functions in this file. it should not have its own operations hardcoded.
+// Keep this event thin so player state behavior remains testable through ROOT helpers.

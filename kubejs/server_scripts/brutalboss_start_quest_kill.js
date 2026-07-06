@@ -1,3 +1,4 @@
+// Completes the configured FTB quest when a player kills the selected BrutalBosses dungeon boss.
 EntityEvents.death(event => {
   const entity = event.entity
   const source = event.source
@@ -20,12 +21,12 @@ EntityEvents.death(event => {
 
   const bossCap = nbt.ForgeCaps["brutalbosses:bosscap"]
 
-  // Only continue if this is a BrutalBosses boss
+  // Only continue if this is a BrutalBosses boss.
   if (!bossCap) {
     return
   }
 
-  // Optional filters based on your screenshot
+  // Boss loot-table filters identify the stage 3 Dungeon Crawl chest boss.
   if (bossCap.bbossltk !== "dungeoncrawl") {
     return
   }

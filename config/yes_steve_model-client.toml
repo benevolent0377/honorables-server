@@ -1,7 +1,7 @@
 
 [general]
 	#Whether to display disclaimer GUI
-	DisclaimerShow = true
+	DisclaimerShow = false
 	#Whether to print animation roulette play message
 	PrintAnimationRouletteMsg = false
 	#Prevents rendering of self player's model
@@ -49,5 +49,5 @@
 	DisableLoadingStateScreen = false
 	#Loading state screen position
 	#Allowed Values: TOP_LEFT, TOP_CENTER, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-	LoadingStatePosition = "TOP_CENTER"
+	LoadingStatePosition = "BOTTOM_RIGHT"
 

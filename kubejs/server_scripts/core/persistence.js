@@ -204,7 +204,10 @@ ROOT.PlayerData.editTrait = function(player, trait, item, value, append) {
     const playerData = player.persistentData.honorables;
     const traitData = playerData.traits[trait];
 
+    console.log(`Accessing data for trait: ${trait}....`);
+
     if (traitData[item] == undefined) {
+        console.log(`Failed to find trait: ${trait}..`);
         return 1;
     }
 
@@ -213,6 +216,7 @@ ROOT.PlayerData.editTrait = function(player, trait, item, value, append) {
     }
     else {
         traitData[item] = value;
+        console.log(`Set trait ${item} to ${value}.`);
     }
 
     return 0;

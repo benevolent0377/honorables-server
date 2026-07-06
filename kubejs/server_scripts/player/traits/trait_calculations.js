@@ -2,7 +2,7 @@ global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
 // Trait recalculation pipeline: validate trait -> collect factors -> weight sources -> export to player data.
-
+ROOT.player = ROOT.player || {};
 ROOT.player.traits = ROOT.player.traits || {};
 
 function isValidTrait(player, trait) {
@@ -92,6 +92,10 @@ function exportTraits(player, traitValues) {
 
     // Writes newly calculated base values back into persistent player trait data.
     for (const [traitID, traitValue] of Object.entries(traitValues)) {
+
+        if (traitValue <= 0) {
+            traitValue = 10;
+        }
 
         ROOT.PlayerData.editTrait(player, traitID, "base", traitValue);
 

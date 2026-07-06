@@ -7,9 +7,24 @@ new ROOT.Command("traits", ["operation"])
 
         const player = context.source.player;
 
-        console.log(`Recalculating ${player.username}'s traits on command.`);
+        console.log(`Argv format: ${argv}`);
 
-        // ROOT.Constants.NONE signals "all traits" to the calculation pipeline.
-        ROOT.player.traits.calculateTraitValue(player, ROOT.Constants.NONE);
+        console.log(`Argv[0]: ${argv[0]}`);
+
+        if (argv[0] == "recalculate" || argv[0] == "recalc"){
+
+            console.log(`Recalculating ${player.username}'s traits on command.`);
+
+            // ROOT.Constants.NONE signals "all traits" to the calculation pipeline.
+            ROOT.player.traits.calculateTraitValue(player, argv[1]);
+        }
+
+        else if (argv[0] == "ping") {
+            context.source.server.runCommandSilent(`/w ${player.username} Successfully pinged the trait command.`);
+        }
+
+        else if (argv[0] == "mod") {
+            ROOT.PlayerData.editTrait(player, argv[1], "base", Number(argv[2]), false);
+        }
 
     });

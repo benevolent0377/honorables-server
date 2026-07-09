@@ -32,7 +32,7 @@ ROOT.Constants = {
             "trait_intelligence",
         ],
 
-        LIST_FORMATTED: [
+        LIST_F: [
             "strength",
             "endurance",
             "constitution",
@@ -157,11 +157,12 @@ ROOT.Constants = {
         // Source categories consumed by Traits.SourceRouter during recalculation.
         VANILLA_STATS: "VANILLA_STATS",
         PLAYER_HISTORY: "PLAYER_HISTORY",
+        MODED_STATS: "MODDED_STATS",
         STAGES: "STAGES",
 
-        LIST_KEYS: ["VANILLA_STATS", "PLAYER_HISTORY", "STAGES"],
+        LIST_KEYS: ["VANILLA_STATS", "PLAYER_HISTORY", "MODDED_STATS", "STAGES"],
 
-        LIST: ["VANILLA_STATS", "PLAYER_HISTORY", "STAGES"],
+        LIST: ["vanillaStats", "playerHistory", "moddedStats", "stages"],
     },
 
     QUALITY: {

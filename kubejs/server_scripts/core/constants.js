@@ -5,11 +5,10 @@ var ROOT = global.HonorablesRoot || global.Honorables;
 // Keep these values stable once player data or progression gates depend on them.
 
 ROOT.Constants = {
-
     NONE: undefined,
 
     VERSION: {
-        DATA: 1
+        DATA: 1,
     },
 
     TRAIT_ID: {
@@ -30,7 +29,7 @@ ROOT.Constants = {
             "trait_agility",
             "trait_dexterity",
             "trait_wisdom",
-            "trait_intelligence"
+            "trait_intelligence",
         ],
 
         LIST_FORMATTED: [
@@ -40,7 +39,7 @@ ROOT.Constants = {
             "agility",
             "dexterity",
             "wisdom",
-            "intelligence"
+            "intelligence",
         ],
 
         LIST_KEYS: [
@@ -54,24 +53,24 @@ ROOT.Constants = {
         ],
 
         TRAIT_ID_TO_KEY: {
-            "trait_strength": "STRENGTH",
-            "trait_endurance": "ENDURANCE",
-            "trait_constitution": "CONSTITUTION",
-            "trait_agility": "AGILITY",
-            "trait_dexterity": "DEXTERITY",
-            "trait_wisdom": "WISDOM",
-            "trait_intelligence": "INTELLIGENCE"
+            trait_strength: "STRENGTH",
+            trait_endurance: "ENDURANCE",
+            trait_constitution: "CONSTITUTION",
+            trait_agility: "AGILITY",
+            trait_dexterity: "DEXTERITY",
+            trait_wisdom: "WISDOM",
+            trait_intelligence: "INTELLIGENCE",
         },
 
         TRAIT_KEY_TO_ID: {
-            "STRENGTH": "trait_strength",
-            "ENDURANCE": "trait_endurance",
-            "CONSTITUTION": "trait_constitution",
-            "AGILITY": "trait_agility",
-            "DEXTERITY": "trait_dexterity",
-            "WISDOM": "trait_wisdom",
-            "INTELLIGENCE": "trait_intelligence"
-        }
+            STRENGTH: "trait_strength",
+            ENDURANCE: "trait_endurance",
+            CONSTITUTION: "trait_constitution",
+            AGILITY: "trait_agility",
+            DEXTERITY: "trait_dexterity",
+            WISDOM: "trait_wisdom",
+            INTELLIGENCE: "trait_intelligence",
+        },
     },
 
     PLAYER_CLASS_ID: {
@@ -87,8 +86,8 @@ ROOT.Constants = {
             "class_naturalist",
             "class_miner",
             "class_mage",
-            "class_adventurer"
-        ]
+            "class_adventurer",
+        ],
     },
 
     PLAYER_SUBCLASS_ID: {
@@ -114,27 +113,26 @@ ROOT.Constants = {
         DELVER: "subclass_delver",
 
         LIST: [
-            
-        "subclass_knight",
-        "subclass_berserker",
-        "subclass_skirmisher",
+            "subclass_knight",
+            "subclass_berserker",
+            "subclass_skirmisher",
 
-        "subclass_agriculturalist",
-        "subclass_husbander",
-        "subclass_apothecary",
+            "subclass_agriculturalist",
+            "subclass_husbander",
+            "subclass_apothecary",
 
-        "subclass_quarryman",
-        "subclass_prospector",
-        "subclass_blacksmith",
+            "subclass_quarryman",
+            "subclass_prospector",
+            "subclass_blacksmith",
 
-        "subclass_arcanist",
-        "subclass_spellsword",
-        "subclass_enchanter",
+            "subclass_arcanist",
+            "subclass_spellsword",
+            "subclass_enchanter",
 
-        "subclass_explorer",
-        "subclass_expeditionist",
-        "subclass_delver"
-        ]
+            "subclass_explorer",
+            "subclass_expeditionist",
+            "subclass_delver",
+        ],
     },
 
     TRIGGERS: {
@@ -143,7 +141,16 @@ ROOT.Constants = {
         ON_KILL: "onKill",
         ON_CAST: "onCast",
         ON_BLOCK_BREAK: "onBlockBreak",
-        ON_TIMER: "onTimer"
+        ON_TIMER: "onTimer",
+        ON_CHAT: "onChat",
+        ON_LOGIN: "onLogin",
+        ON_TICK: "onTick",
+        ON_DAMAGED: "onDamaged",
+        ON_BLOCK: "onBlock",
+
+        LIST: function () {
+            return ROOT.Constants.TRIGGERS;
+        },
     },
 
     TRAIT_FACTOR_TYPES: {
@@ -152,27 +159,19 @@ ROOT.Constants = {
         PLAYER_HISTORY: "PLAYER_HISTORY",
         STAGES: "STAGES",
 
-        LIST_KEYS: [
-            "VANILLA_STATS",
-            "PLAYER_HISTORY",
-            "STAGES"
-        ],
+        LIST_KEYS: ["VANILLA_STATS", "PLAYER_HISTORY", "STAGES"],
 
-        LIST: [
-            "VANILLA_STATS",
-            "PLAYER_HISTORY",
-            "STAGES"
-        ]
+        LIST: ["VANILLA_STATS", "PLAYER_HISTORY", "STAGES"],
     },
 
     QUALITY: {
         // Item quality is item-owned state; player data may only mirror or derive from it.
-        MIN: 1.00,
-        MAX: 5.00,
+        MIN: 1.0,
+        MAX: 5.0,
     },
 
     COMMAND: {
         // Registered without the slash in onCommandRegistry.
-        ROOT_ADDR: "/honorables"
-    }
-}
+        ROOT_ADDR: "/honorables",
+    },
+};

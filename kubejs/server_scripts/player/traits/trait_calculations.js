@@ -27,7 +27,21 @@ function isValidTrait(player, trait) {
     }
 }
 
+/**
+ *  Calculates the new trait values for a player, specifed or unspecified, and writes them to persistent data.
+ * @param {playerobject} player 
+ * @param {string} trait (specified by ID. For example: trait_[traitName].) 
+ * @returns None
+ */
 ROOT.player.traits.calculateTraitValue = function(player, trait) {
+
+    // the trait calculation should be a wholistic recalculation of the player's traits, not an additive bonus
+    // so all the factors should be weighted individually, then summed, then weighted by category, and finally summed again.
+    // a calculation test function should exist to test different values against a range of predefined values
+    // this range will be the allowed amount, per factor and per category, that a trait may increase in one calculation
+    // settings to adjust this value will be simple, multiplicative constants like: NONE, LOOSE, MODERATE, and TIGHT.
+    // where none has no ceiling (0), LOOSE has a generous attenuation cap, MODERATE has a medium strength (noticable) cap, and TIGHT is strict.
+    // this config will, for now, be stored in a local variable, but it will soon be stored in persistent data so it can be altered by a command
 
     // Public entrypoint used by commands and future scheduled recalculation hooks.
     if (!isValidTrait(player, trait)) {
@@ -124,6 +138,7 @@ function getFactors(trait) {
     return factors;
 
 }
+
 
 function calculateWeightedValues(player, factors) {
     // Weighs factor values by source category and by individual subfactor.

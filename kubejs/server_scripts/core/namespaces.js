@@ -6,7 +6,7 @@ var ROOT = global.HonorablesRoot || global.Honorables;
 ROOT.Namespaces = {
     MOD_ID: "honorables",
 
-    id(path) {
+    ID(path) {
         return this.MOD_ID + ":" + path;
     }
 }

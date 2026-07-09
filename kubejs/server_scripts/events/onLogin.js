@@ -7,7 +7,7 @@ PlayerEvents.loggedIn(event => {
     // Add future login operations here as calls into shared helpers, not inline systems.
 
     //validate player data:
-    ROOT.PlayerData.hasRoot(event.player, true);
+    ROOT.Player.Data.HasRoot(event.player, true);
 
 });
 

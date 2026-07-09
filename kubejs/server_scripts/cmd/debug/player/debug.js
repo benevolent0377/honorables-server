@@ -1,14 +1,15 @@
 global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
-ROOT.debug = ROOT.debug || {};
-ROOT.debug.player = ROOT.debug.player || {};
+ROOT.Commands = ROOT.Commands || {};
+ROOT.Commands.Debug = ROOT.Commands.Debug || {};
+ROOT.Commands.Debug.Player = ROOT.Commands.Debug.Player || {};
 
 // Debug subcommand for inspecting the caller's Honorables persistent data.
-new ROOT.Command("getplayerdata", undefined)
-    .registerOperation(function(context, argv) {
+new ROOT.Commands.Command("getplayerdata", undefined)
+    .RegisterOperation(function(context, argv) {
         const player = context.source.player;
-        const dump = ROOT.PlayerData.dump(player);
+        const dump = ROOT.Player.Data.Dump(player);
 
         // Log to server console and whisper the same dump back to the player.
         console.log(dump);

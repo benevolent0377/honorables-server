@@ -2,8 +2,8 @@ global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
 // Debug/admin subcommand: /honorables traits recalculates the caller's trait values.
-new ROOT.Command("traits", ["operation"])
-    .registerOperation(function(context, argv){
+new ROOT.Commands.Command("traits", ["operation"])
+    .RegisterOperation(function(context, argv){
 
         const player = context.source.player;
 
@@ -16,7 +16,7 @@ new ROOT.Command("traits", ["operation"])
             console.log(`Recalculating ${player.username}'s traits on command.`);
 
             // ROOT.Constants.NONE signals "all traits" to the calculation pipeline.
-            ROOT.player.traits.calculateTraitValue(player, argv[1]);
+            ROOT.Traits.CalculateTraitValue(player, argv[1]);
         }
 
         else if (argv[0] == "ping") {
@@ -24,7 +24,7 @@ new ROOT.Command("traits", ["operation"])
         }
 
         else if (argv[0] == "mod") {
-            ROOT.PlayerData.editTrait(player, argv[1], "base", Number(argv[2]), false);
+            ROOT.Player.Data.EditTrait(player, argv[1], "base", Number(argv[2]), false);
         }
 
     });

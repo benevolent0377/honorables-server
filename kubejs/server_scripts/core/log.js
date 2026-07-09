@@ -20,7 +20,7 @@ function writeLog (data) {
 
 }
 
-ROOT.Log.write = function(type, fileName, functionName, argv, msg){
+ROOT.Log.Write = function(type, fileName, functionName, argv, msg){
 
     // Public logging helper used by other namespaces.
     const data = new logData(type, fileName, functionName, argv, msg);

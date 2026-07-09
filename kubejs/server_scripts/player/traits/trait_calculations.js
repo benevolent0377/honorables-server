@@ -2,8 +2,7 @@ global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
 // Trait recalculation pipeline: validate trait -> collect factors -> weight sources -> export to player data.
-ROOT.player = ROOT.player || {};
-ROOT.player.traits = ROOT.player.traits || {};
+ROOT.Traits = ROOT.Traits || {};
 
 function isValidTrait(player, trait) {
 
@@ -12,12 +11,12 @@ function isValidTrait(player, trait) {
         return true;
     }
 
-    else if (!ROOT.Traits.verifyTraitExists(trait)){
+    else if (!ROOT.Traits.VerifyTraitExists(trait)){
         //log the error as an invalid trait
         return false;
     }
 
-    else if (ROOT.PlayerData.get(player).traits[trait] == undefined) {
+    else if (ROOT.Player.Data.Get(player).traits[trait] == undefined) {
         //log the error as malformed player data
         return false;
     }
@@ -33,13 +32,13 @@ function isValidTrait(player, trait) {
  * @param {string} trait (specified by ID. For example: trait_[traitName].) 
  * @returns None
  */
-ROOT.player.traits.calculateTraitValue = function(player, trait) {
+ROOT.Traits.CalculateTraitValue = function(player, trait) {
 
     // the trait calculation should be a wholistic recalculation of the player's traits, not an additive bonus
     // so all the factors should be weighted individually, then summed, then weighted by category, and finally summed again.
     // a calculation test function should exist to test different values against a range of predefined values
     // this range will be the allowed amount, per factor and per category, that a trait may increase in one calculation
-    // settings to adjust this value will be simple, multiplicative constants like: NONE, LOOSE, MODERATE, and TIGHT.
+    // settings to adjust this value will be simple, multiplicative constants like: None, Loose, Moderate, and Tight.
     // where none has no ceiling (0), LOOSE has a generous attenuation cap, MODERATE has a medium strength (noticable) cap, and TIGHT is strict.
     // this config will, for now, be stored in a local variable, but it will soon be stored in persistent data so it can be altered by a command
 
@@ -111,7 +110,7 @@ function exportTraits(player, traitValues) {
             traitValue = 10;
         }
 
-        ROOT.PlayerData.editTrait(player, traitID, "base", traitValue);
+        ROOT.Player.Data.EditTrait(player, traitID, "base", traitValue);
 
     }
 
@@ -129,7 +128,7 @@ function getFactors(trait) {
 
         if (trait == traitIDList[index] || trait == undefined) {
 
-            factors[traitKeys[index]] = ROOT.TraitFactors.traitFactors[traitKeys[index]];
+            factors[traitKeys[index]] = ROOT.Traits.Factors.ByTrait[traitKeys[index]];
 
         }
 
@@ -157,21 +156,21 @@ function calculateWeightedValues(player, factors) {
         for (const [sourceType, factorList] of Object.entries(sourceCategories)) {
 
             weightedValues[traitKey][sourceType] = {};
-            weightedValues[traitKey][sourceType]["categoryWeight"] = ROOT.TraitFactors.factorWeights[sourceType].WEIGHT;
+            weightedValues[traitKey][sourceType]["categoryWeight"] = ROOT.Traits.Factors.Weights[sourceType].WEIGHT;
             weightedValues[traitKey][sourceType]["factors"] = {};
 
             var categorySum = 0;
 
-            // Each factor is read through TraitSourceRouter so source-specific logic stays isolated.
+            // Each factor is read through Traits.SourceRouter so source-specific logic stays isolated.
             for (const factor of factorList) {
 
-                var factorWeight = ROOT.TraitFactors.factorWeights[sourceType].SUBFACTOR_WEIGHTS[factor];
+                var factorWeight = ROOT.Traits.Factors.Weights[sourceType].SUBFACTOR_WEIGHTS[factor];
 
                     if (factorWeight == undefined){
                         factorWeight = 1;
                     }
 
-                var factorValue = ROOT.TraitSourceRouter.getValueFromSource(player, sourceType, factor);
+                var factorValue = ROOT.Traits.SourceRouter.GetValueFromSource(player, sourceType, factor);
 
                     if (factorValue == undefined) {
                         factorValue = 0;
@@ -195,7 +194,7 @@ function calculateWeightedValues(player, factors) {
 }
 
 // Placeholder for a future onTick wrapper that throttles trait recalculation.
-ROOT.player.traits.recalculateAtInterval = function(player) {
+ROOT.Traits.RecalculateAtInterval = function(player) {
 
     //when game tick reaches recalulate tick, then recalculate
 

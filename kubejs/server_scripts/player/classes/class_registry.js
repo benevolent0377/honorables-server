@@ -2,7 +2,9 @@ global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
 // Static class/subclass registry. These IDs are used by GameStages and Puffish Skills wiring.
-ROOT.Classes = {
+ROOT.Player = ROOT.Player || {};
+
+ROOT.Player.Classes = {
     WARRIOR: { 
         ID: ROOT.Constants.PLAYER_CLASS_ID.WARRIOR,
         DISPLAY: "Warrior",
@@ -27,7 +29,7 @@ ROOT.Classes = {
                 "subclass_skirmisher"
             ],
 
-            LIST_F: [
+            LIST_FORMATTED: [
                 "knight",
                 "berserker",
                 "skirmisher"
@@ -70,7 +72,7 @@ ROOT.Classes = {
                 "subclass_apothecary"
             ],
 
-            LIST_F: [
+            LIST_FORMATTED: [
                 "agricultralist",
                 "husbander",
                 "apothecary"
@@ -113,7 +115,7 @@ ROOT.Classes = {
                 "subclass_blacksmith"
             ],
 
-            LIST_F: [
+            LIST_FORMATTED: [
                 "quarryman",
                 "prospector",
                 "blacksmith"
@@ -156,7 +158,7 @@ ROOT.Classes = {
                 "subclass_enchanter"
             ],
 
-            LIST_F: [
+            LIST_FORMATTED: [
                 "arcanist",
                 "spellsword",
                 "enchanter"
@@ -197,7 +199,7 @@ ROOT.Classes = {
                 "subclass_delver"
             ],
 
-            LIST_F: [
+            LIST_FORMATTED: [
                 "explorer",
                 "expeditionist",
                 "delver"
@@ -228,7 +230,7 @@ ROOT.Classes = {
 
     // lists stripped, or split and formatted class names, for easy abstraction
     // Useful for commands or UI-facing formatting that does not want the class_ prefix.
-    LIST_F: [
+    LIST_FORMATTED: [
         "warrior",
         "naturalist",
         "miner",

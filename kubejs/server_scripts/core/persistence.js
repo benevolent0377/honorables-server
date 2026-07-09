@@ -5,10 +5,12 @@ var ROOT = global.HonorablesRoot || global.Honorables;
 // Player data lives under player.persistentData.honorables; item quality should live on item NBT.
 ROOT.Persistence = ROOT.Persistence || {};
 ROOT.Persistence.Filter = ROOT.Persistence.Filter || {};
-ROOT.PlayerData = ROOT.PlayerData || {};
-ROOT.ItemData = ROOT.ItemData || {};
+ROOT.Player = ROOT.Player || {};
+ROOT.Player.Data = ROOT.Player.Data || {};
+ROOT.Item = ROOT.Item || {};
+ROOT.Item.Data = ROOT.Item.Data || {};
 
-ROOT.Persistence.Filter.toString = function(value) {
+ROOT.Persistence.Filter.ToString = function(value) {
     // Console-safe conversion for debug output.
     if (value == undefined) {
         return "";
@@ -17,14 +19,14 @@ ROOT.Persistence.Filter.toString = function(value) {
     return String(value);
 };
 
-ROOT.Persistence.Filter.toData = function(value, depth) {
+ROOT.Persistence.Filter.ToData = function(value, depth) {
     // Converts Java NBT tags and KubeJS/JS objects into plain data for dumps and exports.
     if (depth == undefined) {
         depth = 0;
     }
 
     if (depth > 32) {
-        return ROOT.Persistence.Filter.toString(value);
+        return ROOT.Persistence.Filter.ToString(value);
     }
 
     if (value == undefined || value === null) {
@@ -37,7 +39,7 @@ ROOT.Persistence.Filter.toData = function(value, depth) {
         return value;
     }
 
-    const tagValue = ROOT.Persistence.Filter.unwrapTag(value);
+    const tagValue = ROOT.Persistence.Filter.UnwrapTag(value);
 
     if (tagValue !== value) {
         return tagValue;
@@ -47,30 +49,30 @@ ROOT.Persistence.Filter.toData = function(value, depth) {
         const arrayOut = [];
 
         for (var arrayIndex = 0; arrayIndex < value.length; arrayIndex++) {
-            arrayOut.push(ROOT.Persistence.Filter.toData(value[arrayIndex], depth + 1));
+            arrayOut.push(ROOT.Persistence.Filter.ToData(value[arrayIndex], depth + 1));
         }
 
         return arrayOut;
     }
 
-    if (ROOT.Persistence.Filter.isCompoundTag(value)) {
+    if (ROOT.Persistence.Filter.IsCompoundTag(value)) {
         const compoundOut = {};
         const keys = value.getAllKeys().toArray();
 
         // CompoundTag keys must be read through the Java API before conversion can recurse.
         for (var compoundIndex = 0; compoundIndex < keys.length; compoundIndex++) {
             const compoundKey = String(keys[compoundIndex]);
-            compoundOut[compoundKey] = ROOT.Persistence.Filter.toData(value.get(compoundKey), depth + 1);
+            compoundOut[compoundKey] = ROOT.Persistence.Filter.ToData(value.get(compoundKey), depth + 1);
         }
 
         return compoundOut;
     }
 
-    if (ROOT.Persistence.Filter.isListTag(value)) {
+    if (ROOT.Persistence.Filter.IsListTag(value)) {
         const listOut = [];
 
         for (var listIndex = 0; listIndex < value.size(); listIndex++) {
-            listOut.push(ROOT.Persistence.Filter.toData(value.get(listIndex), depth + 1));
+            listOut.push(ROOT.Persistence.Filter.ToData(value.get(listIndex), depth + 1));
         }
 
         return listOut;
@@ -81,17 +83,17 @@ ROOT.Persistence.Filter.toData = function(value, depth) {
 
     for (var objectIndex = 0; objectIndex < objectKeys.length; objectIndex++) {
         const objectKey = objectKeys[objectIndex];
-        objectOut[objectKey] = ROOT.Persistence.Filter.toData(value[objectKey], depth + 1);
+        objectOut[objectKey] = ROOT.Persistence.Filter.ToData(value[objectKey], depth + 1);
     }
 
     return objectOut;
 };
 
-ROOT.Persistence.Filter.fromData = function(value) {
-    return ROOT.Persistence.Filter.toData(value);
+ROOT.Persistence.Filter.FromData = function(value) {
+    return ROOT.Persistence.Filter.ToData(value);
 };
 
-ROOT.Persistence.Filter.getJavaClassName = function(value) {
+ROOT.Persistence.Filter.GetJavaClassName = function(value) {
     if (value == undefined || value.getClass == undefined) {
         return "";
     }
@@ -99,17 +101,17 @@ ROOT.Persistence.Filter.getJavaClassName = function(value) {
     return String(value.getClass().getName());
 };
 
-ROOT.Persistence.Filter.isCompoundTag = function(value) {
-    return ROOT.Persistence.Filter.getJavaClassName(value) == "net.minecraft.nbt.CompoundTag";
+ROOT.Persistence.Filter.IsCompoundTag = function(value) {
+    return ROOT.Persistence.Filter.GetJavaClassName(value) == "net.minecraft.nbt.CompoundTag";
 };
 
-ROOT.Persistence.Filter.isListTag = function(value) {
-    return ROOT.Persistence.Filter.getJavaClassName(value) == "net.minecraft.nbt.ListTag";
+ROOT.Persistence.Filter.IsListTag = function(value) {
+    return ROOT.Persistence.Filter.GetJavaClassName(value) == "net.minecraft.nbt.ListTag";
 };
 
-ROOT.Persistence.Filter.unwrapTag = function(value) {
-    // Primitive NBT tags are flattened here; compound/list tags are handled by toData.
-    const className = ROOT.Persistence.Filter.getJavaClassName(value);
+ROOT.Persistence.Filter.UnwrapTag = function(value) {
+    // Primitive NBT tags are flattened here; compound/list tags are handled by ToData.
+    const className = ROOT.Persistence.Filter.GetJavaClassName(value);
 
     if (className == "net.minecraft.nbt.StringTag") {
         return String(value.getAsString());
@@ -139,7 +141,7 @@ ROOT.Persistence.Filter.unwrapTag = function(value) {
     return value;
 };
 
-ROOT.PlayerData.init = function(player){
+ROOT.Player.Data.Init = function(player){
 
     // Base shape expected by login repair, trait recalculation, abilities, and debug commands.
     player.persistentData.honorables = {
@@ -156,18 +158,18 @@ ROOT.PlayerData.init = function(player){
         $debug: {}
     };
 
-    const playerData = ROOT.PlayerData.get(player);
+    const playerData = ROOT.Player.Data.Get(player);
     
     // Seed every registered trait with its default structure.
-    for (const [key, trait] of Object.entries(ROOT.Traits.registry)) {
-        playerData.traits[trait.id] = trait.exportData();
+    for (const [key, trait] of Object.entries(ROOT.Traits.Registry)) {
+        playerData.traits[trait.id] = trait.ExportData();
     }
 
     return 0;
 
 };
 
-ROOT.PlayerData.hasRoot = function(player, quickInit) {
+ROOT.Player.Data.HasRoot = function(player, quickInit) {
 
     // quickInit lets login repair missing data without every caller needing a separate init branch.
     if (quickInit == undefined) { 
@@ -176,7 +178,7 @@ ROOT.PlayerData.hasRoot = function(player, quickInit) {
 
     if (player.persistentData.honorables == undefined){
         if (quickInit) {
-            ROOT.PlayerData.init(player);
+            ROOT.Player.Data.Init(player);
             return true;
         }
 
@@ -187,7 +189,7 @@ ROOT.PlayerData.hasRoot = function(player, quickInit) {
     }
 };
 
-ROOT.PlayerData.getTrait = function(player, trait, item) {
+ROOT.Player.Data.GetTrait = function(player, trait, item) {
 
     // If item is null, return the full trait object; otherwise read a named field such as base.
     if (item !== null) {
@@ -198,7 +200,7 @@ ROOT.PlayerData.getTrait = function(player, trait, item) {
 
 };
 
-ROOT.PlayerData.editTrait = function(player, trait, item, value, append) {
+ROOT.Player.Data.EditTrait = function(player, trait, item, value, append) {
 
     // Return code 0 means success; 1 means the requested trait field was not present.
     const playerData = player.persistentData.honorables;
@@ -223,7 +225,7 @@ ROOT.PlayerData.editTrait = function(player, trait, item, value, append) {
 
 };
 
-ROOT.PlayerData.addTraitModifier = function(player, trait, item, value) {
+ROOT.Player.Data.AddTraitModifier = function(player, trait, item, value) {
 
     // Modifiers are stored inside the trait data and are intended to affect derived active values.
     const playerData = player.persistentData.honorables;
@@ -240,7 +242,7 @@ ROOT.PlayerData.addTraitModifier = function(player, trait, item, value) {
 
 };
 
-ROOT.PlayerData.hasAbility = function(player, abilityID) {
+ROOT.Player.Data.HasAbility = function(player, abilityID) {
     // Ability presence check is intentionally data-based; registry validation belongs elsewhere.
     if (player.persistentData.honorables.abilities[abilityID] == undefined){
         return false;
@@ -249,7 +251,7 @@ ROOT.PlayerData.hasAbility = function(player, abilityID) {
     return true;
 };
 
-ROOT.PlayerData.getAbilities = function(player, ability) {
+ROOT.Player.Data.GetAbilities = function(player, ability) {
 
     // With no ability ID, expose the whole ability map for command/debug use.
     const playerData = player.persistentData.honorables;
@@ -267,16 +269,16 @@ ROOT.PlayerData.getAbilities = function(player, ability) {
 
 };
 
-ROOT.PlayerData.editAbilities = function(player, abilityExport, operation){
+ROOT.Player.Data.EditAbilities = function(player, abilityExport, operation){
 
     // Adds or removes serialized ability data from the player's persistent ability map.
-    const abilityList = ROOT.PlayerData.getAbilities(player);
+    const abilityList = ROOT.Player.Data.GetAbilities(player);
     const newAbilityID = abilityExport.ID;
 
     //validateAbility() a function to check the ability registry to ensure this ability exists
 
     // checking the existence of the ability in the data
-    var abilityExists = ROOT.PlayerData.hasAbility(player, newAbilityID);
+    var abilityExists = ROOT.Player.Data.HasAbility(player, newAbilityID);
 
     //parsing operation
 
@@ -307,7 +309,7 @@ ROOT.PlayerData.editAbilities = function(player, abilityExport, operation){
 
 };
 
-ROOT.PlayerData.get = function(player, isNBT) {
+ROOT.Player.Data.Get = function(player, isNBT) {
 
     // Default path is Honorables persistent data; isNBT exposes full player NBT for source readers.
     if (!isNBT) {
@@ -319,25 +321,25 @@ ROOT.PlayerData.get = function(player, isNBT) {
 
 };
 
-ROOT.PlayerData.dump = function(player) {
+ROOT.Player.Data.Dump = function(player) {
     // Human-readable-ish dump for debug commands.
-    const playerData = ROOT.PlayerData.get(player);
-    return ROOT.Persistence.Filter.toString(playerData);
+    const playerData = ROOT.Player.Data.Get(player);
+    return ROOT.Persistence.Filter.ToString(playerData);
 };
 
-ROOT.PlayerData.exportData = function(player) {
+ROOT.Player.Data.ExportData = function(player) {
     // Plain JS export suitable for logging, comparison, or future migration helpers.
-    const playerData = ROOT.PlayerData.get(player);
-    return ROOT.Persistence.Filter.toData(playerData);
+    const playerData = ROOT.Player.Data.Get(player);
+    return ROOT.Persistence.Filter.ToData(playerData);
 };
 
-ROOT.PlayerData.modAbility = function(player, abilityID, modifierExport, operation) {
+ROOT.Player.Data.ModAbility = function(player, abilityID, modifierExport, operation) {
 
     // Modifier updates target an existing ability entry and use the modifier export ID as the key.
     const playerData = player.persistentData.honorables;
     const abilityList = playerData.abilities;
 
-    if (ROOT.PlayerData.hasAbility(player, abilityID)){
+    if (ROOT.Player.Data.HasAbility(player, abilityID)){
         //log goes here
         return 1;
     }
@@ -370,13 +372,13 @@ ROOT.PlayerData.modAbility = function(player, abilityID, modifierExport, operati
 
 // Quality helpers are placeholders. Canonically, quality is item-owned state at honorables.quality.
 
-ROOT.ItemData.editQuality = function(item, qualityValue, operation){
+ROOT.Item.Data.EditQuality = function(item, qualityValue, operation){
 
     //add the function here to add or remove the item quality
 
 };
 
-ROOT.ItemData.getQuality = function(item) {
+ROOT.Item.Data.GetQuality = function(item) {
 
     //return the quality of the item
 

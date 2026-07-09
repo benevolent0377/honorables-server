@@ -2,17 +2,19 @@ global.Honorables = global.Honorables || {};
 var ROOT = global.HonorablesRoot || global.Honorables;
 
 // Simple command abstraction for subcommands under /honorables.
-ROOT.Command = function(commandID, args) {
+ROOT.Commands = ROOT.Commands || {};
+
+ROOT.Commands.Command = function(commandID, args) {
     this.commandID = commandID.toLowerCase();
     this.args = args || [];
     this.op = function(argv) {
         console.log("No operation specified for command: " + this.commandID + ".");
     }
 
-    this.registerSelf();
+    this.RegisterSelf();
 };
 
-ROOT.Command.prototype.registerOperation = function(opFunction) {
+ROOT.Commands.Command.prototype.RegisterOperation = function(opFunction) {
     // Replaces the default no-op handler and returns the command for chaining.
     if (opFunction) {
         this.op = opFunction;
@@ -21,24 +23,24 @@ ROOT.Command.prototype.registerOperation = function(opFunction) {
     return this;
 }
 
-ROOT.Command.prototype.registerSelf = function() {
+ROOT.Commands.Command.prototype.RegisterSelf = function() {
     // Commands register at construction time so loading the file is enough to make them available.
-    ROOT.CommandRegistry.register(this);
+    ROOT.Commands.Registry.Register(this);
 }
 
-ROOT.CommandRegistry = {
-    commands: {},
+ROOT.Commands.Registry = {
+    Table: {},
 
-    register: function(commandObj) {
+    Register: function(commandObj) {
         // Later registrations with the same ID overwrite earlier ones.
-        this.commands[commandObj.commandID] = commandObj;
+        this.Table[commandObj.commandID] = commandObj;
     },
 
-    find: function(commandID) {
-        return this.commands[commandID.toLowerCase()];
+    Find: function(commandID) {
+        return this.Table[commandID.toLowerCase()];
     },
 
-    run: function(context, input) {
+    Run: function(context, input) {
         // Dispatch input forwarded by onCommandRegistry.js after /honorables.
         input = String(input || "");
 
@@ -55,7 +57,7 @@ ROOT.CommandRegistry = {
             return 0;
         }
 
-        const command = this.find(commandName);
+        const command = this.Find(commandName);
 
         if (!command) {
             return 0;

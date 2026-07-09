@@ -15,14 +15,14 @@ ServerEvents.commandRegistry(event => {
             .executes(context => {
                 const input = StringArgumentType.getString(context, "args");
                 console.log("[Honorables Command] args branch input: " + input);
-                return ROOT.CommandRegistry.run(context, input);
+                return ROOT.Commands.Registry.Run(context, input);
             })
     );
 
     root.executes(context => {
         console.log("[Honorables Command] root branch");
-        // Empty input lets CommandRegistry decide whether a default/root handler exists.
-        return ROOT.CommandRegistry.run(context, "");
+        // Empty input lets Commands.Registry decide whether a default/root handler exists.
+        return ROOT.Commands.Registry.Run(context, "");
     });
 
     event.register(root);

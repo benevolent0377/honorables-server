@@ -3,9 +3,10 @@ var ROOT = global.HonorablesRoot || global.Honorables;
 
 // Weight tables for trait recalculation. Source categories are routed in trait_source_router.js.
 
-ROOT.TraitFactors = ROOT.TraitFactors || {};
+ROOT.Traits = ROOT.Traits || {};
+ROOT.Traits.Factors = ROOT.Traits.Factors || {};
 
-ROOT.Traits.Factors.StatWeightRegistry = {
+ROOT.Traits.Factors.StatWeightConstants = {
 
     EX_LOW: .0005,
     LOW: .001,
@@ -65,16 +66,16 @@ ROOT.Traits.Factors.StatWeightRegistry = {
 
 }
 
-ROOT.TraitFactors.factorWeights = {
+ROOT.Traits.Factors.Weights = {
 
-    REGISTRY: ROOT.Traits.Factors.StatWeightRegistry,
+    REGISTRY: ROOT.Traits.Factors.StatWeightConstants,
     // WEIGHT applies to the whole source category; SUBFACTOR_WEIGHTS tune individual factors.
     VANILLA_STATS: {
         WEIGHT: .35,
         SUBFACTOR_WEIGHTS: {
             //various subfactors and their weights go here
-            "minecraft:damage_dealt": REGISTRY.EX_LOW,
-            "minecraft:killed": REGISTRY.LOW
+            "minecraft:damage_dealt": ROOT.Traits.Factors.StatWeightConstants.EX_LOW,
+            "minecraft:killed": ROOT.Traits.Factors.StatWeightConstants.LOW
         }
     },
 
@@ -94,7 +95,7 @@ ROOT.TraitFactors.factorWeights = {
 }
 
 // Factors are grouped by trait, then by source type. Empty arrays mean that source is not wired yet.
-ROOT.TraitFactors.traitFactors = {
+ROOT.Traits.Factors.ByTrait = {
     STRENGTH: {
         VANILLA_STATS: [],
         PLAYER_HISTORY: [],

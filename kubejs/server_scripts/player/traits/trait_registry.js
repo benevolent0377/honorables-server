@@ -14,7 +14,7 @@ function Trait (id, display, defaultBase, description) {
 
 }
 
-Trait.prototype.exportData = function() {
+Trait.prototype.ExportData = function() {
         // Stored per player at honorables.traits[trait_id].
         return {
             "base": this.defaultBase,
@@ -23,7 +23,7 @@ Trait.prototype.exportData = function() {
         };
     };
 
-ROOT.Traits.registry = {
+ROOT.Traits.Registry = {
     STRENGTH: new Trait(ROOT.Constants.TRAIT_ID.STR, "Strength", 10, ""),
     CONSTITUTION: new Trait(ROOT.Constants.TRAIT_ID.CONS, "Constitution", 10, ""),
     ENDURANCE: new Trait(ROOT.Constants.TRAIT_ID.END, "Endurance", 10, ""),
@@ -33,7 +33,7 @@ ROOT.Traits.registry = {
     WISDOM: new Trait(ROOT.Constants.TRAIT_ID.WIS, "Wisdom", 10, ""),
 };
 
-ROOT.Traits.verifyTraitExists = function(trait) {
+ROOT.Traits.VerifyTraitExists = function(trait) {
 
     // Verifies against canonical trait IDs, not display names or registry keys.
     const traitList = ROOT.Constants.TRAIT_ID.LIST;
@@ -48,8 +48,8 @@ ROOT.Traits.verifyTraitExists = function(trait) {
 
 };
 
-ROOT.Traits.getEffectiveTrait = function(player, traitId) {
+ROOT.Traits.GetEffectiveTrait = function(player, traitId) {
     // Active overrides base when temporary or recalculated effects are present.
-    const trait = ROOT.PlayerData.getTrait(player, traitId);
+    const trait = ROOT.Player.Data.GetTrait(player, traitId);
     return trait.active == null ? trait.base : trait.active;
 };

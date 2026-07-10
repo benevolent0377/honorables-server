@@ -316,7 +316,7 @@ ROOT.Player.Data.Get = function(player, isNBT) {
         return player.persistentData.honorables;
     }
     else {
-        return player.fullNBT;
+        return player.nbt;
     }
 
 };

@@ -5,8 +5,10 @@ var ROOT = global.HonorablesRoot || global.Honorables;
 
 ROOT.Traits = ROOT.Traits || {};
 ROOT.Traits.Factors = ROOT.Traits.Factors || {};
+ROOT.Traits.Factors.Weight = ROOT.Traits.Factors.Weight || {};
+ROOT.Traits.Factors.Weight.Stats = ROOT.Traits.Factors.Weight.Stats || {};
 
-ROOT.Traits.Factors.StatWeightConstants = {
+ROOT.Traits.Factors.Weight.Stats.Constants = {
 
     EX_LOW: .0005,
     LOW: .001,
@@ -16,16 +18,22 @@ ROOT.Traits.Factors.StatWeightConstants = {
     LARGE: .1,
     EX_LARGE: .2,
     SIGNIFICANT: .5,
-    EX_SIGNIFICANT: .10,
+    EX_SIGNIFICANT: .10
+}
+
+ROOT.Traits.Factors.Weight.Mutations = {
 
     DOUBLE: function(weight) {
-        return weight*2;
+        return Number(weight)*2;
+    },
+
+    HALVE: function(weight) {
+        return Number(weight)/2;
     },
 
     GROW_SHRINK: function(value, factor) {
-        return value * 10^(factor);
+        return Number(value) * 10^(Number(factor));
     },
-
 
     /**
      * Vary weighting of a factor based on the amount of a stat a player has upon calculation.
@@ -46,11 +54,11 @@ ROOT.Traits.Factors.StatWeightConstants = {
 
         switch (direction.toLowerCase()) {
             case "positive" || "pos":
-                var directionVector = 1;
+                direction = 1;
             break;
 
             case "negative" || "neg":
-                var directionVector = -1;
+                direction = -1;
             break
 
             default:
@@ -59,76 +67,99 @@ ROOT.Traits.Factors.StatWeightConstants = {
         }
 
         var newWeight = Number(statQty^(((1/2)*factor + direction)/(factor + padX)) + padY);
-        var newWeight = Number(newWeight, -3);
+        newWeight = Number(newWeight, -3);
 
         return newWeight;
     }
 
 }
 
-ROOT.Traits.Factors.Weights = {
-
-    REGISTRY: ROOT.Traits.Factors.StatWeightConstants,
+//the weight of each category of factors
+ROOT.Traits.Factors.CategoryWeights = {
     // WEIGHT applies to the whole source category; SUBFACTOR_WEIGHTS tune individual factors.
-    VANILLA_STATS: {
-        WEIGHT: .35,
-        SUBFACTOR_WEIGHTS: {
-            //various subfactors and their weights go here
-            "minecraft:damage_dealt": ROOT.Traits.Factors.StatWeightConstants.EX_LOW,
-            "minecraft:killed": ROOT.Traits.Factors.StatWeightConstants.LOW
-        }
-    },
-
-    PLAYER_HISTORY: {
-        WEIGHT: .15,
-        SUBFACTOR_WEIGHTS: {
-            //ibid
-        }
-    },
-
-    STAGES: {
-        WEIGHT: .75,
-        SUBFACTOR_WEIGHTS: {
-            //ibid
-        }
-    }
+    VANILLA_STATS: .33,
+    PLAYER_HISTORY: .33,
+    MODDED_STATS: .33,
+    STAGES: .65
 }
 
 // Factors are grouped by trait, then by source type. Empty arrays mean that source is not wired yet.
-ROOT.Traits.Factors.ByTrait = {
-    STRENGTH: {
-        VANILLA_STATS: [],
-        PLAYER_HISTORY: [],
-        STAGES: []
-    },
-    ENDURANCE: {
-        VANILLA_STATS: [],
-        PLAYER_HISTORY: [],
-        STAGES: []
-    },
-    CONSTITUTION: {
-        VANILLA_STATS: [],
-        PLAYER_HISTORY: [],
-        STAGES: []
-    },
-    AGILITY: {
-        VANILLA_STATS: [],
-        PLAYER_HISTORY: [],
-        STAGES: []
-    },
-    DEXTERITY: {
-        VANILLA_STATS: [],
-        PLAYER_HISTORY: [],
-        STAGES: []
-    },
-    INTELLIGENCE: {
-        VANILLA_STATS: [],
-        PLAYER_HISTORY: [],
-        STAGES: []
-    },
-    WISDOM: {
-        VANILLA_STATS: [],
-        PLAYER_HISTORY: [],
-        STAGES: []
+ROOT.Traits.Factors.ByTrait = function() {
+
+    const StatWeights = ROOT.Traits.Factors.Weights.Stats.Constants;
+    const Mutate = ROOT.Traits.Factors.Weights.Stats.Mutations;
+
+    return {
+        STRENGTH: {
+            VANILLA_STATS: {
+                //damage to entities
+                "minecraft:mob_kills": 0,
+                "minecraft.damage_dealt": 0,
+
+                //damage taken
+                "minecraft:damage_taken": 0,
+                "minecraft:damage_resisted": 0,
+                "minecraft:damage_blocked_by_shield": 0,
+                "minecraft:damage_absorbed": 0,
+
+                //distances
+                "minecraft:sprint_one_cm": 0,
+                "minecraft:climb_one_cm": 0
+            },
+            PLAYER_HISTORY: {},
+            MODDED_STATS: {},
+            STAGES: {}
+        },
+        ENDURANCE: {
+            VANILLA_STATS: {
+                //damage taken
+                "minecraft:damage_taken": 0,
+                "minecraft:damage_resisted": 0,
+                "minecraft:damage_absorbed": 0,
+                "minecraft:damage_blocked_by_shield": 0,
+
+                //distance
+                "minecraft:sprint_one_cm": 0,
+                "minecraft:walk_one_cm": 0,
+                "minecraft:swim_one_cm": 0
+            },
+            PLAYER_HISTORY: {},
+            MODDED_STATS: {},
+            STAGES: {}
+        },
+        CONSTITUTION: {
+            VANILLA_STATS: {},
+            PLAYER_HISTORY: {},
+            MODDED_STATS: {},
+            STAGES: {}
+        },
+        AGILITY: {
+            VANILLA_STATS: {
+                "minecraft:jump": 0,
+                "minecraft:sprint_one_cm": 0,
+                "minecraft:climb_one_cm": 0
+            },
+            PLAYER_HISTORY: {},
+            MODDED_STATS: {},
+            STAGES: {}
+        },
+        DEXTERITY: {
+            VANILLA_STATS: {},
+            PLAYER_HISTORY: {},
+            MODDED_STATS: {},
+            STAGES: {}
+        },
+        INTELLIGENCE: {
+            VANILLA_STATS: {},
+            PLAYER_HISTORY: {},
+            MODDED_STATS: {},
+            STAGES: {}
+        },
+        WISDOM: {
+            VANILLA_STATS: {},
+            PLAYER_HISTORY: {},
+            MODDED_STATS: {},
+            STAGES: {}
+        }
     }
 }

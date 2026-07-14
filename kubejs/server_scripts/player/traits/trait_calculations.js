@@ -4,6 +4,8 @@ var ROOT = global.HonorablesRoot || global.Honorables;
 // Trait recalculation pipeline: validate trait -> collect factors -> weight sources -> export to player data.
 ROOT.Traits = ROOT.Traits || {};
 
+ROOT.Traits.Attenuation.VALUE = ROOT.Traits.Attenuation.CONFIG.BLEND.LOOSE;
+
 function isValidTrait(player, trait) {
 
     // Undefined means "calculate all traits"; otherwise require a known trait and matching player data.
@@ -85,16 +87,16 @@ ROOT.Traits.CalculateTraitValue = function(player, trait) {
 
         for (const [sourceKey, sourceData] of Object.entries(traitData)) {
 
-            if (sourceKey !== "id") {
+            if (sourceKey != "id") {
 
-               traitValue = (sourceData["categoryWeight"] * sourceData["sum"]) + traitValue;
+               traitValue = (sourceData["categoryWeight"] * sourceData["sum"])+ traitValue;
+               console.log(`New value of ${traitKey} is ${traitValue}.`);
 
             }
 
         }
 
-        traitValues[traitData["id"]] = traitValue;
-
+        traitValues[traitData["id"]] = traitValue + 10;
     }
 
     exportTraits(player, traitValues);
@@ -103,14 +105,18 @@ ROOT.Traits.CalculateTraitValue = function(player, trait) {
 
 function exportTraits(player, traitValues) {
 
+    console.log("Exporting new trait values....");
+
     // Writes newly calculated base values back into persistent player trait data.
     for (const [traitID, traitValue] of Object.entries(traitValues)) {
 
-        if (traitValue <= 0) {
+        if (traitValue == 0) {
             traitValue = 10;
         }
 
-        ROOT.Player.Data.EditTrait(player, traitID, "base", traitValue);
+        console.log(`${traitValue}`);
+
+        ROOT.Player.Data.EditTrait(player, traitID, "base", Number.parseFloat(traitValue).toFixed(3));
 
     }
 
@@ -128,13 +134,35 @@ function getFactors(trait) {
 
         if (trait == traitIDList[index] || trait == undefined) {
 
-            factors[traitKeys[index]] = ROOT.Traits.Factors.ByTrait[traitKeys[index]];
+            factors[traitKeys[index]] = ROOT.Traits.Factors.ByTrait()[traitKeys[index]];
 
         }
 
     }
 
     return factors;
+    // factors here should look something like: 
+    /**
+        {any_trait_ID: {
+            VANILLA_STATS: {
+                    factor_1: weight_1,
+                    factor_2: weight_2,
+                    ....
+                    factor_N: weight_N
+                },
+            .....
+            STAGES: {
+                    factor_1: weight_1,
+                    factor_2: weight_2,
+                    ....
+                    factor_N: weight_N
+                }
+            },
+        .....
+        }
+
+        and this repeats for each trait specified
+    */
 
 }
 
@@ -150,37 +178,43 @@ function calculateWeightedValues(player, factors) {
 
     for (const [traitKey, sourceCategories] of Object.entries(factors)) {
 
+        console.log(`TraitKey: ${traitKey}, sourceCategories: ${sourceCategories}`);
+
         weightedValues[traitKey] = {};
         weightedValues[traitKey]["id"] = ROOT.Constants.TRAIT_ID.TRAIT_KEY_TO_ID[traitKey];
 
         for (const [sourceType, factorList] of Object.entries(sourceCategories)) {
 
             weightedValues[traitKey][sourceType] = {};
-            weightedValues[traitKey][sourceType]["categoryWeight"] = ROOT.Traits.Factors.Weights[sourceType].WEIGHT;
+            weightedValues[traitKey][sourceType]["categoryWeight"] = ROOT.Traits.Factors.CategoryWeights[sourceType];
             weightedValues[traitKey][sourceType]["factors"] = {};
 
             var categorySum = 0;
 
             // Each factor is read through Traits.SourceRouter so source-specific logic stays isolated.
-            for (const factor of factorList) {
+            for (const [factorName, weight] of Object.entries(factorList)) {
 
-                var factorWeight = ROOT.Traits.Factors.Weights[sourceType].SUBFACTOR_WEIGHTS[factor];
+                var factorWeight = weight;
 
                     if (factorWeight == undefined){
                         factorWeight = 1;
                     }
+                
+                console.log(`Getting value for factor named: ${factorName}.`);
+                var factorValue = ROOT.Traits.SourceRouter.GetValueFromSource(player, sourceType, factorName);
 
-                var factorValue = ROOT.Traits.SourceRouter.GetValueFromSource(player, sourceType, factor);
 
                     if (factorValue == undefined) {
                         factorValue = 0;
                     }
 
-                const weightedValue = factorWeight * factorValue;
+                var weightedValue = factorWeight * factorValue;
+
+                console.log(`The weighted value for ${factorName} is ${weightedValue}. (weight: ${factorWeight} & qty: ${factorValue})`);
 
                 categorySum = categorySum + weightedValue;
 
-                weightedValues[traitKey][sourceType]["factors"][factor] = weightedValue;
+                weightedValues[traitKey][sourceType]["factors"][factorName] = weightedValue;
 
             }
 
@@ -199,3 +233,15 @@ ROOT.Traits.RecalculateAtInterval = function(player) {
     //when game tick reaches recalulate tick, then recalculate
 
 };
+
+function Attenuate(oldTraitValue, newTraitValue) {
+
+    newTraitValue = (oldTraitValue*ROOT.Traits.Attenuation.TOLERANCE) * ROOT.TRAITS.Attenuation.VALUE;
+
+    if (newTraitValue > ROOT.Traits.Attenuation.CONFIG.CEILING){
+        return ROOT.Traits.Attenuation.CONFIG.CEILING;
+    }
+
+    return newTraitValue;
+
+}

@@ -9,8 +9,16 @@
             "probe/user",
             "server_scripts",
             "startup_scripts",
-            "client_scripts"
+            "client_scripts",
+            "types"
         ],
         "target": "ES2015"
-    }
+    },
+    "include": [
+        "server_scripts/**/*.js",
+        "startup_scripts/**/*.js",
+        "client_scripts/**/*.js",
+        "probe/generated/**/*.d.ts",
+        "types/**/*.d.ts"
+    ]
 }

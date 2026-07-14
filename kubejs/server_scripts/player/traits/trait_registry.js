@@ -53,3 +53,42 @@ ROOT.Traits.GetEffectiveTrait = function(player, traitId) {
     const trait = ROOT.Player.Data.GetTrait(player, traitId);
     return trait.active == null ? trait.base : trait.active;
 };
+
+ROOT.Traits.Attenuation = {
+
+    VALUE: 0,
+
+    CONFIG: {
+        BLEND: { // these are relative attenuation 'bands' to allow level caps to scale with player level
+            NONE: 1,
+            LOOSE: .25,
+            MODERATE: .135,
+            STRICT: .05,
+        },
+        CEILING: 10 // the absolute maximum increase a trait can undergo per calculation
+    },
+
+    // this value determines how much of the player's current trait value will be used to determine attenuation
+    // max value is 1, minimum value is .05
+    // the higher the value, the more tolerant the configs and the more growth allowed,
+    // the lower the tolerance, the tighter the growth is restricted.
+    TOLERANCE: 1
+
+    /**
+     * Attenuation will be determined as follows:
+     * 
+     * Current (pre-calculation) traits will be determined, and this will be multiplied by the tolerance to determine
+     * how much growth will be allowed
+     * 
+     * Then, this product will be multiplied by the VALUE.
+     * 
+     * The resulting value will be the maximum increase a player's trait can have at one calculation....
+     * 
+     * For example:
+     * 
+     * If a player has 100 in the strength trait, and tolerance is 1 while on a strict config,
+     * the maximum increase the trait can undergo this calculation cycle is 10 points, which is quite high.
+     *  
+     */
+
+};

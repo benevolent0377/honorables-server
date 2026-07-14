@@ -86,25 +86,25 @@ ROOT.Traits.Factors.CategoryWeights = {
 // Factors are grouped by trait, then by source type. Empty arrays mean that source is not wired yet.
 ROOT.Traits.Factors.ByTrait = function() {
 
-    const StatWeights = ROOT.Traits.Factors.Weights.Stats.Constants;
-    const Mutate = ROOT.Traits.Factors.Weights.Stats.Mutations;
+    const StatWeights = ROOT.Traits.Factors.Weight.Stats.Constants;
+    const Mutate = ROOT.Traits.Factors.Weight.Stats.Mutations;
 
     return {
         STRENGTH: {
             VANILLA_STATS: {
                 //damage to entities
-                "minecraft:mob_kills": 0,
-                "minecraft.damage_dealt": 0,
+                "minecraft:mob_kills": StatWeights.EX_SMALL,
+                "minecraft.damage_dealt": StatWeights.EX_LOW,
 
                 //damage taken
-                "minecraft:damage_taken": 0,
-                "minecraft:damage_resisted": 0,
-                "minecraft:damage_blocked_by_shield": 0,
-                "minecraft:damage_absorbed": 0,
+                "minecraft:damage_taken": StatWeights.EX_LOW,
+                "minecraft:damage_resisted": StatWeights.LOW,
+                "minecraft:damage_blocked_by_shield": StatWeights.LOW,
+                "minecraft:damage_absorbed": StatWeights.EX_LOW,
 
                 //distances
-                "minecraft:sprint_one_cm": 0,
-                "minecraft:climb_one_cm": 0
+                "minecraft:sprint_one_cm": StatWeights.EX_LOW,
+                "minecraft:climb_one_cm": StatWeights.EX_LOW
             },
             PLAYER_HISTORY: {},
             MODDED_STATS: {},
@@ -113,15 +113,15 @@ ROOT.Traits.Factors.ByTrait = function() {
         ENDURANCE: {
             VANILLA_STATS: {
                 //damage taken
-                "minecraft:damage_taken": 0,
-                "minecraft:damage_resisted": 0,
-                "minecraft:damage_absorbed": 0,
-                "minecraft:damage_blocked_by_shield": 0,
+                "minecraft:damage_taken": StatWeights.LOW,
+                "minecraft:damage_resisted": StatWeights.SMALL,
+                "minecraft:damage_absorbed": StatWeights.SMALL,
+                "minecraft:damage_blocked_by_shield": StatWeights.LOW,
 
                 //distance
-                "minecraft:sprint_one_cm": 0,
-                "minecraft:walk_one_cm": 0,
-                "minecraft:swim_one_cm": 0
+                "minecraft:sprint_one_cm": StatWeights.EX_LOW,
+                "minecraft:walk_one_cm": StatWeights.EX_LOW,
+                "minecraft:swim_one_cm": StatWeights.EX_LOW
             },
             PLAYER_HISTORY: {},
             MODDED_STATS: {},
@@ -135,9 +135,9 @@ ROOT.Traits.Factors.ByTrait = function() {
         },
         AGILITY: {
             VANILLA_STATS: {
-                "minecraft:jump": 0,
-                "minecraft:sprint_one_cm": 0,
-                "minecraft:climb_one_cm": 0
+                "minecraft:jump": StatWeights.LOW,
+                "minecraft:sprint_one_cm": StatWeights.LOW,
+                "minecraft:climb_one_cm": StatWeights.LOW
             },
             PLAYER_HISTORY: {},
             MODDED_STATS: {},

@@ -97,7 +97,7 @@ ROOT.Traits.Factors.ByTrait = function() {
                 "minecraft.damage_dealt": StatWeights.EX_LOW,
 
                 //damage taken
-                "minecraft:damage_taken": StatWeights.EX_LOW,
+                "minecraft:damage_taken": Mutate.EXPONENTIALIZE(ROOT.Traits.SourceRouter.GetValueBySource(player, "VANILLA_STATS", "minecraft:damage_taken"), "neg", 1, 0, 0),
                 "minecraft:damage_resisted": StatWeights.LOW,
                 "minecraft:damage_blocked_by_shield": StatWeights.LOW,
                 "minecraft:damage_absorbed": StatWeights.EX_LOW,

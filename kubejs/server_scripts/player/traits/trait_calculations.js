@@ -49,7 +49,7 @@ ROOT.Traits.CalculateTraitValue = function(player, trait) {
         return 0;
     }
 
-    var weightedValues = calculateWeightedValues(player, getFactors(trait));
+    var weightedValues = calculateWeightedValues(player, getFactors(player, trait));
 
     /**
      * weightedValues structure: {
@@ -122,7 +122,7 @@ function exportTraits(player, traitValues) {
 
 }
 
-function getFactors(trait) {
+function getFactors(player, trait) {
     // Selects factor definitions for one trait, or all traits when trait is undefined.
 
     const traitIDList = ROOT.Constants.TRAIT_ID.LIST;
@@ -134,7 +134,7 @@ function getFactors(trait) {
 
         if (trait == traitIDList[index] || trait == undefined) {
 
-            factors[traitKeys[index]] = ROOT.Traits.Factors.ByTrait()[traitKeys[index]];
+            factors[traitKeys[index]] = ROOT.Traits.Factors.ByTrait(player)[traitKeys[index]];
 
         }
 

@@ -175,4 +175,6 @@ ROOT.Constants = {
         // Registered without the slash in onCommandRegistry.
         ROOT_ADDR: "/honorables",
     },
+
+    DEBUG_MODE: false
 };

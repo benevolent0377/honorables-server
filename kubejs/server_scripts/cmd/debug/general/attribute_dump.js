@@ -1,10 +1,10 @@
 // Disabled registry dump helper. Uncomment temporarily when attribute IDs need to be inspected.
 ServerEvents.commandRegistry(event => {
-//    console.log("=== ATTRIBUTE DUMP START ===")
+//    ROOT.Log.Write("DEBUG", "cmd/debug/general/attribute_dump.js", "attribute_dump", [], ["=== ATTRIBUTE DUMP START ==="])
 
     //Utils.getRegistryIds('attribute').forEach(id => {
-      //  console.log(id)
+      //  ROOT.Log.Write("DEBUG", "cmd/debug/general/attribute_dump.js", "attribute_dump", [id], ["", ""])
     //})
 
-//    console.log("=== ATTRIBUTE DUMP END ===")
+//    ROOT.Log.Write("DEBUG", "cmd/debug/general/attribute_dump.js", "attribute_dump", [], ["=== ATTRIBUTE DUMP END ==="])
 });

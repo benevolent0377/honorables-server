@@ -7,13 +7,13 @@ new ROOT.Commands.Command("traits", ["operation"])
 
         const player = context.source.player;
 
-        console.log(`Argv format: ${argv}`);
+        ROOT.Log.Write("DEBUG", "cmd/trait.js", "traits", [argv], ["Argv format: ", ""]);
 
-        console.log(`Argv[0]: ${argv[0]}`);
+        ROOT.Log.Write("DEBUG", "cmd/trait.js", "traits", [argv[0]], ["Argv[0]: ", ""]);
 
         if (argv[0] == "recalculate" || argv[0] == "recalc"){
 
-            console.log(`Recalculating ${player.username}'s traits on command.`);
+            ROOT.Log.Write("INFO", "cmd/trait.js", "traits", [player.username], ["Recalculating ", "'s traits on command."]);
 
             // ROOT.Constants.NONE signals "all traits" to the calculation pipeline.
             ROOT.Traits.CalculateTraitValue(player, argv[1]);

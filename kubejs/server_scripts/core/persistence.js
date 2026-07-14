@@ -206,10 +206,10 @@ ROOT.Player.Data.EditTrait = function(player, trait, item, value, append) {
     const playerData = player.persistentData.honorables;
     const traitData = playerData.traits[trait];
 
-    console.log(`Accessing data for trait: ${trait}....`);
+    ROOT.Log.Write("DEBUG", "core/persistence.js", "EditTrait", [trait], ["Accessing data for trait: ", "...."]);
 
     if (traitData[item] == undefined) {
-        console.log(`Failed to find trait: ${trait}..`);
+        ROOT.Log.Write("WARN", "core/persistence.js", "EditTrait", [trait], ["Failed to find trait: ", ".."]);
         return 1;
     }
 
@@ -218,7 +218,7 @@ ROOT.Player.Data.EditTrait = function(player, trait, item, value, append) {
     }
     else {
         traitData[item] = value;
-        console.log(`Set trait ${item} to ${value}.`);
+        ROOT.Log.Write("DEBUG", "core/persistence.js", "EditTrait", [item, value], ["Set trait ", " to ", "."]);
     }
 
     return 0;
@@ -232,7 +232,7 @@ ROOT.Player.Data.AddTraitModifier = function(player, trait, item, value) {
     const traitData = playerData.traits[trait];
 
     if (traitData.modifiers[item] == undefined) {
-        console.log(`[ERROR] @ (nbt.js:modTrait) -> Item ${item} not found in player data under ${trait} trait.`);
+        ROOT.Log.Write("ERROR", "core/persistence.js", "AddTraitModifier", [item, trait], ["[ERROR] @ (nbt.js:modTrait) -> Item ", " not found in player data under ", " trait."]);
         return 1;
     }
 
@@ -303,7 +303,7 @@ ROOT.Player.Data.EditAbilities = function(player, abilityExport, operation){
 
     }
     else {
-        console.log(`[ERROR] @ (nbt.js:editAbilities) -> ${operation} operation does not exist.`);
+        ROOT.Log.Write("ERROR", "core/persistence.js", "EditAbilities", [operation], ["[ERROR] @ (nbt.js:editAbilities) -> ", " operation does not exist."]);
         return 1;
     }
 

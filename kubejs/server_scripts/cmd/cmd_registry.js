@@ -8,7 +8,7 @@ ROOT.Commands.Command = function(commandID, args) {
     this.commandID = commandID.toLowerCase();
     this.args = args || [];
     this.op = function(argv) {
-        console.log("No operation specified for command: " + this.commandID + ".");
+        ROOT.Log.Write("WARN", "cmd/cmd_registry.js", "Command", [this.commandID], ["No operation specified for command: ", "."]);
     }
 
     this.RegisterSelf();
@@ -50,7 +50,7 @@ ROOT.Commands.Registry = {
 
         const commandName = messageSpliced[0];
 
-        console.log(`[Command Registry] input=${input}, commandName=${commandName}`)
+        ROOT.Log.Write("DEBUG", "cmd/cmd_registry.js", "Registry.Run", [input, commandName], ["[Command Registry] input=", ", commandName=", ""]);
 
         // Return 0 so Minecraft treats unknown/empty subcommands as unhandled.
         if (!commandName) {
@@ -63,7 +63,7 @@ ROOT.Commands.Registry = {
             return 0;
         }
 
-        console.log(`[Command Registry] Successfully found command: ${commandName}.`)
+        ROOT.Log.Write("DEBUG", "cmd/cmd_registry.js", "Registry.Run", [commandName], ["[Command Registry] Successfully found command: ", "."]);
         // argv contains everything after the subcommand name.
         command.op(context, messageSpliced.slice(1));
         return 1;

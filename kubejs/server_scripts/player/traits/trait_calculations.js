@@ -90,7 +90,7 @@ ROOT.Traits.CalculateTraitValue = function(player, trait) {
             if (sourceKey != "id") {
 
                traitValue = (sourceData["categoryWeight"] * sourceData["sum"])+ traitValue;
-               console.log(`New value of ${traitKey} is ${traitValue}.`);
+               ROOT.Log.Write("DEBUG", "player/traits/trait_calculations.js", "CalculateTraitValue", [traitKey, traitValue], ["New value of ", " is ", "."]);
 
             }
 
@@ -105,7 +105,7 @@ ROOT.Traits.CalculateTraitValue = function(player, trait) {
 
 function exportTraits(player, traitValues) {
 
-    console.log("Exporting new trait values....");
+    ROOT.Log.Write("DEBUG", "player/traits/trait_calculations.js", "exportTraits", [], ["Exporting new trait values...."]);
 
     // Writes newly calculated base values back into persistent player trait data.
     for (const [traitID, traitValue] of Object.entries(traitValues)) {
@@ -114,7 +114,7 @@ function exportTraits(player, traitValues) {
             traitValue = 10;
         }
 
-        console.log(`${traitValue}`);
+        ROOT.Log.Write("DEBUG", "player/traits/trait_calculations.js", "exportTraits", [traitValue], ["", ""]);
 
         ROOT.Player.Data.EditTrait(player, traitID, "base", Number.parseFloat(traitValue).toFixed(3));
 
@@ -178,7 +178,7 @@ function calculateWeightedValues(player, factors) {
 
     for (const [traitKey, sourceCategories] of Object.entries(factors)) {
 
-        console.log(`TraitKey: ${traitKey}, sourceCategories: ${sourceCategories}`);
+        ROOT.Log.Write("DEBUG", "player/traits/trait_calculations.js", "calculateWeightedValues", [traitKey, sourceCategories], ["TraitKey: ", ", sourceCategories: ", ""]);
 
         weightedValues[traitKey] = {};
         weightedValues[traitKey]["id"] = ROOT.Constants.TRAIT_ID.TRAIT_KEY_TO_ID[traitKey];
@@ -200,7 +200,7 @@ function calculateWeightedValues(player, factors) {
                         factorWeight = 1;
                     }
                 
-                console.log(`Getting value for factor named: ${factorName}.`);
+                ROOT.Log.Write("DEBUG", "player/traits/trait_calculations.js", "calculateWeightedValues", [factorName], ["Getting value for factor named: ", "."]);
                 var factorValue = ROOT.Traits.SourceRouter.GetValueFromSource(player, sourceType, factorName);
 
 
@@ -210,7 +210,7 @@ function calculateWeightedValues(player, factors) {
 
                 var weightedValue = factorWeight * factorValue;
 
-                console.log(`The weighted value for ${factorName} is ${weightedValue}. (weight: ${factorWeight} & qty: ${factorValue})`);
+                ROOT.Log.Write("DEBUG", "player/traits/trait_calculations.js", "calculateWeightedValues", [factorName, weightedValue, factorWeight, factorValue], ["The weighted value for ", " is ", ". (weight: ", " & qty: ", ")"]);
 
                 categorySum = categorySum + weightedValue;
 

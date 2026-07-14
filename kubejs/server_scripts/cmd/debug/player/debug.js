@@ -12,6 +12,6 @@ new ROOT.Commands.Command("getplayerdata", undefined)
         const dump = ROOT.Player.Data.Dump(player);
 
         // Log to server console and whisper the same dump back to the player.
-        console.log(dump);
+        ROOT.Log.Write("DEBUG", "cmd/debug/player/debug.js", "getplayerdata", [dump], ["", ""]);
         context.source.server.runCommandSilent(`/w ${player.username} ${dump}`);
     });

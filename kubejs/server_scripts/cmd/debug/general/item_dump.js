@@ -1,11 +1,11 @@
 // Disabled registry dump helper. Uncomment temporarily when item IDs need to be inspected.
 ServerEvents.commandRegistry(event => {
 
-//    console.log("=== ITEM DUMP START ===")
+//    ROOT.Log.Write("DEBUG", "cmd/debug/general/item_dump.js", "item_dump", [], ["=== ITEM DUMP START ==="])
 
 //    Item.getList().forEach(item => {
-  //      console.log(item.id)
+  //      ROOT.Log.Write("DEBUG", "cmd/debug/general/item_dump.js", "item_dump", [item.id], ["", ""])
     //})
 
-//    console.log("=== ITEM DUMP END ===")
+//    ROOT.Log.Write("DEBUG", "cmd/debug/general/item_dump.js", "item_dump", [], ["=== ITEM DUMP END ==="])
 });

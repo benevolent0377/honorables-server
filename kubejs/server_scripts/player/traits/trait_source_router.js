@@ -42,7 +42,7 @@ function readVanillaStat(player, factor) {
 
 
  /**   for (let method of player.getStats().getClass().getMethods()) {
-        console.log(method.getName())
+        ROOT.Log.Write("DEBUG", "player/traits/trait_source_router.js", "readVanillaStat", [method.getName()], ["", ""])
     }
 
     list of methods for getStats()
@@ -129,7 +129,7 @@ getMobKills
         return 0;
     }
 
-    console.log(`The fetched value of ${factor} is: ${FactortoFunction[factor]()}`);
+    ROOT.Log.Write("DEBUG", "player/traits/trait_source_router.js", "readVanillaStat", [factor, FactortoFunction[factor]()], ["The fetched value of ", " is: ", ""]);
 
     return Number(FactortoFunction[factor]());
 

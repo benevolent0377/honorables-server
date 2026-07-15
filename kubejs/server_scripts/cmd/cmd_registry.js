@@ -12,6 +12,7 @@ ROOT.Commands.Command = function(commandID, args) {
     }
 
     this.RegisterSelf();
+    this.AddDescription("No description yet.");
 };
 
 ROOT.Commands.Command.prototype.RegisterOperation = function(opFunction) {
@@ -26,6 +27,12 @@ ROOT.Commands.Command.prototype.RegisterOperation = function(opFunction) {
 ROOT.Commands.Command.prototype.RegisterSelf = function() {
     // Commands register at construction time so loading the file is enough to make them available.
     ROOT.Commands.Registry.Register(this);
+}
+
+ROOT.Commands.Command.prototype.AddDescription = function(description) {
+
+    this.description = description;
+
 }
 
 ROOT.Commands.Registry = {
@@ -69,4 +76,27 @@ ROOT.Commands.Registry = {
         return 1;
     },
 
+    List: function() {
+        return this.Table;
+    }
+
 };
+
+new ROOT.Commands.Command("help")
+    .RegisterOperation(function(context, args) {
+
+        const commandList = ROOT.Commands.Registry.List();
+
+        var formattedList = "\n";
+
+        for (const [commandID, command] of Object.entries(commandList)) {
+
+            formattedList = formattedList + commandID + " -> " + command.description + "\n";
+
+        }
+
+        context.source.server.runCommandSilent(`/w ${context.source.player.username} ${formattedList}`);
+
+        return 0;
+
+    });

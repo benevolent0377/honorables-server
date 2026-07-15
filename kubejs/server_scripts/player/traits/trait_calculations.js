@@ -116,7 +116,8 @@ function exportTraits(player, traitValues) {
 
         ROOT.Log.Write("DEBUG", "player/traits/trait_calculations.js", "exportTraits", [traitValue], ["", ""]);
 
-        ROOT.Player.Data.EditTrait(player, traitID, "base", Number.parseFloat(traitValue).toFixed(3));
+        const roundedTraitValue = Number(Number.parseFloat(traitValue).toFixed(3));
+        ROOT.Player.Data.EditTrait(player, traitID, "base", roundedTraitValue);
 
     }
 

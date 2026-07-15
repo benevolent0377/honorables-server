@@ -33,36 +33,44 @@ ROOT.Persistence.Filter.ToData = function(value, depth) {
         return value;
     }
 
-    const valueType = typeof value;
-
-    if (valueType == "string" || valueType == "number" || valueType == "boolean") {
-        return value;
-    }
-
-    const tagValue = ROOT.Persistence.Filter.UnwrapTag(value);
-
-    if (tagValue !== value) {
-        return tagValue;
-    }
-
-    if (Array.isArray(value)) {
-        const arrayOut = [];
-
-        for (var arrayIndex = 0; arrayIndex < value.length; arrayIndex++) {
-            arrayOut.push(ROOT.Persistence.Filter.ToData(value[arrayIndex], depth + 1));
-        }
-
-        return arrayOut;
-    }
-
     if (ROOT.Persistence.Filter.IsCompoundTag(value)) {
         const compoundOut = {};
-        const keys = value.getAllKeys().toArray();
+        const compoundKeys = [];
+        var keyIterator = value.getAllKeys().iterator();
 
-        // CompoundTag keys must be read through the Java API before conversion can recurse.
-        for (var compoundIndex = 0; compoundIndex < keys.length; compoundIndex++) {
-            const compoundKey = String(keys[compoundIndex]);
-            compoundOut[compoundKey] = ROOT.Persistence.Filter.ToData(value.get(compoundKey), depth + 1);
+        // Snapshot keys before recursing so nested calls cannot replace the active Java iterator.
+        while (keyIterator.hasNext()) {
+            compoundKeys.push(String(keyIterator.next()));
+        }
+
+        for (var compoundIndex = 0; compoundIndex < compoundKeys.length; compoundIndex++) {
+            var compoundKey = compoundKeys[compoundIndex];
+            var childType = Number(value.getTagType(compoundKey));
+
+            if (childType == 1) {
+                compoundOut[compoundKey] = Number(value.getByte(compoundKey));
+            }
+            else if (childType == 2) {
+                compoundOut[compoundKey] = Number(value.getShort(compoundKey));
+            }
+            else if (childType == 3) {
+                compoundOut[compoundKey] = Number(value.getInt(compoundKey));
+            }
+            else if (childType == 4) {
+                compoundOut[compoundKey] = Number(value.getLong(compoundKey));
+            }
+            else if (childType == 5) {
+                compoundOut[compoundKey] = Number(value.getFloat(compoundKey));
+            }
+            else if (childType == 6) {
+                compoundOut[compoundKey] = Number(value.getDouble(compoundKey));
+            }
+            else if (childType == 8) {
+                compoundOut[compoundKey] = String(value.getString(compoundKey));
+            }
+            else {
+                compoundOut[compoundKey] = ROOT.Persistence.Filter.ToData(value.get(compoundKey), depth + 1);
+            }
         }
 
         return compoundOut;
@@ -76,6 +84,29 @@ ROOT.Persistence.Filter.ToData = function(value, depth) {
         }
 
         return listOut;
+    }
+
+    const tagValue = ROOT.Persistence.Filter.UnwrapTag(value);
+
+    if (tagValue !== value) {
+        return tagValue;
+    }
+
+    // Rhino cannot apply typeof to Java NBT values, so tags must be handled first.
+    const valueType = typeof value;
+
+    if (valueType == "string" || valueType == "number" || valueType == "boolean") {
+        return value;
+    }
+
+    if (Array.isArray(value)) {
+        const arrayOut = [];
+
+        for (var arrayIndex = 0; arrayIndex < value.length; arrayIndex++) {
+            arrayOut.push(ROOT.Persistence.Filter.ToData(value[arrayIndex], depth + 1));
+        }
+
+        return arrayOut;
     }
 
     const objectOut = {};
@@ -94,41 +125,73 @@ ROOT.Persistence.Filter.FromData = function(value) {
 };
 
 ROOT.Persistence.Filter.GetJavaClassName = function(value) {
-    if (value == undefined || value.getClass == undefined) {
+    if (value == undefined || value === null) {
         return "";
     }
 
-    return String(value.getClass().getName());
+    // Rhino can report Java methods as undefined even when they are callable.
+    try {
+        return String(value.getClass().getName());
+    }
+    catch (error) {
+        return "";
+    }
+};
+
+ROOT.Persistence.Filter.GetTagID = function(value) {
+    if (value == undefined || value === null) {
+        return -1;
+    }
+
+    try {
+        return Number(value.getId());
+    }
+    catch (error) {
+        return -1;
+    }
 };
 
 ROOT.Persistence.Filter.IsCompoundTag = function(value) {
-    return ROOT.Persistence.Filter.GetJavaClassName(value) == "net.minecraft.nbt.CompoundTag";
+    return ROOT.Persistence.Filter.GetTagID(value) == 10;
 };
 
 ROOT.Persistence.Filter.IsListTag = function(value) {
-    return ROOT.Persistence.Filter.GetJavaClassName(value) == "net.minecraft.nbt.ListTag";
+    return ROOT.Persistence.Filter.GetTagID(value) == 9;
 };
 
 ROOT.Persistence.Filter.UnwrapTag = function(value) {
     // Primitive NBT tags are flattened here; compound/list tags are handled by ToData.
+    const tagID = ROOT.Persistence.Filter.GetTagID(value);
     const className = ROOT.Persistence.Filter.GetJavaClassName(value);
 
-    if (className == "net.minecraft.nbt.StringTag") {
+    if (tagID == 8) {
         return String(value.getAsString());
     }
 
-    if (
-        className == "net.minecraft.nbt.ByteTag" ||
-        className == "net.minecraft.nbt.ShortTag" ||
-        className == "net.minecraft.nbt.IntTag" ||
-        className == "net.minecraft.nbt.LongTag" ||
-        className == "net.minecraft.nbt.FloatTag" ||
-        className == "net.minecraft.nbt.DoubleTag"
-    ) {
-        return Number(value.getAsString());
+    if (tagID >= 1 && tagID <= 6) {
+        return Number(value.getAsDouble());
     }
 
-    if (className == "net.minecraft.nbt.ByteArrayTag" || className == "net.minecraft.nbt.IntArrayTag" || className == "net.minecraft.nbt.LongArrayTag") {
+    if (className == "java.lang.String" || className == "java.lang.Character") {
+        return String(value);
+    }
+
+    if (className == "java.lang.Boolean") {
+        return Boolean(value.booleanValue());
+    }
+
+    if (
+        className == "java.lang.Byte" ||
+        className == "java.lang.Short" ||
+        className == "java.lang.Integer" ||
+        className == "java.lang.Long" ||
+        className == "java.lang.Float" ||
+        className == "java.lang.Double"
+    ) {
+        return Number(value.doubleValue());
+    }
+
+    if (tagID == 7 || tagID == 11 || tagID == 12) {
         const arrayOut = [];
 
         for (var arrayIndex = 0; arrayIndex < value.size(); arrayIndex++) {

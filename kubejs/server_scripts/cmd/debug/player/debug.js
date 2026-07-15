@@ -9,9 +9,20 @@ ROOT.Commands.Debug.Player = ROOT.Commands.Debug.Player || {};
 new ROOT.Commands.Command("getplayerdata", undefined)
     .RegisterOperation(function(context, argv) {
         const player = context.source.player;
-        const dump = ROOT.Player.Data.Dump(player);
+        const rawData = ROOT.Player.Data.Get(player);
+        const dump = JSON.stringify(ROOT.Player.Data.ExportData(player), null, 2);
+        const lines = dump.split("\n");
 
-        // Log to server console and whisper the same dump back to the player.
-        ROOT.Log.Write("DEBUG", "cmd/debug/player/debug.js", "getplayerdata", [dump], ["", ""]);
-        context.source.server.runCommandSilent(`/w ${player.username} ${dump}`);
-    });
+        for (var i = 0; i < lines.length; i++) {
+            player.tell(lines[i]);
+        }
+
+        ROOT.Log.Write(
+            "DEBUG",
+            "cmd/debug/player/debug.js",
+            "getplayerdata",
+            [String(rawData), dump],
+            ["Raw:\n", "\nExported:\n", ""]
+        );
+
+    }).AddDescription("Returns persistent player data. Takes no arguments.");

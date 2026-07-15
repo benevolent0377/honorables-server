@@ -10,15 +10,15 @@ ROOT.Traits.Factors.Weight.Stats = ROOT.Traits.Factors.Weight.Stats || {};
 
 ROOT.Traits.Factors.Weight.Stats.Constants = {
 
-    EX_LOW: .0005,
-    LOW: .001,
-    EX_SMALL: .005,
-    SMALL: .01,
-    MODERATE: .025,
-    LARGE: .1,
-    EX_LARGE: .2,
-    SIGNIFICANT: .5,
-    EX_SIGNIFICANT: .10
+    EX_LOW: .00005,
+    LOW: .0001,
+    EX_SMALL: .0005,
+    SMALL: .001,
+    MODERATE: .0025,
+    LARGE: .01,
+    EX_LARGE: .02,
+    SIGNIFICANT: .05,
+    EX_SIGNIFICANT: .1
 }
 
 ROOT.Traits.Factors.Weight.Mutations = {
@@ -62,12 +62,14 @@ ROOT.Traits.Factors.Weight.Mutations = {
             break
 
             default:
-                return itemWeight;
+                direction = -1;
 
         }
 
-        var newWeight = Number(statQty^(((1/2)*factor + direction)/(factor + padX)) + padY);
+        var newWeight = Number(statQty^(((1/2)*(factor * direction))/(factor + padX)) + padY);
         newWeight = Number(newWeight, -3);
+
+        ROOT.Log.Write("DEBUG", "trait_factors.js", "EXPONENTIALIZE", [factor, newWeight], ["New weight for ", " is ", "."])
 
         return newWeight;
     }
@@ -84,10 +86,10 @@ ROOT.Traits.Factors.CategoryWeights = {
 }
 
 // Factors are grouped by trait, then by source type. Empty arrays mean that source is not wired yet.
-ROOT.Traits.Factors.ByTrait = function() {
+ROOT.Traits.Factors.ByTrait = function(player) {
 
     const StatWeights = ROOT.Traits.Factors.Weight.Stats.Constants;
-    const Mutate = ROOT.Traits.Factors.Weight.Stats.Mutations;
+    const Mutate = ROOT.Traits.Factors.Weight.Mutations;
 
     return {
         STRENGTH: {
@@ -97,7 +99,7 @@ ROOT.Traits.Factors.ByTrait = function() {
                 "minecraft.damage_dealt": StatWeights.EX_LOW,
 
                 //damage taken
-                "minecraft:damage_taken": Mutate.EXPONENTIALIZE(ROOT.Traits.SourceRouter.GetValueBySource(player, "VANILLA_STATS", "minecraft:damage_taken"), "neg", 1, 0, 0),
+                "minecraft:damage_taken": StatWeights.EX_LOW,
                 "minecraft:damage_resisted": StatWeights.LOW,
                 "minecraft:damage_blocked_by_shield": StatWeights.LOW,
                 "minecraft:damage_absorbed": StatWeights.EX_LOW,
@@ -136,8 +138,8 @@ ROOT.Traits.Factors.ByTrait = function() {
         AGILITY: {
             VANILLA_STATS: {
                 "minecraft:jump": StatWeights.LOW,
-                "minecraft:sprint_one_cm": StatWeights.LOW,
-                "minecraft:climb_one_cm": StatWeights.LOW
+                "minecraft:sprint_one_cm": StatWeights.EX_LOW,
+                "minecraft:climb_one_cm": StatWeights.EX_LOW
             },
             PLAYER_HISTORY: {},
             MODDED_STATS: {},

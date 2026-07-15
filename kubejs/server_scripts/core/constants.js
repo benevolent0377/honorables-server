@@ -176,5 +176,5 @@ ROOT.Constants = {
         ROOT_ADDR: "/honorables",
     },
 
-    DEBUG_MODE: false
+    DEBUG_MODE: true
 };

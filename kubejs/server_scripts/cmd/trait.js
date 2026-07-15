@@ -7,9 +7,9 @@ new ROOT.Commands.Command("traits", ["operation"])
 
         const player = context.source.player;
 
-        ROOT.Log.Write("DEBUG", "cmd/trait.js", "traits", [argv], ["Argv format: ", ""]);
+        //ROOT.Log.Write("DEBUG", "cmd/trait.js", "traits", [argv], ["Argv format: ", ""]);
 
-        ROOT.Log.Write("DEBUG", "cmd/trait.js", "traits", [argv[0]], ["Argv[0]: ", ""]);
+        //ROOT.Log.Write("DEBUG", "cmd/trait.js", "traits", [argv[0]], ["Argv[0]: ", ""]);
 
         if (argv[0] == "recalculate" || argv[0] == "recalc"){
 

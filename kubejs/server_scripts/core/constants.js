@@ -11,6 +11,16 @@ ROOT.Constants = {
         DATA: 1,
     },
 
+    TRAIT_RECALCULATE: {
+        INTERVAL_TICK: 2400,
+
+        MIN_SHIFT_TICK: 600,
+
+        MAX_SHIFT_TICK: 1200,
+
+        EVENT_COUNT_BEFORE_RECALCULATION: 5
+    },
+
     TRAIT_ID: {
         // Internal persistent-data IDs for the primary progression traits.
         STR: "trait_strength",

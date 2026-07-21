@@ -90,13 +90,13 @@ ROOT.Traits.CalculateTraitValue = function(player, trait) {
             if (sourceKey != "id") {
 
                traitValue = (sourceData["categoryWeight"] * sourceData["sum"])+ traitValue;
-               ROOT.Log.Write("DEBUG", "player/traits/trait_calculations.js", "CalculateTraitValue", [traitKey, traitValue], ["New value of ", " is ", "."]);
 
             }
 
         }
 
         traitValues[traitData["id"]] = traitValue + 10;
+        ROOT.Log.Write("DEBUG", "player/traits/trait_calculations.js", "CalculateTraitValue", [traitKey, traitValue + 10], ["New value of ", " is ", "."]);
     }
 
     exportTraits(player, traitValues);
@@ -120,6 +120,18 @@ function exportTraits(player, traitValues) {
         ROOT.Player.Data.EditTrait(player, traitID, "base", roundedTraitValue);
 
     }
+
+    const max = ROOT.Constants.TRAIT_RECALCULATE.MAX_SHIFT_TICK;
+    const min = ROOT.Constants.TRAIT_RECALCULATE.MIN_SHIFT_TICK;
+
+    var recalculateShift = Math.random() * (max - min) + min;
+
+    var recalculateTick = Number(ROOT.Player.Data.Get(player)['traits']['$runtime']['recalculate-tick']);
+
+    var newRecalculateTick = Number(recalculateTick + ROOT.Constants.TRAIT_RECALCULATE.INTERVAL + recalculateShift);
+    ROOT.Log.Write("DEBUG", "player/traits/trait_calculations.js", "exportTraits", [recalculateShift, recalculateTick, newRecalculateTick], ["The random value is: ", ", the old tick is: ", ", and the new tick is: ", "."]);
+
+
 
 }
 
